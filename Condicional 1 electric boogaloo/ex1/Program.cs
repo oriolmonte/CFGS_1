@@ -17,7 +17,7 @@
             }
             else
             {
-                Console.WriteLine("Número no divisible per 2 o 7")
+                Console.WriteLine("Número no divisible per 2 o 7");
             }
         }
     }
