@@ -6,11 +6,9 @@
         {
             Console.WriteLine("Write an integer");
             int entrada = Convert.ToInt32(Console.ReadLine());
-            int mult = 1;
-            while (mult<=10)
+            for (int i = 1; i<=10; i++)
             {
-                Console.WriteLine($"{entrada} x {mult} = {entrada*mult}");
-                mult++;
+                Console.WriteLine($"{entrada} x {i} = {entrada*i}");
             }
         }
     }

@@ -4,19 +4,31 @@
     {
         static void Main(string[] args)
         {
-            int num=0;
             Console.WriteLine("Lower limit");
             int lowerLimit = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Upper limit");
             int upperLimit = Convert.ToInt32(Console.ReadLine());
-            num = lowerLimit;
-            while (num <= upperLimit)
+            Console.WriteLine("Ascending (a) or descending? (d)");
+            string ascendingDescending = Console.ReadLine().ToLower();
+            if(ascendingDescending == "a")
             {
-                if (num % 11 != 0)
+                for (int i = lowerLimit; i <= upperLimit; i++)
                 {
-                    Console.WriteLine($"{num}");
+                    if (i % 11 != 0)
+                    {
+                        Console.WriteLine($"{i}");
+                    }
                 }
-                num++;
+            }
+            else if(ascendingDescending == "b") 
+            {
+                for (int i = upperLimit; i >= lowerLimit; i--)
+                {
+                    if (i % 11 != 0)
+                    {
+                        Console.WriteLine($"{i}");
+                    }
+                }
             }
 
         }

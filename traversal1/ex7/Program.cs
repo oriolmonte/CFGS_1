@@ -5,20 +5,15 @@
         static void Main(string[] args)
         {
             int count = 0;
-            int num = 0;
-            while(num <= 300)
+            for (int i = 0; i<=300;i+=4)
             {
-                if (num%4 == 0)
-                {
-                    Console.WriteLine($"{num}");
-                    count++;
-                }
-                if (count == 20)
+                Console.WriteLine($"{i}");
+                count++;
+                if (count==20) 
                 {
                     Console.ReadKey();
                     count = 0;
                 }
-                num++;
             }
         }
     }
