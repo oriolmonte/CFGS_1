@@ -11,10 +11,7 @@
             input = int.Parse(Console.ReadLine());
             while (total != input && divisors<input) 
             {
-                if (input%input == 0)
-                {
-                    total += divisors;
-                }
+                total += divisors;
                 divisors++;
             }
             if (total == input)

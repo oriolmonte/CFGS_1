@@ -13,14 +13,13 @@
             while (cursor != null && cursorInt != 231)
             {
                 cursorInt = int.Parse(cursor);
-                cursor = sr.ReadLine();
                 count++;
+                cursor = sr.ReadLine();
 
             }
             if (cursor == null)
             {
                 Console.WriteLine("S'ha perdut");
-            }
             }
             else
                 Console.WriteLine($"Ha arribat en posició: {count+1}");
