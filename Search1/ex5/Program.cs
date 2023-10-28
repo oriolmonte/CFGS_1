@@ -13,8 +13,8 @@
             while (cursor != null && cursorInt != 231)
             {
                 cursorInt = int.Parse(cursor);
-                cursor = sr.ReadLine();
                 count++;
+                cursor = sr.ReadLine();
 
             }
             if (cursor == null)
