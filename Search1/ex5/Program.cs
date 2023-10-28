@@ -21,7 +21,6 @@
             {
                 Console.WriteLine("S'ha perdut");
             }
-            }
             else
                 Console.WriteLine($"Ha arribat en posició: {count+1}");
         }
