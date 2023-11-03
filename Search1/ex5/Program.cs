@@ -10,14 +10,16 @@
             StreamReader sr = new StreamReader("cursa.txt");
             cursor = sr.ReadLine();
             cursorInt = int.Parse(cursor);
-            while (cursor != null && cursorInt != 231)
+            bool trobat = cursorInt == 231;
+            while (cursor != null && !trobat)
             {
-                cursorInt = int.Parse(cursor);
                 count++;
+                cursorInt = int.Parse(cursor);
+                trobat = cursorInt == 231;
                 cursor = sr.ReadLine();
 
             }
-            if (cursor == null)
+            if (!trobat)
             {
                 Console.WriteLine("S'ha perdut");
             }

@@ -10,13 +10,15 @@
             StreamReader sr = new StreamReader("enters.txt");
             cursor = sr.ReadLine();
             cursorInt = int.Parse(cursor);
-            while (cursorInt%2!=0 && cursor != null)
+            bool trobat = cursorInt % 2 == 0; 
+            while (!trobat && cursor != null)
             {
                 count++;
                 cursorInt = int.Parse(cursor);
+                trobat = cursorInt % 2 == 0;
                 cursor = sr.ReadLine();
             }
-            if (cursor == null)
+            if (!trobat)
                 Console.WriteLine($"No hi ha parells");
             else
                 Console.WriteLine($"{cursorInt} és parell i s'ha trobat a la posició {count}");

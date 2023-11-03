@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            bool exists =false;
+            bool exists = false;
             int year = 1582;
             while (!exists)
             {

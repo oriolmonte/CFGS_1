@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             int score = 0;
-            int total = 0;
+            int total = 0;  
             Console.WriteLine("Enter: ");
             int input = int.Parse(Console.ReadLine());
             bool isSum = true;

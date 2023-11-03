@@ -5,17 +5,20 @@
         static void Main(string[] args)
         {
             int primer, cursorInt, count;
-            count = 0;
+            count = 1;
             string cursor;
             StreamReader sr = new StreamReader("enters.txt");
             primer = int.Parse(sr.ReadLine());
             cursor = sr.ReadLine();
             cursorInt = int.Parse(cursor);
-            while (primer != cursorInt && cursor != null)
+            bool trobat = cursorInt == primer;
+            while (!trobat && cursor != null)
             {
-                count++;
-                cursorInt = int.Parse(cursor);
+                count++; 
                 cursor = sr.ReadLine();
+                cursorInt = int.Parse(cursor);
+                trobat = primer == cursorInt;
+
             }
             if (cursor == null)
                 Console.WriteLine($"{primer} no s'ha repetit");
