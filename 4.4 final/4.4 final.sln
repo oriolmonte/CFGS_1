@@ -13,11 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex3bé", "ex3bé\ex3bé.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex5", "ex5\ex5.csproj", "{39C3ABBB-9E42-4EFB-A549-99CCF7C4A10F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex4", "ex4\ex4.csproj", "{500B96F3-9064-4321-930E-C2C7224E4E8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex4", "ex4\ex4.csproj", "{500B96F3-9064-4321-930E-C2C7224E4E8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex5cerca", "ex5cerca\ex5cerca.csproj", "{ABFCA3A5-09F0-4187-8334-6C39C8443789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex5cerca", "ex5cerca\ex5cerca.csproj", "{ABFCA3A5-09F0-4187-8334-6C39C8443789}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex7", "ex7\ex7.csproj", "{741C4FA3-28FE-4BFF-8998-8CAD4D5EBBFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex7", "ex7\ex7.csproj", "{741C4FA3-28FE-4BFF-8998-8CAD4D5EBBFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex5tots", "ex5tots\ex5tots.csproj", "{6168A2B7-C7A8-440E-A314-787B363969A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{741C4FA3-28FE-4BFF-8998-8CAD4D5EBBFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{741C4FA3-28FE-4BFF-8998-8CAD4D5EBBFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{741C4FA3-28FE-4BFF-8998-8CAD4D5EBBFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6168A2B7-C7A8-440E-A314-787B363969A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6168A2B7-C7A8-440E-A314-787B363969A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6168A2B7-C7A8-440E-A314-787B363969A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6168A2B7-C7A8-440E-A314-787B363969A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
