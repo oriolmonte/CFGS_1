@@ -14,8 +14,7 @@
             {
                 ratio = ratioSave;
                 noop *= 2;
-                //si no acoto a 2 o 3 decimals no m'hi cap AMB LONG
-                ratioSave = Math.Round(Simulació(random, noop),3);
+                ratioSave = Math.Round(Simulació(random, noop),4);
             }
             Console.WriteLine($"Amb el mètode Monte-Carlo hem aproximat pi a: {ratioSave}");
         }
