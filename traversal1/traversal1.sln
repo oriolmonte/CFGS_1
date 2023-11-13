@@ -27,7 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex12for", "ex12for\ex12for.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex13", "ex13\ex13.csproj", "{1409A032-54FA-495C-9131-A02FDD66DCF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex13for", "ex13for\ex13for.csproj", "{A4E36A30-C4F6-491D-B5DA-EA707568B32F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex13for", "ex13for\ex13for.csproj", "{A4E36A30-C4F6-491D-B5DA-EA707568B32F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex14", "ex14\ex14.csproj", "{8063776A-EEB3-4581-9658-A933D0B12F23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketColesterol", "TicketColesterol\TicketColesterol.csproj", "{E2D44BAA-6734-478C-8AE1-3258DB41A447}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,14 @@ Global
 		{A4E36A30-C4F6-491D-B5DA-EA707568B32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4E36A30-C4F6-491D-B5DA-EA707568B32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4E36A30-C4F6-491D-B5DA-EA707568B32F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8063776A-EEB3-4581-9658-A933D0B12F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8063776A-EEB3-4581-9658-A933D0B12F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8063776A-EEB3-4581-9658-A933D0B12F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8063776A-EEB3-4581-9658-A933D0B12F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2D44BAA-6734-478C-8AE1-3258DB41A447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2D44BAA-6734-478C-8AE1-3258DB41A447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2D44BAA-6734-478C-8AE1-3258DB41A447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2D44BAA-6734-478C-8AE1-3258DB41A447}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

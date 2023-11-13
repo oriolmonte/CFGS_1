@@ -11,16 +11,10 @@
             {
                 for (int j = 1; j <= i; j++)
                 {
-                    if (j == 1)
-                        Console.Write(i);
-                    if (j==1 && i==1)
-                        Console.Write($" = {i}");
-                    else if (j < i)
-                        Console.Write($"+{i}");
-                    else if (j == i)
-                        Console.Write($"+{i} = {i*i}");
+                    if (j != i) Console.Write(j + "+");
+                    else Console.Write(j + "=");
                 }
-                Console.WriteLine();
+                Console.WriteLine(i * (i + 1) / 2);
             }
         }
     }
