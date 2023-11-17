@@ -29,9 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex11", "ex11\ex11.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EX10B", "EX10B\EX10B.csproj", "{E726FCBA-DCA1-4099-B194-3058DDD18362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex12", "ex12\ex12.csproj", "{E20CD6E9-067C-4C11-AACA-6329AEDF77B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex12", "ex12\ex12.csproj", "{E20CD6E9-067C-4C11-AACA-6329AEDF77B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex no sabia que era un bucle", "ex no sabia que era un bucle\ex no sabia que era un bucle.csproj", "{3DA734CA-5025-4C0F-A369-77C14C2FB0E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex8.1", "ex no sabia que era un bucle\ex8.1.csproj", "{3DA734CA-5025-4C0F-A369-77C14C2FB0E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex8 trying", "ex8 trying\ex8 trying.csproj", "{5906A461-EABF-4B08-A51C-9E1160A41AB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{3DA734CA-5025-4C0F-A369-77C14C2FB0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DA734CA-5025-4C0F-A369-77C14C2FB0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DA734CA-5025-4C0F-A369-77C14C2FB0E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5906A461-EABF-4B08-A51C-9E1160A41AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5906A461-EABF-4B08-A51C-9E1160A41AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5906A461-EABF-4B08-A51C-9E1160A41AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5906A461-EABF-4B08-A51C-9E1160A41AB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

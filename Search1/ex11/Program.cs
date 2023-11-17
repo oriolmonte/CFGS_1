@@ -7,7 +7,7 @@
             Random random = new Random();
             double countDins = 0;
             double ratioSave, ratio;
-            long noop = 100;
+            int noop = 100;
             ratioSave = Simulació(random, noop);
             ratio = 0;
             while (ratioSave != ratio)
@@ -18,7 +18,7 @@
             }
             Console.WriteLine($"Amb el mètode Monte-Carlo hem aproximat pi a: {ratioSave}");
         }
-        static double Simulació (Random random, long noops)
+        static double Simulació (Random random, int noops)
         {
             double ratio;
             double countDins = 0;
