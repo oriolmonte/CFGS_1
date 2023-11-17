@@ -14,7 +14,6 @@
             string cursor = sr.ReadLine();
             while (cursor != null && !colesterol)
             {
-
                 if (cursor.Contains("PIZZ") || cursor.Contains("SAUSAGE"))
                 {
                     colesterolCount++;
@@ -28,7 +27,7 @@
             }
             sr.Close();
             if (colesterol)
-                Console.WriteLine($"No es pot comprar");
+                Console.WriteLine($"No es pot comprar, massa colesterol");
             else
                 Console.WriteLine($"{producteColesterol}Total: {Math.Round(total,2)}€");
         }
