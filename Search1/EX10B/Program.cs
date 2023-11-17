@@ -10,7 +10,6 @@
             string cursor;
             StreamReader sr = new StreamReader("enters.txt");
             cursor = sr.ReadLine();
-            input = int.Parse(cursor);
             while (cursor != null)
             {
                 input = int.Parse(cursor);

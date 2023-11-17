@@ -8,15 +8,15 @@
             int year = 1582;
             while (!exists)
             {
-                year++;
                 bool leap = Leap(year);
                 if (leap && year % 15 == 0 && year % 55 == 0)
                 {
                     exists = true;
                 }
+                year++;
             }
             if (exists)
-                Console.WriteLine($"A year exists that meets the conditions {year}");
+                Console.WriteLine($"A year that meets the conditions exists: {year}");
             else 
                 Console.WriteLine("Doesn't exist");
         }
