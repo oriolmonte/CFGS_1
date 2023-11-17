@@ -10,7 +10,7 @@ namespace ex9for
             Random random = new Random();
             double countDins = 0;
             double ratio,noop;
-            for (int i = 0; i<=5; i++)
+            for (int i = 0; i<=3; i++)
             {
                 noop = NOOP * Math.Pow(10, i);
                 for (int j = 1; j <= noop; j++)

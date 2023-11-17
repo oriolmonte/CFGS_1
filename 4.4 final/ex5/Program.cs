@@ -10,6 +10,8 @@
             Console.WriteLine("bigger integer: ");
             big = int.Parse(Console.ReadLine()); 
             remainder = big % small;
+            big = small;
+            small = remainder;
             while (remainder > 0)
             {
                 remainder = big % small;
