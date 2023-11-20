@@ -4,18 +4,30 @@
     {
         static void Main(string[] args)
         {
-            int input,divisors,total;
+            int input,divisor,total;
+            bool perfect = false;
             total = 0;
-            divisors = 1;
-            Console.Write("Entra un enter positiu:");
-            input = int.Parse(Console.ReadLine());
-            while (total != input && divisors<input) 
+            divisor = 1;
+            Console.WriteLine("Enter: ");
+            input = Convert.ToInt32(Console.ReadLine());
+            while (!perfect && total < input)
             {
-                total += divisors;
-                divisors++;
+                total += divisor;
+                if(total == input)
+                    perfect = true;
+                else
+                {
+                    divisor++;
+                    while(input%divisor !=0 && divisor<input)
+                    {
+                        divisor++;
+                    }                    
+                }
             }
-            if (total == input)
+            if (perfect)
+            {
                 Console.WriteLine("Perfecte");
+            }
             else
                 Console.WriteLine("No perfecte");
         }

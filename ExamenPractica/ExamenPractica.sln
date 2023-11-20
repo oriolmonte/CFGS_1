@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "letsplayagame", "letsplayagame\letsplayagame.csproj", "{780C9275-6FA6-44CD-BAE3-3FB5CDC3F95E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NYMarathon", "NYMarathon\NYMarathon.csproj", "{ECCF8F6F-0548-4E6F-96DC-9DBB8AF77902}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{780C9275-6FA6-44CD-BAE3-3FB5CDC3F95E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780C9275-6FA6-44CD-BAE3-3FB5CDC3F95E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780C9275-6FA6-44CD-BAE3-3FB5CDC3F95E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780C9275-6FA6-44CD-BAE3-3FB5CDC3F95E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECCF8F6F-0548-4E6F-96DC-9DBB8AF77902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECCF8F6F-0548-4E6F-96DC-9DBB8AF77902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECCF8F6F-0548-4E6F-96DC-9DBB8AF77902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECCF8F6F-0548-4E6F-96DC-9DBB8AF77902}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83C0255D-907E-4DEF-B8D1-E476CE5CD566}
+	EndGlobalSection
+EndGlobal
