@@ -1,4 +1,6 @@
-﻿namespace ex5
+﻿using System.Runtime.CompilerServices;
+
+namespace ex5
 {
     internal class Program
     {
@@ -55,22 +57,17 @@
 
                         tendenciaActual = CalcTendencia(anterior, actual);
                         IncrementMes(ref mes, ref any);
-                        if (tendenciaActual != ESTANCAT)
-                        {
-                            //si trobem una inversió tanquem
-                            if (tendenciaActual != tendenciaAnterior)
-                                tendenciaInv = true;
-                            // Si s'estanca no actualitzem anterior, la tendència no s'inverteix
-                            tendenciaAnterior = tendenciaActual;
-                        }
-                        cursor = sr.ReadLine();
+                        if (tendenciaActual != ESTANCAT && tendenciaActual != tendenciaAnterior)
+                            tendenciaInv = true;
+                        else
+                            cursor = sr.ReadLine();
                     }
                     sr.Close();
                     if (tendenciaInv)
                     {
                         if (tendenciaActual == CREIXENT)
                             Console.WriteLine($"S'ha invertit la tendència negativa el mes {mes} de l'any {any}");
-                        else
+                        else 
                             Console.WriteLine($"S'ha invertit la tendència positiva el mes {mes} de l'any {any}");
                     }
                     else
@@ -78,6 +75,7 @@
                 }
             }
         }
+        //assignem 3 estats
         static int CalcTendencia(int primer, int segon)
         {
             int tendencia;
@@ -89,6 +87,7 @@
                 tendencia = ESTANCAT;
             return tendencia;
         }
+        //sumem mes fins a 12 i donem la volta a l'any
         static void IncrementMes(ref int mes, ref int any)
         {
             if ((mes + 1) > 12)
