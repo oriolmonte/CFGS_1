@@ -44,8 +44,7 @@
             }
             if (sortedRunner.Count>0)
             {
-                Console.WriteLine($"THE WINNER IS: {sortedRunner[0].bib} - {sortedRunner[0].name} TIME ELAPSED: {sortedRunner[0].time.ToString("HH:mm:ss")}");
-
+               Console.WriteLine($"THE WINNER IS: {sortedRunner[0].bib} - {sortedRunner[0].name} TIME ELAPSED: {sortedRunner[0].time.ToString("HH:mm:ss")}");
             }
             Console.WriteLine($"# OF ABANDONS {abandonat}");
         }
