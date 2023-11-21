@@ -4,15 +4,16 @@
     {
         class Runner
         {
-            public int? bib;
-            public string name;
-            public DateTime time;
+            public int Bib { get;}
+            public string Name { get;}
+
+            public DateTime Time { get;}
             
-            public Runner(int? bibn, string namen, DateTime timen)
+            public Runner(int bibn, string namen, DateTime timen)
             {
-                bib = bibn;
-                name = namen;
-                time = timen;
+                Bib = bibn;
+                Name = namen;
+                Time = timen;
             }
         }
         static void Main(string[] args)
@@ -40,11 +41,12 @@
             List<Runner> sortedRunner = new List<Runner>();
             if (runner.Count > 0) 
             {
-                sortedRunner = runner.OrderBy(x => x.time).ToList();
+                sortedRunner = runner.OrderBy(x => x.Time).ToList();
             }
             if (sortedRunner.Count>0)
             {
-               Console.WriteLine($"THE WINNER IS: {sortedRunner[0].bib} - {sortedRunner[0].name} TIME ELAPSED: {sortedRunner[0].time.ToString("HH:mm:ss")}");
+                Console.WriteLine($"THE WINNER IS: {sortedRunner[0].Bib} - {sortedRunner[0].Name} TIME ELAPSED: {sortedRunner[0].Time.ToString("HH:mm:ss")}");
+
             }
             Console.WriteLine($"# OF ABANDONS {abandonat}");
         }
