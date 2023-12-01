@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Data;
+using System.Globalization;
 
 namespace ex4
 {
@@ -6,11 +7,13 @@ namespace ex4
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter a date (dd/mm/yyyy): ");
-            string dataStr = Console.ReadLine();
+            string[] strArr = { "20/11/2023", "21/11/2023", "22/11/2023", "23/11/2023", "24/11/2023", "25/11/2023", "26/11/2023" };
             DateTime data = new DateTime();
-            data = DateTime.Parse(dataStr,CultureInfo.CurrentCulture);
-            Console.WriteLine(WorkDay(data.DayOfWeek));
+            for (int i = 0; i < strArr.Length; i++) 
+            {
+                data = DateTime.Parse(strArr[i], CultureInfo.CurrentCulture);
+                Console.WriteLine($"Weekend? {WorkDay(data.DayOfWeek)}");
+            }
 
         }
         public static bool WorkDay(DayOfWeek day)

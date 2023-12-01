@@ -4,16 +4,21 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            int[] time = { 235959, 245959, 236059, 235960 };
+            for(int i = 0; i < time.Length; i++) 
+            {
+                Console.WriteLine($"{time[i]} valid? {TimeValid(time[i])}");
+            }
+        
         }
         public static bool TimeValid(int time)
         {
             bool result = false;
             int hora, min, seg;
-            hora = time / 1000;
-            min = (time % 1000)/100;
+            hora = time / 10000;
+            min = (time % 10000)/100;
             seg = time %100;
-            if (hora <= 23 && min <= 59 && seg <=59)
+            if (hora <= 23 && min <= 59 && seg <= 59)
             {
                result = true;
             }

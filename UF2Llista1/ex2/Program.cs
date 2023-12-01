@@ -4,13 +4,19 @@
     {
         static void Main(string[] args)
         {
-            Console.Write("hores: ");
-            int hores = Convert.ToInt32(Console.ReadLine());
-            Console.Write("minuts: ");
-            int min = Convert.ToInt32(Console.ReadLine());
-            Console.Write("segons: ");
-            int seg = Convert.ToInt32(Console.ReadLine());
+            int hores = 23;
+            int min = 59;
+            int seg = 59;
             Console.WriteLine(ConvertToSeconds(hores, seg, min));
+            hores = 23;
+            min = 58;
+            seg = 59;
+            Console.WriteLine(ConvertToSeconds(hores, seg, min));
+            hores = 23;
+            min = 58;
+            seg = 58;
+            Console.WriteLine(ConvertToSeconds(hores, seg, min));
+
         }
         public static int ConvertToSeconds(int hores, int segons, int minut) 
         {
