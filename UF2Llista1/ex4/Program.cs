@@ -12,7 +12,7 @@ namespace ex4
             for (int i = 0; i < strArr.Length; i++) 
             {
                 data = DateTime.Parse(strArr[i], CultureInfo.CurrentCulture);
-                Console.WriteLine($"Weekend? {WorkDay(data.DayOfWeek)}");
+                Console.WriteLine($"Workday? {WorkDay(data.DayOfWeek)}");
             }
 
         }
@@ -20,9 +20,9 @@ namespace ex4
         {
             bool result;
             if (day == DayOfWeek.Sunday || day == DayOfWeek.Saturday)
-                result = true;
-            else
                 result = false;
+            else
+                result = true;
             return result;
         }
     }
