@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex5b", "ex5b\ex5b.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "anagram", "anagram\anagram.csproj", "{35D6CB01-C25D-4DDB-B394-362B3505B0FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex1while", "ex1while\ex1while.csproj", "{C98DAB79-7D65-4DD8-88DC-7DA52181729E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{35D6CB01-C25D-4DDB-B394-362B3505B0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35D6CB01-C25D-4DDB-B394-362B3505B0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35D6CB01-C25D-4DDB-B394-362B3505B0FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C98DAB79-7D65-4DD8-88DC-7DA52181729E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C98DAB79-7D65-4DD8-88DC-7DA52181729E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C98DAB79-7D65-4DD8-88DC-7DA52181729E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C98DAB79-7D65-4DD8-88DC-7DA52181729E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
