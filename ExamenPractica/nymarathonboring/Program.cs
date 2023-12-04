@@ -29,8 +29,9 @@
                 }
                 cursor = sr.ReadLine();                
             }
-            if(segonsTotalGuanyador > 0)
+            if(bibGuanyador > 0)
             {
+
                 tempsGuanyador = ToHHmmss(segonsTotalGuanyador).ToString("HH:mm:ss");
                 Console.WriteLine($"THE WINNER IS: {bibGuanyador} - {nameGuanyador} TIME ELAPSED: {tempsGuanyador}");
             }
