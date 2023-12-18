@@ -4,11 +4,31 @@
     {
         static void Main(string[] args)
         {
-            int time = 235959;
+            int time = 235958;
             if (TimeValid(time)) 
             {
                 int timePlusOne = IncreaseSecond(time);
-                Console.WriteLine($"+1 second: {timePlusOne}");
+                Console.WriteLine($"{time} +1 second: {timePlusOne}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid");
+            }
+            time = 235959;
+            if (TimeValid(time))
+            {
+                int timePlusOne = IncreaseSecond(time);
+                Console.WriteLine($"{time} +1 second: {timePlusOne}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid");
+            }
+            time = 235955;
+            if (TimeValid(time))
+            {
+                int timePlusOne = IncreaseSecond(time);
+                Console.WriteLine($"{time} +1 second: {timePlusOne}");
             }
             else
             {

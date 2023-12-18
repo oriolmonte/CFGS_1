@@ -18,6 +18,7 @@
                 total += int.Parse(cursor);
                 cursor = srReader.ReadLine();
             }
+            srReader.Close();
             return Math.Round((double)total/contador,2);
         }
     }

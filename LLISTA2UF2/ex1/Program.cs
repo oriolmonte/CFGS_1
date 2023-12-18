@@ -5,17 +5,18 @@
         static void Main(string[] args)
         {
             int year = GetLeapYear();
-            Console.WriteLine(year);
+            Console.WriteLine($"{year} és un any de traspàs");
         }
         public static int GetLeapYear()
         {
             int year = 1;
-            while (!IsLeap(year))
+            while (!IsLeap(year)) 
             {
                 try
                 {
+                    Console.Write("Entra un any de traspàs: ");
                     year = Convert.ToInt32(Console.ReadLine());
-                    if (!IsLeap(year)) throw new Exception("It's not a leap year");
+                    if (!IsLeap(year)) throw new Exception($"{year} no es de traspàs");
                 }
                 catch (Exception ex)
                 {
