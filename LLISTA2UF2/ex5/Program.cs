@@ -41,21 +41,21 @@ namespace ex5
             if (mes == 2)
             {
                 if (IsLeap(any))
-                    result = (any >= 0 && any <= 9999 && dia >= 0 && dia <= 29);
+                    result = (any >= 0 && any <= 9999 && dia > 0 && dia <= 29);
                 else
-                    result = (any >= 0 && any <= 9999 && dia >= 0 && dia <= 28);
+                    result = (any >= 0 && any <= 9999 && dia > 0 && dia <= 28);
             }
             else if (mes<8 && mes>0 && mes%2!= 0)
             {
-                result = (any >= 0 && any <= 9999 && dia >= 0 && dia <= 31);
+                result = (any >= 0 && any <= 9999 && dia > 0 && dia <= 31);
             }
             else if (mes>7 && mes<=12 && mes%2 == 0)
             {
-                result = (any >= 0 && any <= 9999 && dia >= 0 && dia <= 31);
+                result = (any >= 0 && any <= 9999 && dia > 0 && dia <= 31);
             }
             else
             {
-                result = (any >= 0 && any <= 9999 && mes >= 0 && mes <= 12 && dia >= 0 && dia <= 30);
+                result = (any >= 0 && any <= 9999 && mes >= 0 && mes <= 12 && dia > 0 && dia <= 30);
             }
             return result;
         }
