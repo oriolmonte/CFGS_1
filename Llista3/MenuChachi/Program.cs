@@ -23,14 +23,10 @@ namespace MenuChachi
                         DoOddOrEven();
                         break;
                     case ConsoleKey.D3:
-                        //DoTry2ReadValidTimeStamp();
-                        Console.WriteLine("Opció 3");
-                        MsgNextScreen("prem una tecla per tornar al menu");
+                        DoTry2ReadValidTimeStamp();
                         break;
                     case ConsoleKey.D4:
-                        //DoReadAValidTimeStamp();
-                        Console.WriteLine("Opció 4");
-                        MsgNextScreen("prem una tecla per tornar al menu");
+                        DoReadAValidTimeStamp();
                         break;
                     case ConsoleKey.D5:
                         DoEnterValidDate();
@@ -40,6 +36,15 @@ namespace MenuChachi
                         break;
                     case ConsoleKey.D7:
                         DoMCD();
+                        break;
+                    case ConsoleKey.D8:
+                        DoGenerateBulukulu();
+                        break;
+                    case ConsoleKey.D9:
+                        DoSumOfDigits();
+                        break;
+                    case ConsoleKey.A:
+                        DoAverageOfDataFile();
                         break;
                     case ConsoleKey.D0:
                         MsgNextScreen("Press any key to exit");
@@ -80,6 +85,10 @@ namespace MenuChachi
             Console.WriteLine("5)   Read a valid date");
             Console.WriteLine("6)   Try to read a valid date");
             Console.WriteLine("7)   MCD of 2 integers");
+            Console.WriteLine("8)   Generate Hulukulu Bulukulu Years");
+            Console.WriteLine("9)   Sum of digits");
+            Console.WriteLine("A)   Average from file");
+
 
             Console.WriteLine("\n\n\nPress 0 to exit.");
         }
@@ -88,7 +97,7 @@ namespace MenuChachi
         /// <summary>
         /// Acció que activa la opció per saber si un numero es parell o imparell
         /// </summary>
-        private static void DoOddOrEven()
+        public static void DoOddOrEven()
         {
             try
             {
@@ -115,25 +124,15 @@ namespace MenuChachi
         /// <summary>
         /// Acció que activa la opció per que comprovi si les dates que entra l'usuari son vàlides fins que n'introdueixi una
         /// </summary>
-        private static void DoEnterValidDate()
+        public static void DoEnterValidDate()
         {
-            try
-            {
-                Console.WriteLine(TryReadDate());   
-            }
-            catch(Exception e) 
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
-            }
+            Console.WriteLine(ReadDate());
+            MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
         }
         /// <summary>
         /// Acció que activa la opció per saber si es un any de traspàs
         /// </summary>
-        private static void DoLeap()
+        public static void DoLeap()
         {
             int year;
             Console.Write("ENTER A YEAR --->");
@@ -158,7 +157,7 @@ namespace MenuChachi
         /// <summary>
         /// Acció que activa la opció per saber si una data és vàlida
         /// </summary>
-        private static void DoTryReadValidDate()
+        public static void DoTryReadValidDate()
         {
             try
             {
@@ -182,7 +181,7 @@ namespace MenuChachi
         /// <summary>
         /// Acció que activa la opció per saber el Minim Comu Divisor de dos nombres enters
         /// </summary>
-        private static void DoMCD()
+        public static void DoMCD()
         {
             try
             {
@@ -203,7 +202,117 @@ namespace MenuChachi
                 MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
             }
         }
-
+        /// <summary>
+        /// Aquesta acció ens dona els anys bulukulu i hulukulu dins un rang
+        /// </summary>
+        public static void DoGenerateBulukulu()
+        {
+            try
+            {
+                Console.WriteLine("Trobem tots els anys Hulukulu i Bulukulu en un rang");
+                Console.Write("Entra el llindar inferior: ");
+                int anyInferior = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Entra el llindar superior: ");
+                int anySuperior = Convert.ToInt32(Console.ReadLine());
+                for (int i = anyInferior; i <= anySuperior; i++)
+                {
+                    bool leap = IsLeap(i);
+                    if (leap && i % 15 == 0 && i % 55 == 0)
+                    {
+                        Console.WriteLine($"Year {i} celebrates Hulukulu and Bulukulu festivals");
+                    }
+                }
+            }
+            catch (Exception e)
+            { 
+                Console.WriteLine(e.Message); 
+            }
+            finally
+            {
+                MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
+            }
+        }
+        /// <summary>
+        /// Action that calculates the sum of digits of any integer
+        /// </summary>
+        public static void DoSumOfDigits()
+        {
+            try
+            {
+                int sum,input;
+                Console.WriteLine("Enter an integer");
+                input = Convert.ToInt32(Console.ReadLine());
+                sum = SumOfDigits(input);
+                Console.WriteLine($"Sum of digits --> {sum}");
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine (e.Message);
+            }
+            finally
+            {
+                MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
+            }
+        }
+        /// <summary>
+        /// Asks user for a data file containing an integer per line and calculates the average of the contained integers
+        /// </summary>
+        public static void DoAverageOfDataFile()
+        {
+            try
+            {
+                Console.WriteLine("Enter the filename");
+                string filename = Console.ReadLine();
+                double avg = AverageFromFile(filename);
+                Console.WriteLine($"The average from {filename} is {avg}");
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
+            }
+        }
+        /// <summary>
+        /// Asks user for a timestamp and validates it
+        /// </summary>
+        public static void DoTry2ReadValidTimeStamp()
+        {
+            int time;
+            int m, h, s, aux;
+            Console.Write("ENTER A TIME IN FORMAT hhmmss--->");
+            try
+            {
+                time = Convert.ToInt32(Console.ReadLine());
+                s = time % 100;
+                aux = time / 100;
+                h = aux / 100;
+                m = aux % 100;
+                if (ValidTime(h, m, s))
+                    Console.WriteLine($"{h:00}:{m:00}:{s:00} IS A VALID TIMESTAMP");
+                else
+                    Console.WriteLine($"{h:00}:{m:00}:{s:00} IS NOT A VALID TIMESTAMP");
+            }
+            catch  (Exception e ) 
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
+            }
+        }
+        /// <summary>
+        /// Action that prompts user to enter a timestamp until a valid one is entered
+        /// </summary>
+        public static void DoReadAValidTimeStamp()
+        {
+            string time = ReadTime();
+            Console.WriteLine($"{time} IS A VALID TIMESTAMP");
+            MsgNextScreen("PRESS A KEY TO GO BACK TO MAIN MENU");
+        }
         #endregion
         #region Calculation and Data Input
         /// <summary>
@@ -253,7 +362,7 @@ namespace MenuChachi
         /// <returns>
         /// Una string que informa la validitat de la data
         /// </returns>
-        public static string TryReadDate()
+        public static string ReadDate()
         {
             Console.WriteLine("Entra una data ddmmyyyy");
             int dia = 0, mes = 0, any = 0;
@@ -287,7 +396,7 @@ namespace MenuChachi
         /// Enter Gran</param>
         /// <returns>
         /// El resultat del MCD</returns>
-        public static int MinimComuDivisor (int bigParam, int smallParam)
+        public static int MinimComuDivisor(int bigParam, int smallParam)
         {
             int remainder, small = smallParam, big = bigParam;
             remainder = big % small;
@@ -304,6 +413,87 @@ namespace MenuChachi
             }
             return small;
         }
+        /// <summary>
+        /// Caulculates sum of digits
+        /// </summary>
+        /// <param name="inputParam">Digits to be totaled</param>
+        /// <returns>Integer containing sum of digits</returns>
+        private static int SumOfDigits(int inputParam)
+        {
+            int total = 0;
+            int input = inputParam;
+            while (input > 0)
+            {
+                total += input % 10;
+                input /= 10;
+            }
+            return total;
+        }
+        /// <summary>
+        /// Calculates the average of a list of integers in a txt file
+        /// </summary>
+        /// <param name="sr"> file name</param>
+        /// <returns>
+        /// Average of file</returns>
+        public static double AverageFromFile(string sr)
+        {
+            StreamReader srReader = new StreamReader(sr);
+            int contador = 0, total = 0;
+            string cursor = srReader.ReadLine();
+            while (cursor != null)
+            {
+                contador++;
+                total += int.Parse(cursor);
+                cursor = srReader.ReadLine();
+            }
+            srReader.Close();
+            return Math.Round((double)total / contador, 2);
+        }
+        /// <summary>
+        /// Validates a timestamp
+        /// </summary>
+        /// <param name="h">hours</param>
+        /// <param name="m">minutes</param>
+        /// <param name="s">seconds</param>
+        /// <returns>True if timestamp is valid</returns>
+        public static bool ValidTime(int h, int m, int s)
+        {
+            return h>=0 && h<=23 && m >= 0 && m <= 59 && s>=0 && s<=59;
+        }
+        /// <summary>
+        /// Reads user input until he enters a valid timestamp
+        /// </summary>
+        /// <returns>
+        /// String containing a valid timestamp</returns>
+        public static string ReadTime()
+        {
+            int time = 0;
+            int h = 0, m = 0, s = 0;
+            int aux;
+            bool valid = false;
+            while(!valid) 
+            {
+                try
+                {
+                    Console.WriteLine("ENTER A TIME IN FORMAT hhmmss -->");
+                    time = Convert.ToInt32(Console.ReadLine());
+                    s = time % 100;
+                    aux = time / 100;
+                    h = aux / 100;
+                    m = aux % 100;
+                    if (!ValidTime(h, m, s)) throw new Exception($"{h:00}:{m:00}:{s:00} is not a valid timestamp");
+                    valid = true;
+                }
+                catch (Exception e) 
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Retry...");
+                }
+            }
+            return ($"{h:00}:{m:00}:{s:00}");
+
+        }
         #endregion
+
     }
 }
