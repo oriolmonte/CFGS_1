@@ -1,11 +1,10 @@
-﻿namespace ex5
+﻿namespace ex5b
 {
     internal class Program
     {
         public const int ESTANCAT = 0;
         public const int CREIXENT = 1;
         public const int DECREIXENT = -1;
-
         static void Main(string[] args)
         {
             string cursor;
@@ -29,41 +28,24 @@
                     IncrementMes(ref mes, ref any);
                     tendenciaAnterior = CalcTendencia(anterior, actual);
                     cursor = sr.ReadLine();
-
-                    //Considerem tendència com 2 mesos seguits de creixement o decreixement.
-                    //S'invertirà tendència si durant el periode anterior de canvi hi ha hagut delta i en el següent delta invertida
-                    //Estancarse no es invertir la tendència. 
-                    //(No tendència = 0, tendencia pos = + tendencia neg = -
                     while (cursor != null && tendenciaAnterior == ESTANCAT)
                     {
-                        //Cerquem primer element vàlid (inici de tendència)
-
+                        anterior = actual;
                         actual = int.Parse(cursor);
                         IncrementMes(ref mes, ref any);
                         tendenciaAnterior = CalcTendencia(anterior, actual);
-                        anterior = actual;
                         cursor = sr.ReadLine();
                     }
-                    //primer element trobat
-                    //Cerquem una inversió de la tendència trobada
                     while (cursor != null && !tendenciaInv)
                     {
                         anterior = actual;
                         actual = int.Parse(cursor);
-
-                        //següent element
-
-                        tendenciaActual = CalcTendencia(anterior, actual);
                         IncrementMes(ref mes, ref any);
-                        if (tendenciaActual != ESTANCAT)
-                        {
-                            //si trobem una inversió tanquem
-                            if (tendenciaActual != tendenciaAnterior)
-                                tendenciaInv = true;
-                            // Si s'estanca no actualitzem anterior, la tendència no s'inverteix
-                            tendenciaAnterior = tendenciaActual;
-                        }
-                        cursor = sr.ReadLine();
+                        tendenciaActual = CalcTendencia(anterior, actual);
+                        if (tendenciaActual != 0 && tendenciaActual != tendenciaAnterior)
+                            tendenciaInv = true;
+                        else
+                            cursor = sr.ReadLine();
                     }
                     sr.Close();
                     if (tendenciaInv)

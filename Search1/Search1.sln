@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sumadigits", "sumadigits\su
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ex12mevamanera", "ex12mevamanera\ex12mevamanera.csproj", "{758A9148-FB55-450C-9D0F-98023FD0474C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex51", "ex51\ex51.csproj", "{288B323E-98F3-483F-B943-534A071014BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "trobasenar", "trobasenar\trobasenar.csproj", "{E1EB7548-B3A0-41BB-AA8D-0E8233317BCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,10 +113,10 @@ Global
 		{758A9148-FB55-450C-9D0F-98023FD0474C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{758A9148-FB55-450C-9D0F-98023FD0474C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{758A9148-FB55-450C-9D0F-98023FD0474C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{288B323E-98F3-483F-B943-534A071014BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{288B323E-98F3-483F-B943-534A071014BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{288B323E-98F3-483F-B943-534A071014BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{288B323E-98F3-483F-B943-534A071014BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1EB7548-B3A0-41BB-AA8D-0E8233317BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1EB7548-B3A0-41BB-AA8D-0E8233317BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1EB7548-B3A0-41BB-AA8D-0E8233317BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1EB7548-B3A0-41BB-AA8D-0E8233317BCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
