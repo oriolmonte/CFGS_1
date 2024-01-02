@@ -10,7 +10,6 @@
         {
             string cursor;
             int mes = 1, any = 1990, actual, anterior;
-            int tendenciaAnterior = 0, tendenciaActual = 0;
             bool tendenciaInv = false;
             StreamReader sr = new StreamReader("test.txt");
             cursor = sr.ReadLine();
@@ -49,7 +48,6 @@
                     while (cursor != null && !tendenciaInv)
                     {
                         anterior = actual;
-                        actual = int.Parse(cursor);
 
                         //següent element
 
@@ -89,7 +87,6 @@
                 tendencia = ESTANCAT;
             return tendencia;
         }
-        static void IncrementMes(ref int mes, ref int any)
         {
             if ((mes + 1) > 12)
             {
