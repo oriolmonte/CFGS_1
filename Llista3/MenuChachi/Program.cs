@@ -335,8 +335,7 @@ namespace MenuChachi
             }
             else if (mes < 8 && mes > 0 && mes % 2 != 0)
             {
-                result = (any >= 0 && any <= 9999 && dia > 0 && dia <= 31);
-                result = (any >= 0 && any <= 9999 && dia > 0 && dia <= 31);
+                result = (any >= 0 && any <= 9999 && dia >= 0 && dia <= 31);
             }
             else if (mes > 7 && mes <= 12 && mes % 2 == 0)
             {
