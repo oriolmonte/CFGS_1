@@ -6,21 +6,28 @@ namespace ex1
     {
         static void Main(string[] args)
         {
-            String a = "aaa<<<<jjjjiia";
-            Console.WriteLine(Ocurrences(a, 'a'));
-            List<int> list = WhereIs(a, 'a');
-            foreach (int i in list)
-            {
-                Console.WriteLine(i);
-            }
-            Console.WriteLine(Reverse(a));
-            String b = "racecar";
-            Console.WriteLine(IsPalindrome(b));
-            Console.WriteLine(IsPalindrome("rachas"));
-            Console.WriteLine(IsPalindrome("abba"));
-            Console.WriteLine(IsPalindromeNoBlanks("ab ba"));
-            Console.WriteLine(IsPalindromeNoBlanks("bb ba"));
-            Console.WriteLine(ToUpperCase("BaBc!AzA<"));
+            //String a = "aaa<<<<jjjjiia";
+            //Console.WriteLine(Ocurrences(a, 'a'));
+            //List<int> list = WhereIs(a, 'a');
+            //foreach (int i in list)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //Console.WriteLine(Reverse(a));
+            //String b = "racecar";
+            //Console.WriteLine(IsPalindrome(b));
+            //Console.WriteLine(IsPalindrome("rachas"));
+            //Console.WriteLine(IsPalindrome("abba"));
+            //Console.WriteLine(IsPalindromeNoBlanks("ab ba"));
+            //Console.WriteLine(IsPalindromeNoBlanks("bb ba"));
+            ////Console.WriteLine(ToUpperCase("BaBc!AzA<"));
+            Console.WriteLine(GreaterThan("salt", "Salt"));
+            Console.WriteLine(GreaterThan("b", "aa"));
+            Console.WriteLine(GreaterThan("salt", "salt"));
+            Console.WriteLine(GreaterThan("sal", "salt"));
+            Console.WriteLine(GreaterThan("aa", "bb"));
+            Console.WriteLine(GreaterThan("A", "bb"));
+            
 
 
         }
@@ -120,30 +127,45 @@ namespace ex1
         public static bool GreaterThan(String first, String second)
         {
             bool result=false;
-            if (IsNull(first)||IsNull(second)) throw new ArgumentNullException("data");
-            if(first.Length>second.Length)
-            {
-                if(StringComparer(second,first))
-                    result = true;
-            }
-            else if (second.Length>first.Length) 
-            {
-                if (StringComparer(first, second))
-                    result = false;
-            }
-
-        }
-        public static bool StringComparer(String petit, String gran)
-        {
+            bool trobat=false;
+            char firstChar, secondChar;
             int count = 0;
-            bool equal = true;
-            while(equal && count<petit.Length)
+
+            if (IsNull(first)||IsNull(second)) throw new ArgumentNullException("data");
+            while(!trobat && count < Math.Min(first.Length, second.Length))
             {
-                if (!Equals(petit[count], gran[count])) equal = false;
-                else 
+                firstChar = CharToUpper(first[count]);
+                secondChar = CharToUpper(second[count]);
+                if (firstChar < secondChar) 
+                {
+                    result = true;
+                    trobat = true;
+                }
+                else if (firstChar > secondChar)
+                {
+                    trobat = true;
+                }
+                else
+                {
                     count++;
+                }
             }
-            return equal;
+            if (!trobat)
+            {
+                result=first.Length<second.Length;
+            }
+            return result;
+        }
+        public static char CharToUpper(char lower)
+        {
+            char result;
+            if (lower >= 'a' && lower <= 'z')
+            {
+                result = (char)(lower - 32);
+            }
+            else
+                result = lower;
+            return result;
         }
     }
 }
