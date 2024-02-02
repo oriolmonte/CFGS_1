@@ -1,0 +1,3 @@
+tinc,exercici,chungo
+molta,fet,feina
+set,permi,quetecagas
