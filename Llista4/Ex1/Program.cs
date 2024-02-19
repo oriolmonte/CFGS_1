@@ -4,12 +4,13 @@
     {
         static void Main(string[] args)
         {
+            Random r = new Random();
             int[] taula = GenerateRandomTable(500);
-            Console.WriteLine(Search(taula,3));
-            Console.WriteLine(Search(taula, 199));
-            Console.WriteLine(Search(taula, 73));
-            Console.WriteLine(Search(taula, 51));
-            Console.WriteLine(Search(taula, 0));
+            for (int i = 0; i < 5; i++) 
+            {
+                int rNext=r.Next(0, 101);
+                Console.WriteLine(rNext + " " + Search(taula,rNext));
+            }
         }
         public static int[] GenerateRandomTable(int max)
         {
