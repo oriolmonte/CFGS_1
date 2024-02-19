@@ -83,7 +83,7 @@ namespace ex8
 
             string pattern = "[a-zA-VZ3-9]";
             Regex rg = new Regex(pattern);
-            Console.WriteLine("Enter your pool (without separators 1 2 or X):\n");
+            Console.WriteLine("Enter your pool (14 characters 1 2 or X without separators):\n");
             try
             {
                 int[,] winningMatrix = GenerateMatrix();

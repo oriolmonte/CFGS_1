@@ -17,7 +17,10 @@
             ResultPrint(input);
             ResultPrint(output);
             Console.WriteLine(CheckResults(input, output));
-            output[11] = 'A';
+            for (int i = 11; i < output.Length; i++)
+            {
+                output[i] = 'A';
+            }
             ResultPrint(input);
             ResultPrint(output);
             Console.WriteLine(CheckResults(input, output));
