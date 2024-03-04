@@ -97,7 +97,6 @@ internal class Program
         }
         sr.Close();
         return count;
-
     }
 
     /// <summary>
@@ -164,6 +163,7 @@ internal class Program
     /// </returns>
     public static String[] GeneresMusicalsDelCantant(string fileName, string nomDelCantant) //EXERCICI 6 : 1 punts
     {
+        string[] generes = null;
         StreamReader sr = new StreamReader(fileName);
         string cursor = sr.ReadLine();
         List<String> generesList = new List<String>();
@@ -174,18 +174,14 @@ internal class Program
             String[] primeraMeitat = cursorAux[0].Split(',');
             if (primeraMeitat[0].Equals(nomDelCantant))
             {
-                String[] generes = cursorAux[1].Split(',');
-                foreach( String gene in generes) 
-                {
-                    generesList.Add(gene);                    
-                }
+                generes = cursorAux[1].Split(',');
                 trobat = true;
             }
             else
                 cursor = sr.ReadLine();
         }
         sr.Close ();
-        return generesList.ToArray();
+        return generes;
     }
 
 }

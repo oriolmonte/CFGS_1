@@ -18,6 +18,7 @@ namespace Fraction
         {
             if (den == 0 || den == null) throw new Exception("Cannot divide by zero");
             if (num < 0) throw new Exception("Numerator cannot be negative");
+            if (den < 0) throw new Exception("Denominator cannot be negative");
             if ((char)sign != '+' && (char)sign != '-') throw new Exception("Sign can only be '+' or '-'");
             this.a_num = num;
             this.a_den = den; 
@@ -48,7 +49,9 @@ namespace Fraction
             get { return a_den; }
             set
             {
+                if (value < 0) throw new Exception("Numerator cannot be negative");
                 if (value == 0 || value == null) throw new Exception("Cannot divide by zero");
+
                 a_den = value;
             }
         }
@@ -57,7 +60,7 @@ namespace Fraction
             get { return a_sign; }
             set
             {
-                if (value != '+' || value != '-') throw new Exception("Sign can only be '+' or '-'");
+                if (value != '+' && value != '-') throw new Exception("Sign can only be '+' or '-'");
                 a_sign = value;
 
             }
@@ -137,7 +140,7 @@ namespace Fraction
             else
                 a_sign = '-';
         }
-        public void Sum(Fraction f)
+        public void Add(Fraction f)
         {
             int tmpA_num = a_num;
             int tmpParamA_num = f.a_num;
@@ -176,11 +179,10 @@ namespace Fraction
                 iguals = true;
             return iguals;
         }
-        public static Fraction Add(Fraction f1, Fraction f2)
+        public static Fraction Sum(Fraction f1, Fraction f2)
         {
             Fraction f1Copy = new Fraction(f1);
-            Fraction f2Copy = new Fraction(f2);
-            f1Copy.Sum(f2Copy);
+            f1Copy.Add(f2);
             return f1Copy;
         }
         public static Fraction Substract(Fraction f1, Fraction f2)
@@ -191,7 +193,7 @@ namespace Fraction
                 f2Copy.a_sign = '+';
             else
                 f2Copy.a_sign = '-';
-            f1Copy.Sum(f2Copy);
+            f1Copy.Add(f2Copy);
             return f1Copy;
         }
         public static Fraction Multiply(Fraction f1, Fraction f2)
@@ -226,7 +228,7 @@ namespace Fraction
         }
         public static Fraction operator + (Fraction f1, Fraction f2)
         {
-            return Add(f1, f2);
+            return Sum(f1, f2);
         }
         public static Fraction operator - (Fraction f1, Fraction f2)
         {
@@ -240,7 +242,7 @@ namespace Fraction
         {
             return Divide(f1, f2);
         }
-        public static Fraction operator -(Fraction f)
+        public static Fraction operator - (Fraction f)
         {
             Fraction fCopy = new Fraction(f);
             if (fCopy.a_sign == '-')
@@ -251,14 +253,12 @@ namespace Fraction
         }
         public static Fraction operator ++(Fraction f)
         {
-            Fraction one = new Fraction(1, 1, '+');
-            return Add(one, f);
+            return f + new Fraction(1,1,'+');
           
         }
         public static Fraction operator --(Fraction f)
         {
-            Fraction one = new Fraction(1, 1, '+');
-            return Substract(one, f);
+            return f - new Fraction(1, 1, '+');
         }
         public static Fraction operator !(Fraction f)
         {
