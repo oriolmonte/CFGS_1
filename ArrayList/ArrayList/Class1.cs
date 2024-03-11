@@ -204,11 +204,12 @@ namespace ArrayList
         }
         public override string ToString()
         {
+            if (this is null) throw new NullReferenceException("NO PODEM TRANSFORMAR LLISTES NULES");
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("[");
             for(int i = 0; i<_nelements; i++)
             {
-                stringBuilder.Append($"{_dades[i].ToString()},");
+                stringBuilder.Append($"{_dades[i]},");
             }
             stringBuilder.Remove(stringBuilder.Length - 1, 1);
             stringBuilder.Append("]");
@@ -217,7 +218,7 @@ namespace ArrayList
         public override bool Equals(object? obj)
         {
             bool areEqual = true;
-            if (this is null) areEqual = false;
+            if (this is null) areEqual = obj is null;
             else if (obj is TaulaLlista)
             {
                 TaulaLlista entrada = new TaulaLlista((TaulaLlista)obj);

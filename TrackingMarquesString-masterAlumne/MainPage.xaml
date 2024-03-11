@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackingMarques.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="logo_montilivi_2015_vermell.png"
+                SemanticProperties.Description="Institut Montilivi"
+                HeightRequest="80"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="EtiquetaNomRuta"
+                Text="1r DAM 2023-2024"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="16"
+                HorizontalOptions="Center" />
+
+             <Label
+                x:Name="IDAlum"
+                Text="Oriol Monte"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="16"
+                HorizontalOptions="Center" /> 
+
+            <Button 
+                x:Name="RecuperarBtn"
+                Text="Recuperar ruta no finalitzada"
+                SemanticProperties.Hint="Recuperar ruta no finalitzada"
+                Clicked="RecuperarBtn_Clicked"
+                HorizontalOptions="Center"
+                />
+
+            <Button
+                x:Name="IniciBtn"
+                Text="Inici de la ruta"
+                SemanticProperties.Hint="Inicia la ruta"
+                Clicked="IniciBtn_Clicked"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="LabelPuntsInteres"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="10"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="PuntInteresBtn"
+                Text="Marcar punt d'interés"
+                SemanticProperties.Hint="Marcar un punt d'interés"
+                Clicked="PuntInteresBtn_Clicked"
+                IsEnabled="False"
+                HorizontalOptions="Center" />
+
+            <Entry
+                x:Name="PuntInteresEntry"
+                MaxLength="100"
+                Text="" 
+                Placeholder="Nom punt interés"/>
+
+            <Label
+                x:Name="LabelPuntsRuta"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="10"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="PuntRutaBtn"
+                Text="Marcar punt de la ruta"
+                SemanticProperties.Hint="Marcar un punt de la ruta"
+                Clicked="PuntRutaBtn_Clicked"
+                IsEnabled="False"
+                HorizontalOptions="Center" />
+
+            <Button 
+                x:Name="FinalBtn"
+                Text="Final de la ruta"
+                SemanticProperties.Hint="Finalitza la ruta"
+                Clicked="FinalBtn_Clicked"
+                IsEnabled="False"
+                HorizontalOptions="Center" />
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
