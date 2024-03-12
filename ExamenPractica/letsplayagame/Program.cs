@@ -10,11 +10,11 @@
             Console.WriteLine("WELCOME TO THE GAME!\n" +
                 "IF YOU GET TIRED, ENTER 0 TO END\n");
             Console.Write("ENTER A NUMBER BETWEEN 1 AND 35 -> ");
-            random = r.Next(1, 36);
             input = Convert.ToInt32(Console.ReadLine());
+            random = r.Next(1,36);
+            contador++;
             while(input != 0 && !guanyat)
             {
-                contador++;
                 if (random == input)
                     guanyat=true;
                 else
@@ -23,6 +23,7 @@
                     random = r.Next(1, 36);
                     Console.Write("ENTER A NUMBER BETWEEN 1 AND 35 -> ");
                     input = Convert.ToInt32(Console.ReadLine());
+                    contador++;
                 }
             }
             Console.Write($"NUMBER OF ATTEMPTS -->{contador}\n");

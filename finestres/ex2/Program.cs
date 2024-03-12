@@ -4,26 +4,23 @@
     {
         static void Main(string[] args)
         {
-            int primer, segon, tercer, contador=3;
-            Random random = new Random();
+            int primer, segon, tercer, contador;
             bool trobat = false;
-            primer = random.Next(1, 7);
-            segon = random.Next(1, 7);
-            tercer = random.Next(1, 7);
+            Random r = new Random();
+            primer = r.Next(1,7);
+            segon = r.Next(1,7);
+            tercer = r.Next(1,7);
+            contador = 3;
+            trobat = segon == (tercer + primer);
             while(!trobat)
             {
-                if (segon == (primer + tercer))
-                    trobat = true;
-                else
-                {
-                    primer = segon;
-                    segon = tercer;
-                    tercer = random.Next(1, 7);
-                    contador++;
-                }
+                primer = segon;
+                segon = tercer;
+                tercer=r.Next(1,7);
+                contador++;
+                trobat = segon == (tercer + primer);
             }
-            // \n es per posar una nova linea a la consola
-            Console.WriteLine($"Finestra guanyadora: [{primer},{segon},{tercer}]\n{segon}={primer}+{tercer}\nNombre de tirades: {contador}");
+            Console.WriteLine($"{segon}={tercer}+{primer} Tirades={contador}");
         }
     }
 }

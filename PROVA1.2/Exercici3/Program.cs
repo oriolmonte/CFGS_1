@@ -22,10 +22,10 @@
             avgOus = totalOus / 4;
             Console.WriteLine($"\nLa mitjana és de {avgOus} per trimestre\n");
             //CALCUL PERCENTATGE
-            percentOus1 = Math.Round((100 * ous1) / totalOus,0);
-            percentOus2 = Math.Round((100 * ous2) / totalOus,0);
-            percentOus3 = Math.Round((100 * ous3) / totalOus,0);
-            percentOus4 = Math.Round((100 * ous4) / totalOus,0);
+            percentOus1 = Math.Floor((100 * ous1) / totalOus);
+            percentOus2 = Math.Floor((100 * ous2) / totalOus);
+            percentOus3 = Math.Floor((100 * ous3) / totalOus);
+            percentOus4 = Math.Floor((100 * ous4) / totalOus);
             //CRIDA A ALERTA I OUTPUT, ENS TORNA STRING BUIDA SI NO HI HA ALERTA
             alerta = Alerta(percentOus1);
             Console.WriteLine($"El primer trimestre s'han produït un {percentOus1}% del total. {alerta}");
