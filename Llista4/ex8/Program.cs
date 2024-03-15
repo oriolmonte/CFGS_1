@@ -196,7 +196,9 @@ namespace ex8
             Console.WriteLine("1)   Show match results");
             Console.WriteLine("2)   Did you win?");
             Console.WriteLine("3)   Did random pool win?");
-
+            string p = "pene";
+            char pri = p[0];
+            Console.WriteLine(pri);
             Console.WriteLine("\n\n\nPress 0 to exit.");
         }
         private static void MsgNextScreen(string v)

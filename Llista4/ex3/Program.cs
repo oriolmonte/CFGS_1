@@ -17,7 +17,7 @@
         public static int[] HitsIndex(int[] data, int value)
         {
             int[] indexesRaw = new int[data.Length];
-            int count = 0;Ll
+            int count = 0;
             for(int i = 0; i < data.Length; i++)
             {
                 if (data[i] == value)

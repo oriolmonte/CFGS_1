@@ -16,6 +16,7 @@ namespace EstudiarDUROOO
             //PrintMatrix(matrix);
             //PrintMatrix(transposed);
             //HiddenMessage(MatrixGet("yoda.txt", 3, 3));
+            Reverse();
 
         }
         public static int[] Hits(int[] array, int value)
@@ -306,6 +307,19 @@ namespace EstudiarDUROOO
                 cadena.Append("[]");
             }
             Console.WriteLine(cadena.ToString());
+        }
+        private static void Reverse ()
+        {
+            int[] data = { 1, 2, 3, 4, 5 };
+            int[] reversed = new int[data.Length];
+            for(int i = reversed.Length - 1; i >= 0; i--) 
+            {
+                reversed[data.Length - 1 - i] = data[i];
+            }
+            foreach (int i in reversed)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 
