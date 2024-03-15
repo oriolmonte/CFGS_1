@@ -5,15 +5,58 @@
         static void Main(string[] args)
         {
             TaulaLlista<Equip> equips = TaulaLlistaParser("equips.txt");
-            Console.WriteLine("Gols Fets");
-            PrintPerGolsMarcats(equips);
-            Console.WriteLine("-----------------------------------------------------------");
-            Console.WriteLine("Gols Encaixats");
-            PrintPerGolsEncaixats(equips);
-            Console.WriteLine("-----------------------------------------------------------");
-            Console.WriteLine("Classificacio");
-            PrintPerClassificacio(equips);
-            Console.WriteLine("-----------------------------------------------------------");
+            ConsoleKeyInfo tecla;
+            do
+            {
+                Console.Clear();
+                ShowOptions();
+                tecla = Console.ReadKey();
+                Console.Clear();
+                switch (tecla.Key)
+                {
+                    case ConsoleKey.D1:
+                    case ConsoleKey.NumPad1:
+                        PrintAlfabetic(equips);
+                        break;
+                    case ConsoleKey.D2:
+                    case ConsoleKey.NumPad2:
+                        PrintPerClassificacio(equips);
+                        break;
+                    case ConsoleKey.D3:
+                    case ConsoleKey.NumPad3:
+                        PrintPerGolsMarcats(equips);
+                        break;
+                    case ConsoleKey.D4:
+                    case ConsoleKey.NumPad4:
+                        PrintPerGolsEncaixats(equips);
+                        break;
+                    case ConsoleKey.D0:
+                    case ConsoleKey.NumPad0:
+                        MsgNextScreen("Press any key to exit");
+                        break;
+                    default:
+                        MsgNextScreen("Error prem una tecla per tornar al menu");
+                        break;
+                }
+            } while (tecla.Key != ConsoleKey.D0);
+        }
+        private static void MsgNextScreen(string v)
+        {
+            Console.WriteLine(v);
+            Console.ReadKey();
+        }
+        /// <summary>
+        /// Mostra les opcions del menu
+        /// </summary>
+        private static void ShowOptions()
+        {
+            Console.Clear();
+            Console.WriteLine("1)   Llistat Alfabetic");
+            Console.WriteLine("2)   Llistat per Classificacio");
+            Console.WriteLine("3)   Per Gols Marcats");
+            Console.WriteLine("4)   Per gols encaixats");
+
+            Console.WriteLine("\n\n\nPress 0 to exit.");
         }
         public static void PrintPerGolsMarcats(TaulaLlista<Equip> equip)
         {
@@ -23,6 +66,7 @@
             {
                 Console.WriteLine(item);
             }
+            MsgNextScreen("Prem qualsevol tecla per tornar");
         }
         public static void PrintPerClassificacio(TaulaLlista<Equip> equip)
         {
@@ -32,6 +76,8 @@
             {
                 Console.WriteLine(item);
             }
+            MsgNextScreen("Prem qualsevol tecla per tornar");
+
         }
         public static void PrintPerGolsEncaixats(TaulaLlista<Equip> equip)
         {
@@ -41,6 +87,8 @@
             {
                 Console.WriteLine(item);
             }
+            MsgNextScreen("Prem qualsevol tecla per tornar");
+
         }
         public static TaulaLlista<Equip> TaulaLlistaParser (string path)
         {
@@ -59,6 +107,16 @@
                 cursor = sr.ReadLine();
             }
             return resultat;
+        }
+        public static void PrintAlfabetic(TaulaLlista<Equip> equip)
+        {
+            equip.Sort();
+            for(int i = 0; i<equip.NElems; i++) 
+            {
+                Console.WriteLine(equip[i]);
+            }
+            MsgNextScreen("Prem qualsevol tecla per tornar");
+
         }
 
     }
