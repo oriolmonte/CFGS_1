@@ -446,6 +446,7 @@ namespace MenuChachi
                 total += int.Parse(cursor);
                 cursor = srReader.ReadLine();
             }
+            if (contador == 0) throw new Exception("No data");
             srReader.Close();
             return Math.Round((double)total / contador, 2);
         }

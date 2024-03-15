@@ -10,6 +10,7 @@
         {
             string cursor;
             int mes = 1, any = 1990, actual, anterior;
+            int tendenciaAnterior = 0, tendenciaActual = 0;
             bool tendenciaInv = false;
             StreamReader sr = new StreamReader("test.txt");
             cursor = sr.ReadLine();
@@ -24,19 +25,15 @@
                 else
                 {
                     actual = int.Parse(cursor);
-                    //Si passem parametres com a referencia podem fer-ho en una funcio
                     IncrementMes(ref mes, ref any);
                     tendenciaAnterior = CalcTendencia(anterior, actual);
                     cursor = sr.ReadLine();
-
-                    //Considerem tendència com 2 mesos seguits de creixement o decreixement.
+                    /*Considerem tendència com 2 mesos seguits de creixement o decreixement.
                     //S'invertirà tendència si durant el periode anterior de canvi hi ha hagut delta i en el següent delta invertida
-                    //Estancarse no es invertir la tendència. 
-                    //(No tendència = 0, tendencia pos = + tendencia neg = -
+                    //Un estancament no es invertible,Estancarse no es invertir la tendència. 
+                    //(No tendència = 0, tendencia pos = + tendencia neg = -*/
                     while (cursor != null && tendenciaAnterior == ESTANCAT)
                     {
-                        //Cerquem primer element vàlid (inici de tendència)
-
                         actual = int.Parse(cursor);
                         IncrementMes(ref mes, ref any);
                         tendenciaAnterior = CalcTendencia(anterior, actual);
@@ -48,17 +45,13 @@
                     while (cursor != null && !tendenciaInv)
                     {
                         anterior = actual;
-
-                        //següent element
-
+                        actual = int.Parse(cursor);
                         tendenciaActual = CalcTendencia(anterior, actual);
                         IncrementMes(ref mes, ref any);
                         if (tendenciaActual != ESTANCAT)
                         {
-                            //si trobem una inversió tanquem
                             if (tendenciaActual != tendenciaAnterior)
                                 tendenciaInv = true;
-                            // Si s'estanca no actualitzem anterior, la tendència no s'inverteix
                             tendenciaAnterior = tendenciaActual;
                         }
                         cursor = sr.ReadLine();
@@ -87,6 +80,7 @@
                 tendencia = ESTANCAT;
             return tendencia;
         }
+        static void IncrementMes(ref int mes, ref int any)
         {
             if ((mes + 1) > 12)
             {
