@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(EsTriangular(6));
+            Console.WriteLine(Max(new int[] {5,2,3,4}));
         }
         public static int Sumatori(int n)
         {
@@ -191,6 +191,66 @@
             return result;
 
 
+        }
+        public static bool EsPerfecte(int numero)
+        {
+            return (EsPerfecte(numero, numero-1, 0));
+        }
+
+        public static bool EsPerfecte(int numero, int divisor, int acum)
+        {
+            bool result = false;
+            if (numero == acum)
+            {
+                result = true;
+            }
+            else if (divisor == 0)
+                result = false;
+            else
+            {
+                while (numero % divisor != 0 && divisor > 0)
+                    divisor--;
+                result = EsPerfecte(numero, divisor-1, acum+divisor);
+            }
+
+            return result;
+            
+        }
+        public static int Reverse (int numero)
+        {
+            return Reverse(numero, 0);
+        }
+        public static int Reverse (int numero, int aux)
+        {
+            if(numero == 0)
+            {
+                aux +=0;
+            }
+            else
+            {
+                aux=Reverse(numero / 10, numero%10+10*aux);
+            }
+            return aux;
+        }
+        public static int Max(int[] vector)
+        {
+            return Max(vector, 0, 0);
+        }
+        public static int Max(int[] vector, int max, int index)
+        {
+            if(index==vector.Length)
+            {
+                max += 0;
+            }
+            else
+            {
+                if (max < vector[index])
+                {
+                    max = vector[index];
+                }
+                max = Max(vector, max, index+1);
+            }
+            return max;
         }
     }
 }

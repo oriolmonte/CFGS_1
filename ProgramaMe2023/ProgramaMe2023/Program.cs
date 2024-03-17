@@ -12,15 +12,15 @@
                 char[,] superficie = Superficie(input);
                 int g = GranitePoints(superficie);
                 Console.WriteLine(g);
-                //for (int i = 0; i < superficie.GetLength(0); i++)
-                //{
-                //    for (int z = 0; z < superficie.GetLength(1); z++)
-                //    {
-                //        Console.Write(superficie[i, z]);s
-                //    }
-                //    Console.WriteLine();
-                //}
-                //Console.WriteLine();
+                for (int i = 0; i < superficie.GetLength(0); i++)
+                {
+                    for (int z = 0; z < superficie.GetLength(1); z++)
+                    {
+                        Console.Write(superficie[i, z]);
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
             }
             input.Close();
         }
