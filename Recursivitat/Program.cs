@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(EsTriangular(6));
+            Console.WriteLine(Ordenat(new int[] {1,2,3,7,4,5,6}));
         }
         public static int Sumatori(int n)
         {
@@ -191,6 +191,174 @@
             return result;
 
 
+        }
+        public static bool EsPerfecte(int numero)
+        {
+            return (EsPerfecte(numero, numero-1, 0));
+        }
+
+        public static bool EsPerfecte(int numero, int divisor, int acum)
+        {
+            bool result = false;
+            if (numero == acum)
+            {
+                result = true;
+            }
+            else if (divisor == 0)
+                result = false;
+            else
+            {
+                while (numero % divisor != 0 && divisor > 0)
+                    divisor--;
+                result = EsPerfecte(numero, divisor-1, acum+divisor);
+            }
+
+            return result;
+            
+        }
+        public static int Reverse (int numero)
+        {
+            return Reverse(numero, 0);
+        }
+        public static int Reverse (int numero, int aux)
+        {
+            if(numero == 0)
+            {
+                aux +=0;
+            }
+            else
+            {
+                aux=Reverse(numero / 10, numero%10+10*aux);
+            }
+            return aux;
+        }
+        public static int Max(int[] vector)
+        {
+            return Max(vector, 0, 0);
+        }
+        public static int Max(int[] vector, int max, int index)
+        {
+            if(index==vector.Length)
+            {
+                max += 0;
+            }
+            else
+            {
+                if (max < vector[index])
+                {
+                    max = vector[index];
+                }
+                max = Max(vector, max, index+1);
+            }
+            return max;
+        }
+        public static int Escalar(int[] vectorA, int[] vectorB)
+        {
+            return Escalar(vectorA, vectorB, 0, 0);
+        }
+        public static int Escalar(int[] vectorA, int[] vectorB, int index, int producte)
+        {
+            
+            if (index == vectorA.Length)
+            {
+                 producte += 0;
+            }
+            else
+            {
+                producte += Escalar(vectorA, vectorB, index + 1, vectorA[index] * vectorB[index]);
+            }
+            return producte;
+        }
+        public static int IndexOf(int[] vectorA, int busca)
+        {
+            return IndexOf(vectorA, busca, 0);
+        }
+        public static int IndexOf(int[] vectorA, int busca, int index)
+        {
+            int resultat = -1;
+            if (vectorA[index]==busca)
+            {
+                resultat = index;
+            }
+            else
+            {
+                resultat = IndexOf(vectorA, busca, index+1);
+            }
+            return resultat;
+        }
+        public static bool SumaPrecedents(int[] vectorA)
+        {
+            return SumaPrecedents(vectorA, 0, 0);
+        }
+        public static bool SumaPrecedents(int[] vectorA, int index, int acum)
+        {
+            bool resultat;
+            if (index == vectorA.Length)
+            {
+                resultat = false;
+            }
+            else if (acum == vectorA[index])
+            {
+                resultat = true;
+            }
+            else
+            {
+                resultat=SumaPrecedents(vectorA, index+1, acum+vectorA[index]);
+            }
+            return resultat;
+        }
+        public static bool Capicua(int[] vectorA)
+        {
+            return Capicua(vectorA, 0, vectorA[0], vectorA[vectorA.Length-1]);
+        }
+        public static bool Capicua(int[] vectorA, int index, int principi, int final)
+        {
+            bool resultat = true;
+            if(index > vectorA.Length/2)
+            {
+                resultat = true;
+            }
+            else if (principi != final)
+            {
+                resultat = false;
+            }
+            else
+            {
+                resultat = Capicua(vectorA, index+1, vectorA[index], vectorA[vectorA.Length-1-index]);
+            }
+            return resultat;
+        }
+        public static bool Ordenat(int[] vectorA)
+        {
+            return Ordenat(vectorA, true, 0,0,false);
+        }
+        public static bool Ordenat(int[] vectorA, bool reves)
+        {
+            return Ordenat(vectorA, true, 0, 0, reves);
+        }
+        public static bool Ordenat(int[] vectorA, bool creixent, int anterior, int index, bool reves)
+        {
+            bool result = false;    
+            if(index == vectorA.Length && creixent) 
+            {
+                result = true;
+            }
+            else if(!creixent && !reves)
+            {
+                Array.Reverse(vectorA);
+                result = Ordenat(vectorA, true, 0, 0, true);
+
+            }
+            else if(!creixent && reves)
+            {
+                result = false;
+            }
+            else
+            {
+                result = Ordenat(vectorA,vectorA[index]>=anterior, vectorA[index], index + 1, reves);
+            }
+            return result;
+        
         }
     }
 }
