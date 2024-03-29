@@ -35,7 +35,7 @@ namespace CuaEstatica
         {
             get
             {
-                if(index==0 || index > front) throw new IndexOutOfRangeException();
+                if(index<0 || index > front) throw new IndexOutOfRangeException();
                 return data[index];
             }
         }
@@ -65,6 +65,13 @@ namespace CuaEstatica
             data[0] = item;
             front++;
         }
+        public void Enqueue(IEnumerable<T> items)
+        {
+            foreach(T item in items)
+            {
+                Enqueue(item);
+            }
+        }
         public T[] ToArray()
         {
             int i = 0;
@@ -87,16 +94,32 @@ namespace CuaEstatica
         }
         public Queue<T> Requeue()
         {
-            Queue<T> result = new Queue<T>((front+1)/2);
-            result.front = result.data.Length-1;
-            for(int i = 0; i<result.data.Length;i++)
+            Queue<T> result = new Queue<T>(data.Length);
+            Queue<T> tail = new Queue<T>(data.Length);
+            for(int i = 0; i<(this.front+1)/2;i++)
             {
-                result.data[i] = this.data[i];
-                
-                this.data[i] = default;
+                result.data[i] = this.data[i];      
+                result.front++;
             }
+            int frontFix = front;
+            if (frontFix%2!=0) 
+            {
+                for (int i = 0; i < (frontFix + 1) / 2; i++)
+                {
+                    tail.Enqueue(this.DeQueue());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < (frontFix + 1) / 2+1; i++)
+                {
+                    tail.Enqueue(this.DeQueue());
+                }
+            }
+            
+            this.data = tail.data;
+            this.front = tail.front;
             return result;
-
         }
         public override string ToString()
         {
@@ -133,6 +156,10 @@ namespace CuaEstatica
         {
             return this.GetEnumerator();
             
+        }
+        public IEnumerator<T> GetEnumeratorYield()
+        {
+            for (int i = front; i >= 0; i--) yield return data[i];
         }
     }
 }
