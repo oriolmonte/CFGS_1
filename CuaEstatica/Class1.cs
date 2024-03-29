@@ -93,7 +93,8 @@ namespace CuaEstatica
             return result;
         }
         public Queue<T> Requeue()
-        {
+        {            
+            //Una mica cutre, no se'm acut massa mes si m'he de quedar en les especificacions...
             Queue<T> result = new Queue<T>(data.Length);
             Queue<T> tail = new Queue<T>(data.Length);
             for(int i = 0; i<(this.front+1)/2;i++)
@@ -101,7 +102,7 @@ namespace CuaEstatica
                 result.data[i] = this.data[i];      
                 result.front++;
             }
-            int frontFix = front;
+            int frontFix = front; 
             if (frontFix%2!=0) 
             {
                 for (int i = 0; i < (frontFix + 1) / 2; i++)
