@@ -132,43 +132,35 @@ public partial class MainPage : ContentPage
             List<PuntRuta> puntsRuta = await conn.Table<PuntRuta>().Where(w => w.RutaId == ruta.Id).ToListAsync();
 
             string xml = string.Empty;
-            xml = "\t<root>\r\n";
+            xml = "\t<turismeactiugirona>\r\n";
             //Creem els elements de la ruta
-            xml = xml + "<PuntRuta>\r\n"; /*** AQUI HAS DE MODIFICAR EL CODI ***/
+            xml = xml + "<puntsRuta>\r\n"; /*** AQUI HAS DE MODIFICAR EL CODI ***/
             foreach (PuntRuta puntRuta in puntsRuta)
             {
-                /*** AQUI HAS DE MODIFICAR EL CODI ***/
-                /*puntRuta.Latitud.ToString(nfi)
-                puntRuta.Longitud.ToString(nfi)
-                puntRuta.Elevacio?.ToString(nfi)
-                puntRuta.DataHora.ToString("yyyy-MM-ddTHH:mm:ssZ")*/
+                xml = xml + "<puntRuta>\r\n"; 
                 xml = xml + "<Latitud>" + puntRuta.Latitud.ToString(nfi) + "</Latitud>" + "\r\n";
                 xml = xml + "<Longitud>" + puntRuta.Longitud.ToString(nfi) + "</Longitud>" + "\r\n";
                 xml = xml + "<Elevacio>" + puntRuta.Elevacio?.ToString(nfi) + "</Elevacio>" + "\r\n";
                 xml = xml + "<DataHora>" + puntRuta.DataHora.ToString("yyyy-MM-ddTHH:mm:ssZ") + "</DataHora>" + "\r\n";
+                xml = xml + "</puntRuta>\r\n"; 
             }
-            xml = xml + "</PuntRuta>\r\n"; /*** AQUI HAS DE MODIFICAR EL CODI ***/
+            xml = xml + "</puntsRuta>\r\n"; 
 
             //Creem els elements dels punts d'interès
-            xml = xml + "<PuntInteres>\r\n"; /*** AQUI HAS DE MODIFICAR EL CODI ***/
+            xml = xml + "<puntsInteres>\r\n"; 
             foreach (PuntInteres puntInteres in puntsInteres)
             {
-                /*** AQUI HAS DE MODIFICAR EL CODI ***/
-                /*
-                puntInteres.Nom
-                puntInteres.Latitud.ToString(nfi)
-                puntInteres.Longitud.ToString(nfi)
-                puntInteres.Elevacio?.ToString(nfi)
-                puntInteres.DataHora.ToString("yyyy-MM-ddTHH:mm:ssZ")*/
+                xml = xml + "<puntInteres>\r\n"; 
                 xml = xml + "<Nom>" + puntInteres.Nom + "</Nom>" + "\r\n";
                 xml = xml + "<Latitud>" + puntInteres.Latitud.ToString(nfi) + "</Latitud>" + "\r\n";
                 xml = xml + "<Longitud>" + puntInteres.Longitud.ToString(nfi) + "</Longitud>" + "\r\n";
                 xml = xml + "<Elevacio>" + puntInteres.Elevacio?.ToString(nfi) + "</Elevacio>" + "\r\n";
                 xml = xml + "<DataHora>" + puntInteres.DataHora.ToString("yyyy-MM-ddTHH:mm:ssZ") + "</DataHora>" + "\r\n";
+                xml = xml + "</puntInteres>\r\n";
             }
-            xml = xml + "</PuntInteres>\r\n";/*** AQUI HAS DE MODIFICAR EL CODI ***/
+            xml = xml + "</puntsInteres>\r\n";
 
-            xml = xml + "\t</root>\r\n";
+            xml = xml + "\t</turismeactiugirona>\r\n";
 
             string fitxer = $"ruta_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}";
             using var stream = new MemoryStream(Encoding.Default.GetBytes(xml));
