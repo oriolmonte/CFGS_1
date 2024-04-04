@@ -27,7 +27,7 @@ namespace PilaDinamica
             get { return top; }
         }
 
-        int ICollection<T>.Count
+        public int Count
         {
             get
             {
@@ -37,20 +37,25 @@ namespace PilaDinamica
             }
         }
 
-        bool ICollection<T>.IsReadOnly { get => isReadOnly;} 
+        public bool IsReadOnly { get => isReadOnly;}
 
-        T IList<T>.this[int index] 
+        public T this[int index] 
         { 
             
             get
             {
-                Node<T> cursor = null;
-                IEnumerator<T> enumerator = GetEnumerator();
-                for (int i = 0; i<index;index++)
-                {
-                    enumerator.MoveNext();
-                }
-
+                if(index < 0 || index >= Count) throw new ArgumentOutOfRangeException("index");
+                Node<T> node = GetNodeAt(index);
+                return node.Info;
+                
+            }
+            set
+            {
+                if (value == null) throw new ArgumentNullException("value");
+                if (index < 0 || index >= Count) throw new ArgumentOutOfRangeException("index");
+                if (isReadOnly) throw new NotSupportedException();
+                Node<T> node = GetNodeAt(index);
+                node.Info = value;
             }
         }
 
@@ -102,44 +107,120 @@ namespace PilaDinamica
 
         }
 
-        int IList<T>.IndexOf(T item)
+        public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            
+            int index = 0;
+            Node<T> current = top;
+            bool trobat = false;
+            while (!trobat)
+            {
+                if (current.Info.Equals(item))
+                    trobat = true;
+                else
+                {
+                    index++;
+                    current = current.Next;
+                    if (current == null)
+                        trobat = true;
+                }
+            }
+            if (current==null)
+                index = -1;
+            return index;
+
+        }
+        
+        private Node<T> GetNodeAt(int index)
+        {
+            Node<T> cursor = top;
+            for (int i = 0; i < index; i++)
+            {
+                cursor = cursor.Next;
+            }
+            return cursor;
+        }
+        public void Insert(int index, T item)
+        {
+            if (index < 0 || index >= Count) throw new ArgumentOutOfRangeException("index");
+            if (isReadOnly) throw new NotSupportedException();
+            Node<T> itemN = new Node<T>(item);
+            if (index == 0)
+                Push(item);
+            else if (index == Count-1)
+            {
+                GetNodeAt(index).Next = itemN;
+            }
+            else
+            {
+                Node<T> node = GetNodeAt(index);
+                Node<T> antNode = GetNodeAt(index-1);
+                antNode.Next = itemN;
+                itemN.Next = node;
+            }
+        }
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index >= Count) throw new ArgumentOutOfRangeException("index");
+            if (isReadOnly) throw new NotSupportedException();
+            if (index == 0)
+            {
+                Pop();
+            }
+            else if (index == Count - 1)
+            {
+                Node<T> a = GetNodeAt(index-1);
+                a.Next=null;
+            }
+            else
+            {
+                Node<T> antNode = GetNodeAt(index - 1);
+                Node<T> segNode = GetNodeAt(index + 1);
+                antNode.Next = segNode;
+            }
+        }
+        public void Add(T item)
+        {
+            if (isReadOnly) throw new NotSupportedException();
+            Push(item);
         }
 
-        void IList<T>.Insert(int index, T item)
+        public void Clear()
         {
-            throw new NotImplementedException();
+            if (isReadOnly) throw new NotSupportedException();
+            top = null;
         }
 
-        void IList<T>.RemoveAt(int index)
+        public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            bool a = false;
+            if(IndexOf(item)!=-1) a = true;
+            return a;
         }
 
-        void ICollection<T>.Add(T item)
+        public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            if(array == null) throw new ArgumentNullException("array");
+            if (arrayIndex < 0) throw new ArgumentOutOfRangeException("no valid index");
+            if (array.Length - arrayIndex < Count) throw new ArgumentException("No cap la pila a dins l'array");
+            for(int i = 0; i < Count; i++)
+            {
+                array[arrayIndex+i] = this[i];
+            }
         }
 
-        void ICollection<T>.Clear()
+        public bool Remove(T item)
         {
-            throw new NotImplementedException();
-        }
-
-        bool ICollection<T>.Contains(T item)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICollection<T>.CopyTo(T[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool ICollection<T>.Remove(T item)
-        {
-            throw new NotImplementedException();
+            if (isReadOnly) throw new NotSupportedException();
+            bool result;
+            int index = IndexOf(item);
+            if (index != -1)
+            {
+                RemoveAt(index);
+                result = true;
+            }
+            else { result= false; }
+            return result;
         }
     }
 }
