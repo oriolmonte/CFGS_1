@@ -11,8 +11,8 @@ namespace PilaDinamica
             p.Push(2);
             p.Push(3);
             p.Push(4);
-            p.RemoveAt(0);
-            Console.WriteLine(p);
+            p.IndexOf(4);
+            Console.WriteLine(p.IndexOf(4));
         }
     }
 }

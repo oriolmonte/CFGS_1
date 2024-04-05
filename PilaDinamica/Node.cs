@@ -9,7 +9,7 @@ namespace PilaDinamica
     public class Node<T>
     {
         private T info;
-        private Node<T> next;
+        private Node<T> next = null;
 
         public T Info { get => info; set => info = value; }
         public Node<T> Next { get => next; set => next = value; }
