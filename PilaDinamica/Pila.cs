@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PilaDinamica
 {
-    public class Pila<T> : IEnumerable<T>, IEnumerable, IList<T> //TODO TOSTRING, EQUALS, GET ENUMERATOR NORMAL
+    public class Pila<T> : IEnumerable<T>, IEnumerable, IList<T> 
     {
         private Node<T> top = null;
         private bool isReadOnly;
@@ -153,8 +153,8 @@ namespace PilaDinamica
             }
             else
             {
-                Node<T> node = GetNodeAt(index);
                 Node<T> antNode = GetNodeAt(index-1);
+                Node<T> node = antNode.Next;
                 antNode.Next = itemN;
                 itemN.Next = node;
             }
@@ -175,7 +175,7 @@ namespace PilaDinamica
             else
             {
                 Node<T> antNode = GetNodeAt(index - 1);
-                Node<T> segNode = GetNodeAt(index + 1);
+                Node<T> segNode = antNode.Next.Next;
                 antNode.Next = segNode;
             }
         }
@@ -221,6 +221,42 @@ namespace PilaDinamica
             }
             else { result= false; }
             return result;
+        }
+        public override bool Equals(object? obj)
+        {
+            bool areEqual = true;
+            bool end = false;
+            if (this is null) areEqual = obj is null;
+            else if ( obj is Pila<T> otherPila)
+            {
+                if (!this.Count.Equals(otherPila.Count)) areEqual = false;
+                else
+                {
+                    Node<T> thisNode = this.top;
+                    Node<T> otherNode = otherPila.top;
+
+                    while (areEqual && !end)
+                    {
+                        areEqual = thisNode.Info.Equals(otherNode.Info);
+                        thisNode = thisNode.Next; otherNode = otherNode.Next;
+                        if (thisNode is null && otherNode is null)
+                            end = true;
+                    }
+                }
+            }
+            return areEqual;
+        }
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            foreach (T item in this)
+            {
+                sb.Append($"{item},");
+            }
+            sb.Remove(sb.Length - 1, 1);
+            sb.Append("]");
+            return sb.ToString();
         }
     }
 }

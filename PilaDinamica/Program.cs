@@ -10,12 +10,9 @@ namespace PilaDinamica
             p.Push(1);
             p.Push(2);
             p.Push(3);
-            int[] ints = new int[10];
-            p.CopyTo(ints, 5);
-            foreach (int i in ints)
-            {
-                Console.WriteLine(i);
-            }
+            p.Push(4);
+            p.RemoveAt(0);
+            Console.WriteLine(p);
         }
     }
 }
