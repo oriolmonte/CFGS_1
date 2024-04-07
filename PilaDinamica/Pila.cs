@@ -18,7 +18,7 @@ namespace PilaDinamica
         {
             top = new Node<T>(input);
         }
-        bool Empty
+        public bool Empty
         {
             get { return top == null; }
         }
@@ -72,6 +72,13 @@ namespace PilaDinamica
                 top = node;
             }
         }
+        public void Push (ICollection<T> values)
+        {
+            foreach (T item in values)
+            {
+                Push(item);
+            }
+        }
         public T Pop()
         {
             if (!Empty)
@@ -111,21 +118,19 @@ namespace PilaDinamica
         {
             
             int index = 0;
-            Node<T> current = top;
             bool trobat = false;
-            while (!trobat)
+            IEnumerator enumerador = GetEnumerator();
+
+            while (enumerador.MoveNext() && !trobat)
             {
-                if (current.Info.Equals(item))
+                if (enumerador.Current.Equals(item))
                     trobat = true;
                 else
                 {
                     index++;
-                    current = current.Next;
-                    if (current == null)
-                        trobat = true;
                 }
             }
-            if (current==null)
+            if (!trobat)
                 index = -1;
             return index;
 
@@ -188,7 +193,12 @@ namespace PilaDinamica
         public void Clear()
         {
             if (isReadOnly) throw new NotSupportedException();
-            top = null;
+            int countC = Count;
+            for(int i = 0; i<countC;i++)
+            {
+                Pop();
+            }
+            
         }
 
         public bool Contains(T item)
@@ -250,13 +260,17 @@ namespace PilaDinamica
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("[");
+            bool contingut = false;
             foreach (T item in this)
             {
                 sb.Append($"{item},");
+                contingut = true;
             }
-            sb.Remove(sb.Length - 1, 1);
+            if(contingut)
+                sb.Remove(sb.Length - 1, 1);
             sb.Append("]");
             return sb.ToString();
         }
     }
+    
 }
