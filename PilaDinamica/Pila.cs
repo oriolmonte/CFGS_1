@@ -10,7 +10,7 @@ namespace PilaDinamica
     public class Pila<T> : IEnumerable<T>, IEnumerable, IList<T> 
     {
         private Node<T> top = null;
-        private bool isReadOnly = false;
+        private bool isReadOnly;
         public Pila()
         {
         }
@@ -18,7 +18,7 @@ namespace PilaDinamica
         {
             top = new Node<T>(input);
         }
-        bool Empty
+        public bool Empty
         {
             get { return top == null; }
         }
@@ -51,6 +51,7 @@ namespace PilaDinamica
             }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
                 if (index < 0 || index >= Count) throw new ArgumentOutOfRangeException("index");
                 if (isReadOnly) throw new NotSupportedException();
                 Node<T> node = GetNodeAt(index);
@@ -69,6 +70,13 @@ namespace PilaDinamica
             else
             {
                 top = node;
+            }
+        }
+        public void Push (ICollection<T> values)
+        {
+            foreach (T item in values)
+            {
+                Push(item);
             }
         }
         public T Pop()
@@ -109,29 +117,31 @@ namespace PilaDinamica
         public int IndexOf(T item)
         {
             
-            int contador = 0;
+            int index = 0;
             bool trobat = false;
-            
             IEnumerator enumerador = GetEnumerator();
-            while (enumerador.MoveNext() && !trobat) 
-            {
-                if(enumerador.Current.Equals(item))
-                    trobat = true;
 
+            while (enumerador.MoveNext() && !trobat)
+            {
+                if (enumerador.Current.Equals(item))
+                    trobat = true;
+                else
+                {
+                    index++;
+                }
             }
-            return contador;
+            if (!trobat)
+                index = -1;
+            return index;
+
         }
         
         private Node<T> GetNodeAt(int index)
         {
             Node<T> cursor = top;
-            if (index < 0 || index >= Count) cursor = null;
-            else
+            for (int i = 0; i < index; i++)
             {
-                for (int i = 0; i < index; i++)
-                {
-                    cursor = cursor.Next;
-                }
+                cursor = cursor.Next;
             }
             return cursor;
         }
@@ -182,12 +192,13 @@ namespace PilaDinamica
 
         public void Clear()
         {
-            int countIni = Count;
             if (isReadOnly) throw new NotSupportedException();
-            for (int i =0; i<countIni; i++) 
+            int countC = Count;
+            for(int i = 0; i<countC;i++)
             {
                 Pop();
             }
+            
         }
 
         public bool Contains(T item)
@@ -247,22 +258,19 @@ namespace PilaDinamica
         }
         public override string ToString()
         {
-            string outp;
-            if (!Empty)
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            bool contingut = false;
+            foreach (T item in this)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("[");
-                foreach (T item in this)
-                {
-                    sb.Append($"{item},");
-                }
-                sb.Remove(sb.Length - 1, 1);
-                sb.Append("]");
-                outp = sb.ToString();
+                sb.Append($"{item},");
+                contingut = true;
             }
-            else outp = "EMPTY";
-            return outp;
+            if(contingut)
+                sb.Remove(sb.Length - 1, 1);
+            sb.Append("]");
+            return sb.ToString();
         }
-        
     }
+    
 }
