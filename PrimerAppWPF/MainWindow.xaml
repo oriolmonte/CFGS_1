@@ -1,0 +1,30 @@
+﻿<Window x:Class="PrimerAppWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrimerAppWPF"
+        mc:Ignorable="d"
+        Title="Principal" Height="450" Width="800">
+    <ScrollViewer>
+        <StackPanel>
+            <Button Content="WrapPanel"
+                x:Name="btnWrapPanel" Click="btnWrapPanel_Click"></Button>
+            <Button Content="Canvas"
+                x:Name="btnCanvas" Click="btnCanvas_Click"></Button>
+            <Button Content="DockPanel"
+                x:Name="btnDockPanel" Click="btnDockPanel_Click"></Button>
+            <Button Content="StackPanel"
+                x:Name="btnStackPanel" Click="btnStackPanel_Click"></Button>
+            <Image Source="/Imatges/tresor.png" Stretch="Uniform" Height="183"/>
+            <TextBox TextWrapping="Wrap" Text="TextBox" Width="120" TextChanged="TextBox_TextChanged"/>
+            <Viewbox>
+                <TextBlock Text="lamingadominga" HorizontalAlignment="Center"/>
+            </Viewbox>
+            <Button Content="StackPanel"
+                x:Name="btnStackPanel2" Click="btnStackPanel_Click"></Button>
+            <Button></Button>
+        </StackPanel>
+    </ScrollViewer>
+
+</Window>
