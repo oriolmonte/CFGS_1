@@ -1,0 +1,69 @@
+﻿<Window x:Class="ExerciciLayouts.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExerciciLayouts"
+        mc:Ignorable="d"
+        Title="Exercici " Height="450" Width="800" Background="#f7e9b4" FontSize="18">
+    <StackPanel VerticalAlignment="Center" Margin="30,30" >
+        <StackPanel.Background>
+            <RadialGradientBrush RadiusX="0.55" RadiusY="0.55">
+                <GradientStop Color="#BFFFFAE7" Offset="0.571"/>
+                <GradientStop Color="#FFF7E9B4" Offset="1"/>
+                <GradientStop Color="#FFFFFAE7" Offset="0.119"/>
+                <GradientStop Color="#D2FFFAE7" Offset="0.119"/>
+            </RadialGradientBrush>
+        </StackPanel.Background>
+
+        <Button x:Name="Calculadora" Margin="10" Height="30" Background="#f7d16a" FontFamily="Bahnschrift Light" Foreground="#FF4A2C00" Click="Calculadora_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Calculadora
+        </Button>
+        <Button x:Name="Dibuix" Margin="10" Height="30" Background="#f7d16a" FontFamily="Bahnschrift Light" Foreground="#FF4A2C00" Click="Dibuix_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Dibuix
+        </Button>
+
+        <Button Margin="10" Height="30" Background="#f7d16a" FontFamily="Bahnschrift Light" Foreground="#FF4A2C00">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Formulari
+        </Button>
+
+        <Button Margin="10" Height="30" Background="#f7d16a" FontFamily="Bahnschrift Light" Foreground="#FF4A2C00">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Tria de colors
+        </Button>
+
+        <Button Margin="10" Height="30" Background="#f7d16a" FontFamily="Bahnschrift Light" Foreground="#FF4A2C00">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Text
+        </Button>
+
+        <Button Margin="10" Height="30" Background="#f7d16a" FontFamily="Bahnschrift Light" Foreground="#FF4A2C00">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Text i barra de navegació
+        </Button>
+
+    </StackPanel>
+
+
+</Window>
