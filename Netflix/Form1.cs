@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Netflix
 {
     public partial class Form1 : Form
@@ -14,6 +16,8 @@ namespace Netflix
         private void Form1_Load(object sender, EventArgs e)
         {
             dao.SelectByGenre("drama", "outdrama.txt");
+            RawTitle[] r = dao.ReadTitles(5803, 10);
+            Console.WriteLine();
         }
     }
 }

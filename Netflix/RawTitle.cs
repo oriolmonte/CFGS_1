@@ -47,6 +47,10 @@ namespace Netflix
                     return 0;
             }
         }
+        public override string ToString()
+        {
+            return $"{Index};{Id};{Title};{release_year};{seasons};{imdb_score};{imdb_votes}";
+        }
 
         public override bool Equals(object? obj)
         {

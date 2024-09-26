@@ -10,7 +10,7 @@ namespace Netflix
     {
         int SelectByGenre(String genre, String outputFile);
         String SelectByIndex(int index);
-        String SelectById(int id);
+        String SelectById(string id);
         RawTitle[] ReadTitles(int index, int length);
         int PreMerge(RawTitle[] titles, String outFileName);
         int Merge(string file1,string file2, string outFileName);
