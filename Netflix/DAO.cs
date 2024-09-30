@@ -11,7 +11,7 @@ namespace Netflix
 {
     internal class NetflixImpl : IDAO
     {
-        readonly CultureInfo culture = new CultureInfo("en-US");
+        readonly CultureInfo culture = new CultureInfo("");
         public const string FILENAME = "raw_titles.csv";
         FileStream fs = null;
         private StreamReader sr = null;
@@ -28,12 +28,12 @@ namespace Netflix
 
                 while(fileOne != null && fileTwo!=null)
                 {
-                    if (double.Parse(fileOne.Split()[^1],culture) < double.Parse(fileTwo.Split()[^1],culture))
+                    if (double.Parse(fileOne.Split(";")[^2]) < double.Parse(fileTwo.Split(";")[^2]))
                     {
                         sw.WriteLine(fileOne);
                         fileOne=sr.ReadLine();
                     }
-                    else if(double.Parse(fileOne.Split()[^1], culture) == double.Parse(fileTwo.Split()[^1], culture))
+                    else if(double.Parse(fileOne.Split(";")[^2]) == double.Parse(fileTwo.Split(";")[^2]))
                     {
                         sw.WriteLine(fileOne);
                         sw.WriteLine(fileTwo);
@@ -98,6 +98,7 @@ namespace Netflix
                     double votes=0;
                     double score=0;
                     double season=0;
+                    int any = 0;
                     if (cur[cur.Length - 1]!="")
                     {
                          votes= Convert.ToDouble(cur[^1], culture);
@@ -110,11 +111,26 @@ namespace Netflix
                     {
                         season = Convert.ToDouble(cur[^4], culture);
                     }
-                    ret[current] = new RawTitle(Convert.ToInt32(cur[0]), cur[1], cur[2], Convert.ToInt32(cur[4]), season, score, votes);
+                    if ((cur[4])!="")
+                    {
+                        try
+                        {
+                            any = Convert.ToInt32(cur[4]);
+                        }
+                        catch
+                        {
+                            any = 0;
+                        }
+                        
+                    }
+                    RawTitle afegir = new RawTitle(Convert.ToInt32(cur[0]), cur[1], cur[2], any, season, score, votes);
+                    ret[current] = afegir;
                     linia = sr.ReadLine();
                     current++; 
                 }
-                return ret;
+                var final = ret.Where(c => c != null).ToArray(); 
+                Array.Sort(final);
+                return final;
                      
             }
 
@@ -126,19 +142,31 @@ namespace Netflix
             using (sr = new StreamReader(fs))
             using (StreamWriter sw = new StreamWriter(outputFile))
             {
-                    
+
+                string genreCometes = "'" + genre + "'";
                 int count = 0;
-                string pattern = "(?:\"[^\"]*\"|[^,]+)";
+                string pattern = @",(?=(?:[^""]*""[^""]*"")*[^""]*$)";
                 string linia = sr.ReadLine();
                 while (linia != null)
                 {
-                    List<string> separat = new List<string>();
-                    var matches = Regex.Matches(linia, pattern);
-                 
-                    if (matches[7].ToString().Contains(genre))
+                    var matches = Regex.Split(linia, pattern);
+                    string generes = matches[7].ToString();
+                    if (generes[0]=='"')
                     {
-                        sw.WriteLine($"{matches[0]},{matches[1]},{matches[2]},{matches[7]}");
-                        count++;
+                        generes = generes.Substring(2,generes.Length-4);
+                    }
+                    else
+                    {
+                        generes = generes.Substring(1, generes.Length - 2);
+                    }
+                    var generesS = generes.Split(',');
+                    foreach (string genere in generesS)
+                    {
+                        if (genreCometes == genere.Trim()) //UN GENERE POT CONTENIR EL NOM D'UN ALTRE GENERE...
+                        {
+                            sw.WriteLine($"{matches[0]},{matches[1]},{matches[2]},{matches[7]}");
+                            count++;
+                        }
                     }
                     linia= sr.ReadLine();
                 }   
@@ -153,6 +181,7 @@ namespace Netflix
             {
                 string result = null;
                 string linia = sr.ReadLine();
+                linia = sr.ReadLine();
                 while (linia != null && result == null)
                 {
                     if (linia.Split(',')[1] == id)
@@ -172,12 +201,19 @@ namespace Netflix
             {
                 string result = null;
                 string linia = sr.ReadLine();
+                string indexS = index.ToString();
+                linia = sr.ReadLine();
+                
                 while (linia != null && result==null)
                 {
-                    if (linia.Split(',')[0] == index.ToString())
+                    string split = linia.Split(',')[0];
+                    if (split == indexS)
                     {
-                        result=linia;
+                        result = linia;
+                        
                     }
+                    else if (int.Parse(linia.Split(',')[0]) > index)
+                        result = null;
                     linia = sr.ReadLine();
                 }
                 return result;
@@ -186,6 +222,7 @@ namespace Netflix
         public List<string> TitlesInRange(string fileSortedByIMDBScore, double minscore, double maxscore)
         {
             StreamReader sr = null;
+            List<string> result = new List<string>();
             try
             {
                  sr = new StreamReader(fileSortedByIMDBScore);
@@ -196,7 +233,17 @@ namespace Netflix
             }
             string cursor = sr.ReadLine();
             double score = 0;
-            while (cursor!=null  )
+            while (cursor!=null && double.Parse(cursor.Split(";")[^2], culture)<minscore)
+            {
+                cursor = sr.ReadLine();
+            }
+            while (cursor!=null && double.Parse(cursor.Split(";")[^2], culture)<=maxscore)
+            {
+                result.Add(cursor);
+                cursor = sr.ReadLine();
+
+            }
+            return result;
         }
     }
 }

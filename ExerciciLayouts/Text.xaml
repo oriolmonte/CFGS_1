@@ -1,0 +1,96 @@
+﻿<Window x:Class="ExerciciLayouts.Text"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExerciciLayouts"
+        mc:Ignorable="d"
+        Title="Text" Height="450" Width="800">
+    <ScrollViewer><Grid Background="Gray" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="2" Background="Black" Foreground="White" TextAlignment="Center" FontSize="30">Sisè Exercici</TextBlock>
+        <Grid Grid.Column="0" Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+            <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 1</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium."></TextBlock>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
+            <Grid Grid.Column="0" Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 2</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium.Maecenas ut auctor sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam efficitur ligula tellus, ac auctor nibh iaculis lacinia. Curabitur scelerisque vehicula mauris id viverra. Fusce imperdiet posuere arcu. Sed vel mattis risus. Mauris varius vel eros ut ullamcorper.Mauris sem nunc, consectetur sed turpis eu, luctus laoreet erat. Donec congue pharetra lacus, placerat tempor leo ullamcorper ac. Duis sed tellus ipsum. Praesent semper eget neque et semper. Quisque non bibendum sem, in congue mauris. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eleifend tellus leo, nec vestibulum lectus imperdiet a. Ut et purus libero. Duis mi massa, ornare aliquam porta eget, congue sit amet ipsum.
+                "></TextBlock>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="3" Margin="5">
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 3</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium.Maecenas ut auctor sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam efficitur ligula tellus, ac auctor nibh iaculis lacinia. Curabitur scelerisque vehicula mauris id viverra. Fusce imperdiet posuere arcu. Sed vel mattis risus. Mauris varius vel eros ut ullamcorper.
+       "></TextBlock>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="4" Margin="5">
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 4</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium.Maecenas ut auctor sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam efficitur ligula tellus, ac auctor nibh iaculis lacinia. Curabitur scelerisque vehicula mauris id viverra. Fusce imperdiet posuere arcu. Sed vel mattis risus. Mauris varius vel eros ut ullamcorper.
+       "></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1" Margin="5">
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 1</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium."></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 1</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium."></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="3" Margin="5">
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 1</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium."></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="4" Margin="5">
+                <TextBlock Grid.Column="0" Grid.Row="0" TextAlignment="Center">Article 1</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" TextAlignment="Justify" TextWrapping="Wrap" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec tempor eu metus ac sodales. Donec sit amet dignissim eros, eget tincidunt ligula. Cras tincidunt mi sed odio blandit, vel scelerisque lectus porta. Donec lacus nibh, lobortis sed magna sit amet, facilisis viverra ligula. Ut condimentum tortor vel nisi consequat, id dictum nulla pretium."></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+
+
+
+        </Grid>
+    </ScrollViewer>
+</Window>

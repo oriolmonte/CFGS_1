@@ -9,7 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="sources\Malcolm-Liepke-TuttArt%40-20-3914515683.jpg" />
+    <None Remove="sources\dibuix.jpg" />
+    <None Remove="sources\fondoform.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sources\dibuix.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sources\fondoform.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ExerciciLayouts
 {
     /// <summary>
-    /// Lógica de interacción para formulari.xaml
+    /// Lógica de interacción para TriaColors.xaml
     /// </summary>
-    public partial class Formulari : Window
+    public partial class TriaColors : Window
     {
-        public Formulari()
+        public TriaColors()
         {
             InitializeComponent();
         }

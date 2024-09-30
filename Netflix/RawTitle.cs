@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,8 +38,7 @@ namespace Netflix
 
         public int CompareTo(RawTitle? other)
         {
-            if(other is null) return 1;
-            else if(this is null) return -1;
+            if(this is null) return 1;
             else
             {
                 if (this.imdb_score < other.imdb_score) return -1;
@@ -49,7 +49,8 @@ namespace Netflix
         }
         public override string ToString()
         {
-            return $"{Index};{Id};{Title};{release_year};{seasons};{imdb_score};{imdb_votes}";
+            var culture = new CultureInfo("en-US");
+            return $"{Index};{Id};{Title};{release_year};{seasons};{Convert.ToString(imdb_score, culture)};{Convert.ToString(imdb_votes, culture)}";
         }
 
         public override bool Equals(object? obj)

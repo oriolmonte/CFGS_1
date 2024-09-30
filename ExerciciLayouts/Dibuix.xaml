@@ -12,7 +12,7 @@
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill">
                 <ImageBrush.ImageSource>
-                    <BitmapImage UriSource="C:\Users\FUNCIONA\source\repos\oriolmonte\CFGS_1\ExerciciLayouts\sources\Malcolm-Liepke-TuttArt%40-20-3914515683.jpg" ></BitmapImage>
+                    <BitmapImage UriSource=".\sources\dibuix.jpg" ></BitmapImage>
                 </ImageBrush.ImageSource>
             </ImageBrush>
         </Grid.Background>

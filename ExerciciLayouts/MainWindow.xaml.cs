@@ -32,5 +32,32 @@ namespace ExerciciLayouts
             Dibuix finestra = new Dibuix();
             finestra.Show();
         }
+
+        private void Formulari_Click(object sender, RoutedEventArgs e)
+        {
+            Formulari finestra = new Formulari();
+            finestra.Show();
+
+        }
+
+        private void TriaColors_Click(object sender, RoutedEventArgs e)
+        {
+            TriaColors finestra = new TriaColors();
+            finestra.Show();
+
+        }
+
+        private void Textos_Click(object sender, RoutedEventArgs e)
+        {
+            Text finestra = new Text();
+            finestra.Show();
+
+        }
+
+        private void NavBar_Click(object sender, RoutedEventArgs e)
+        {
+            TextMenu finestra = new TextMenu();
+            finestra.Show();
+        }
     }
 }

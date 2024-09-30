@@ -3,6 +3,8 @@
     <Style TargetType="Button">
         <Setter Property="Background" Value="#f7d16a" />
         <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="Foreground" Value="#FF4A2C00"/>
+        <Setter Property="FontFamily" Value="Bahnschrift Light"></Setter>
         <Style.Resources>
             <Style TargetType="Border">
                 <Setter Property="CornerRadius" Value="10" />

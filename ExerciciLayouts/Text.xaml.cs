@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ExerciciLayouts
 {
     /// <summary>
-    /// Lógica de interacción para formulari.xaml
+    /// Lógica de interacción para Text.xaml
     /// </summary>
-    public partial class Formulari : Window
+    public partial class Text : Window
     {
-        public Formulari()
+        public Text()
         {
             InitializeComponent();
         }

@@ -28,16 +28,56 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="0">7</Button>
-            <Button Grid.Row="0" Grid.Column="1">8</Button>
-            <Button Grid.Row="0" Grid.Column="2">9</Button>
-            <Button Grid.Row="1" Grid.Column="0">4</Button>
-            <Button Grid.Row="1" Grid.Column="1">5</Button>
-            <Button Grid.Row="1" Grid.Column="2">6</Button>
-            <Button Grid.Row="2" Grid.Column="0">1</Button>
-            <Button Grid.Row="2" Grid.Column="1">2</Button>
-            <Button Grid.Row="2" Grid.Column="2">3</Button>
-            <Button Grid.Row="3" Grid.ColumnSpan="3" >0</Button>
+            
+            <Button Grid.Row="0" Grid.Column="0">
+                <Viewbox>
+                    <TextBlock>7</TextBlock></Viewbox>
+            </Button>
+            <Button Grid.Row="0" Grid.Column="1">
+                <Viewbox>
+                    <TextBlock>8</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="0" Grid.Column="2">
+                <Viewbox>
+                    <TextBlock>9</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="0">
+                <Viewbox>
+                    <TextBlock>4</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="1">
+                <Viewbox>
+                    <TextBlock>5</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="2">
+                <Viewbox>
+                    <TextBlock>6</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="0">
+                <Viewbox>
+                    <TextBlock>1</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="1">
+                <Viewbox>
+                    <TextBlock>2</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="2">
+                <Viewbox>
+                    <TextBlock>3</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="3" Grid.ColumnSpan="3" >
+                <Viewbox>
+                    <TextBlock>0</TextBlock>
+                </Viewbox>
+            </Button>
         </Grid>
         <Grid x:Name="operacions" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -46,13 +86,19 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0">
-                +
+                <Viewbox>
+                    <TextBlock>+</TextBlock>
+                </Viewbox>
             </Button>
             <Button Grid.Row="1">
-                C
+                <Viewbox>
+                    <TextBlock>C</TextBlock>
+                </Viewbox>
             </Button>
             <Button Grid.Row="2">
-                =
+                <Viewbox>
+                    <TextBlock>=</TextBlock>
+                </Viewbox>
             </Button>
         </Grid>
         <Grid.Background>
