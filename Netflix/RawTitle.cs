@@ -38,11 +38,11 @@ namespace Netflix
 
         public int CompareTo(RawTitle? other)
         {
-            if(this is null) return 1;
+            if(this is null) return -1;
             else
             {
-                if (this.imdb_score < other.imdb_score) return -1;
-                if (this.imdb_score > other.imdb_score) return 1;
+                if (this.imdb_score > other.imdb_score) return -1;
+                if (this.imdb_score < other.imdb_score) return 1;
                 else
                     return 0;
             }

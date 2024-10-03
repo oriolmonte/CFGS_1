@@ -13,7 +13,7 @@ namespace Netflix
         String SelectById(string id);
         RawTitle[] ReadTitles(int index, int length);
         int PreMerge(RawTitle[] titles, String outFileName);
-        int Merge(string file1,string file2, string outFileName);
+        void Merge(string file1,string file2, string outFileName);
         List<String> TitlesInRange(string fileSortedByIMDBScore, double minscore, double maxscore);
     }
 }

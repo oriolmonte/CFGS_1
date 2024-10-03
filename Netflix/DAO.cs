@@ -17,7 +17,7 @@ namespace Netflix
         private StreamReader sr = null;
         private StreamReader sr2 = null;
 
-        public int Merge(string file1, string file2, string outFileName)
+        public void Merge(string file1, string file2, string outFileName)
         {
             using(sr = new StreamReader(file1)) 
             using(sr2 = new StreamReader(file2))
@@ -28,18 +28,19 @@ namespace Netflix
 
                 while(fileOne != null && fileTwo!=null)
                 {
-                    if (double.Parse(fileOne.Split(";")[^2]) < double.Parse(fileTwo.Split(";")[^2]))
+                    double fileOneDouble = double.Parse(fileOne.Split(";")[^2]);
+                    double fileTwoDouble = double.Parse(fileTwo.Split(";")[^2]);
+                    if (fileOneDouble < fileTwoDouble)
                     {
                         sw.WriteLine(fileOne);
                         fileOne=sr.ReadLine();
                     }
-                    else if(double.Parse(fileOne.Split(";")[^2]) == double.Parse(fileTwo.Split(";")[^2]))
+                    else if(fileOneDouble == fileTwoDouble)
                     {
                         sw.WriteLine(fileOne);
                         sw.WriteLine(fileTwo);
                         fileOne = sr.ReadLine();
                         fileTwo = sr2.ReadLine();
-
                     }
                     else
                     {
@@ -58,7 +59,8 @@ namespace Netflix
                     fileTwo = sr2.ReadLine();
                 }
             }
-            return 1;
+            sr.Close();
+            sr2.Close();
         }
 
         public int PreMerge(RawTitle[] titles, string outFileName)
@@ -85,7 +87,7 @@ namespace Netflix
                 string linia = sr.ReadLine();
                 linia = sr.ReadLine();
                 int current = 0;
-                RawTitle[] ret = new RawTitle[length];
+                List<RawTitle> ret = new List<RawTitle>();
                 while (linia != null && current<index-1) 
                 {
                     current = Convert.ToInt32(linia.Split(',')[0]);
@@ -124,11 +126,11 @@ namespace Netflix
                         
                     }
                     RawTitle afegir = new RawTitle(Convert.ToInt32(cur[0]), cur[1], cur[2], any, season, score, votes);
-                    ret[current] = afegir;
+                   ret.Add(afegir);
                     linia = sr.ReadLine();
                     current++; 
                 }
-                var final = ret.Where(c => c != null).ToArray(); 
+                var final = ret.ToArray();
                 Array.Sort(final);
                 return final;
                      
@@ -232,17 +234,20 @@ namespace Netflix
                 throw new Exception("no existeix arxiu fusionat");
             }
             string cursor = sr.ReadLine();
-            double score = 0;
-            while (cursor!=null && double.Parse(cursor.Split(";")[^2], culture)<minscore)
+            double score = double.Parse(cursor.Split(";")[^2],culture);
+            while (cursor!=null && score>maxscore)
             {
                 cursor = sr.ReadLine();
+                score = double.Parse(cursor.Split(";")[^2], culture);
             }
-            while (cursor!=null && double.Parse(cursor.Split(";")[^2], culture)<=maxscore)
+            while (cursor!=null && score>=minscore)
             {
                 result.Add(cursor);
                 cursor = sr.ReadLine();
+                score = double.Parse(cursor.Split(";")[^2], culture);
 
             }
+            sr.Close();
             return result;
         }
     }
