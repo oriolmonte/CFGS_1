@@ -25,17 +25,14 @@ namespace Restaurant
 
         private void butPuro_Checked(object sender, RoutedEventArgs e)
         {
-            if(butCopa.IsChecked==true)
-            {
-                butCopa.IsChecked = false;
-            }
+            
         }
 
         private void butCopa_Checked(object sender, RoutedEventArgs e)
         {
-            if (butPuro.IsChecked == true)
+            if (butPuro.IsEnabled == false)
             {
-                butPuro.IsChecked = false;
+                butPuro.IsEnabled = true;
             }
         }
 

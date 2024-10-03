@@ -10,20 +10,26 @@ namespace A2Vehicles
     {
         private int _year;
         private string _month;
-        private int _totalNews;
-        private int _totalUsed;
-        private int _used;
-        private int _new;
+        private int _totalNews=0;
+        private int _totalUsed=0;
+        private int _used=0;
+        private int _new=0;
 
-        public Statistic(int year, string month, int totalNews, int totalUsed, int used, int @new)
+        public Statistic(int year, string month, int totalNews, int totalUsed, int used, int pnew)
         {
             _year = year;
             _month = month;
             _totalNews = totalNews;
             _totalUsed = totalUsed;
             _used = used;
-            _new = @new;
+            _new = pnew;
         }
+        public Statistic(int year, string month) 
+        {
+            _year=year;
+            _month = month;
+        }
+        
 
         public int Year { get => _year; set => _year = value; }
         public string Month { get => _month; set => _month = value; }
