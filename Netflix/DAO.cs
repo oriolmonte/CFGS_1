@@ -11,7 +11,7 @@ namespace Netflix
 {
     internal class NetflixImpl : IDAO
     {
-        readonly CultureInfo culture = new CultureInfo("");
+        readonly CultureInfo culture = new CultureInfo("en-US");
         public const string FILENAME = "raw_titles.csv";
         FileStream fs = null;
         private StreamReader sr = null;
