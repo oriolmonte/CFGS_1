@@ -1,0 +1,101 @@
+﻿<Window x:Class="ColorPicker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ColorPicker" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--#region Scrolls-->
+            <TextBlock TextAlignment="Center" Grid.Column="0" Grid.Row="0">A</TextBlock>
+            <TextBlock TextAlignment="Center" Grid.Column="1" Grid.Row="0">R</TextBlock>
+            <TextBlock TextAlignment="Center" Grid.Column="2" Grid.Row="0">G</TextBlock>
+            <TextBlock TextAlignment="Center" Grid.Column="3" Grid.Row="0">B</TextBlock>
+
+            <ScrollBar Name="scbA" Grid.Row="1" Grid.Column="0" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="255" ValueChanged="scbA_ValueChanged"></ScrollBar>
+            <ScrollBar Name="scbR" Grid.Row="1" Grid.Column="1" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="0" ValueChanged="scbR_ValueChanged"></ScrollBar>
+            <ScrollBar Name="scbG" Grid.Row="1" Grid.Column="2" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="0" ValueChanged="scbG_ValueChanged"></ScrollBar>
+            <ScrollBar Name="scbB" Grid.Row="1" Grid.Column="3" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="0" ValueChanged="scbB_ValueChanged"></ScrollBar>
+            
+
+
+            <TextBlock TextAlignment="Center" Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=scbA, Path=Value}"></TextBlock>
+            <TextBlock TextAlignment="Center" Grid.Column="1" Grid.Row="2" Text="{Binding ElementName=scbR, Path=Value}"></TextBlock>
+            <TextBlock TextAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding ElementName=scbG, Path=Value}"></TextBlock>
+            <TextBlock TextAlignment="Center" Grid.Column="3" Grid.Row="2" Text="{Binding ElementName=scbB, Path=Value}"></TextBlock>
+            <!--#endregion-->
+        </Grid>
+        <!--#region SLIDERS-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition>
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Margin="3,17">A</TextBlock>
+                <TextBlock Margin="3,17">R</TextBlock>
+                <TextBlock Margin="3,17">G</TextBlock>
+                <TextBlock Margin="3,17">B</TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Slider Name="sldA" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="{Binding ElementName=scbA, Path=Value}"/>
+                <Slider Name="sldR" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="{Binding ElementName=scbR, Path=Value}"/>
+                <Slider Name="sldG" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="{Binding ElementName=scbG, Path=Value}"/>
+                <Slider Name="sldB" Margin="16" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="{Binding ElementName=scbB, Path=Value}"></Slider>
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <xctk:ColorPicker SelectedColorChanged="ColorPicker_SelectedColorChanged" Name="colorPicker"></xctk:ColorPicker>
+            <Rectangle Name="rectangle"  Grid.Row="1" Margin="16"></Rectangle>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="7*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Margin="10,17" Grid.Row="0" Grid.Column="0">A</TextBlock>
+            <TextBlock Margin="10,17" Grid.Row="1" Grid.Column="0">R</TextBlock>
+            <TextBlock Margin="10,17" Grid.Row="2" Grid.Column="0">G</TextBlock>
+            <TextBlock Margin="10,17" Grid.Row="3" Grid.Column="0">B</TextBlock>
+
+            <xctk:IntegerUpDown Value="{Binding ElementName=scbA, Path=Value}" Increment="1" Grid.Row="0" Grid.Column="1"/>
+            <xctk:IntegerUpDown Value="{Binding ElementName=scbR, Path=Value}" Increment="1" Grid.Row="1" Grid.Column="1"/>
+            <xctk:IntegerUpDown Value="{Binding ElementName=scbG, Path=Value}" Increment="1" Grid.Row="2" Grid.Column="1"/>
+            <xctk:IntegerUpDown Value="{Binding ElementName=scbB, Path=Value}" Increment="1" Grid.Row="3" Grid.Column="1"/>
+
+        </Grid>
+    </Grid>
+</Window>

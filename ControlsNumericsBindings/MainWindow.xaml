@@ -1,0 +1,62 @@
+﻿<Window x:Class="ControlsNumericsBindings.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlsNumericsBindings" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel LastChildFill="False">
+        <Button x:Name="btnExecuta" Click="btnExecuta_Click"
+                DockPanel.Dock="Top"
+                >Clicam</Button>
+        <Button x:Name="btnExecutaColor" Click="btnExecutaColor_Click"
+                DockPanel.Dock="Top" Height="{Binding ElementName=sldValor, Path=Value}"
+                >Color</Button>
+        <StackPanel Width="80" Background="Black"></StackPanel>
+        <StackPanel Width="80" Name="stkPanell"></StackPanel>
+        <TextBlock Margin = "16" Name ="tbScrollBar" TextWrapping="Wrap" DockPanel.Dock="Right" Text="" ></TextBlock>
+        <TextBlock Margin = "16" Name ="tbSlider" TextWrapping="Wrap" DockPanel.Dock="Right" Text=""></TextBlock>
+        <xctk:IntegerUpDown Value="{Binding ElementName=sldValorBinding, Path=Value}" DockPanel.Dock="Top"></xctk:IntegerUpDown>
+        <TextBlock Margin = "16" Name ="tbScrollBarBinding" TextWrapping="Wrap" DockPanel.Dock="Right" Text="{Binding ElementName=sbValorBinding, Path=Value}"></TextBlock>
+        <TextBlock Margin = "16" Name ="tbSliderBinding" TextWrapping="Wrap" DockPanel.Dock="Right" Text="{Binding ElementName=sldValorBinding, Path=Value}"></TextBlock>
+        <ScrollBar Orientation="Vertical" Margin="16"
+                   Width="60"
+                   Minimum="10"
+                   Maximum="40"
+                   SmallChange="1"
+                   LargeChange="10"
+                   Name="sbValor" ValueChanged="sbValor_ValueChanged"
+                   >
+        </ScrollBar>
+        <Slider Width="60" Orientation="Vertical" Margin="50"
+                   Minimum="10"
+                   Maximum="40"
+                   SmallChange="1"
+                   LargeChange="10"
+                   TickFrequency="10"
+                   TickPlacement="Both"
+                   Name="sldValor" ValueChanged="sldValor_ValueChanged" 
+                ></Slider>
+        <ScrollBar Orientation="Vertical" Margin="16"
+                   Width="60"
+                   Minimum="10"
+                   Maximum="40"
+                   SmallChange="1"
+                   LargeChange="10"
+                   Name="sbValorBinding" 
+                   Value="{Binding ElementName=sldValor,Path=Value}"
+                   >
+        </ScrollBar>
+        <Slider Width="60" Orientation="Vertical" Margin="50"
+                   Minimum="10"
+                   Maximum="40"
+                   SmallChange="1"
+                   LargeChange="10"
+                   TickFrequency="10"
+                   TickPlacement="Both"
+                   Name="sldValorBinding"  
+                ></Slider>
+        <xctk:IntegerUpDown Value="1213" DockPanel.Dock="Top"></xctk:IntegerUpDown>
+    </DockPanel>
+</Window>

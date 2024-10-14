@@ -25,7 +25,6 @@ namespace Restaurant
 
         private void butPuro_Checked(object sender, RoutedEventArgs e)
         {
-            
         }
 
         private void butCopa_Checked(object sender, RoutedEventArgs e)
@@ -34,6 +33,7 @@ namespace Restaurant
             {
                 butPuro.IsEnabled = true;
             }
+ 
         }
 
         private void butClear_Click(object sender, RoutedEventArgs e)
