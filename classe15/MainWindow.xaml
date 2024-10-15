@@ -1,0 +1,72 @@
+﻿<Window x:Class="classe15.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:classe15"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <Button 
+                Content="Misstatge"
+                Name="btnMissatge" Click="btnMissatge_Click"
+                ></Button>
+            <Button
+                Content="Enum"
+                Name="btnEnum" Click="btnEnum_Click"
+                >
+            </Button>
+            <Button
+                Content="Afegeix"
+                x:Name="btnAfegeixCombo" Click="btnAfegeixCombo_Click">
+            </Button>
+            <Button
+                Content="AfegeixLlista"
+                x:Name="btnAfegeixLlista" Click="btnAfegeixComboLlista_Click">
+            </Button>
+            <Button
+                Content="AfegeixMolts"
+                x:Name="btnAfegeixMoltss" Click="btnAfegeixMoltss_Click" >
+            </Button>
+
+
+            <ComboBox x:Name="cmbDies" Width="134">
+            </ComboBox>
+            <Button
+                Content="Deselecciona"
+                x:Name="btnAfegeixMoltss_Copiar" Click="btnDeselecciona_Click" />
+            <Button
+                Content="Afegeix Botons"
+                x:Name="btnAfegeixBotons" Click="btnAfegeixBotons_Click" />
+        </StackPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200*"></ColumnDefinition>
+                <ColumnDefinition Width="200*"></ColumnDefinition>
+                <ColumnDefinition Width="39*"></ColumnDefinition>
+                <ColumnDefinition Width="19*"/>
+                <ColumnDefinition Width="142*"/>
+                <ColumnDefinition Width="200*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ListBox SelectionMode="Extended" Name="lstPata">
+                <ListBoxItem Content="Pata"></ListBoxItem>
+                <ListBoxItem Content="Peta"></ListBoxItem>
+                <ListBoxItem Content="Pita"></ListBoxItem>
+                <ListBoxItem Content="Pota"></ListBoxItem>
+                <ListBoxItem Content="Puta"></ListBoxItem>
+            </ListBox>
+            <ListBox Grid.Column="1" Name="lstDies">
+
+            </ListBox>
+            <ListBox Grid.Column="2" Name="lstAfegeix" Grid.ColumnSpan="3">
+
+            </ListBox>
+            <StackPanel Grid.Column="5" x:Name="stkContenidor">
+
+            </StackPanel>
+        </Grid>
+
+    </DockPanel>
+</Window>

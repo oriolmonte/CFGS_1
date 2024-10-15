@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -45,7 +46,6 @@ namespace ColorPicker
             {
                 color = Color.FromArgb((byte)scbA.Value, (byte)scbR.Value, (byte)scbG.Value, (byte)scbB.Value);
                 brush.Color = color;
-                rectangle.Fill = brush;
                 colorPicker.SelectedColor=color;
             }
 
@@ -64,12 +64,12 @@ namespace ColorPicker
         private void ColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             color = colorPicker.SelectedColor.Value;
-            scbA.Value = colorPicker.SelectedColor.Value.A;
-            scbR.Value = colorPicker.SelectedColor.Value.R;
-            scbG.Value = colorPicker.SelectedColor.Value.G;
-            scbB.Value = colorPicker.SelectedColor.Value.B;
-
-            Pinta();
+            scbA.Value = color.A;
+            scbR.Value = color.R;
+            scbG.Value = color.G;
+            scbB.Value = color.B;
+            
+            //Pinta();
         }
 
     }
