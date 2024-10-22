@@ -5,12 +5,13 @@ namespace A2Vehicles
 {
     public partial class frmMain : Form
     {
-        private XMLManagerFactory factory = new XMLManagerFactory();
-        private IXMLManager dao = null;
+        private XMLManagerFactory factory;
+        private IXMLManager dao;
         private string[] mesos = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "ALL"];
 
         public frmMain()
         {
+            factory = new XMLManagerFactory();
             dao = factory.CreateXMLImpl();
             InitializeComponent();
         }

@@ -74,7 +74,12 @@ namespace A2Vehicles
                 .Where(y => (int)y.Element("year") == year);
             foreach( var row in query)
             {
-                result.Add(new Statistic(year.ToString(), row.Element("month").Value, long.Parse(row.Element("total_sales_new").Value), long.Parse(row.Element("total_sales_used").Value), int.Parse(row.Element("used").Value), int.Parse(row.Element("new").Value)));
+                result.Add(new Statistic(year.ToString(), 
+                                row.Element("month").Value, 
+                                long.Parse(row.Element("total_sales_new").Value), 
+                                long.Parse(row.Element("total_sales_used").Value), 
+                                int.Parse(row.Element("used").Value),
+                                int.Parse(row.Element("new").Value)));
             }
             return result;
         }

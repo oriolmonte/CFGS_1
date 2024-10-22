@@ -57,6 +57,8 @@ namespace classe15
 
         private void btnAfegeixCombo_Click(object sender, RoutedEventArgs e)
         {
+            //diesSetmana dia = Enum.Parse<diesSetmana>(cmbDies.Text);
+            //Enum.TryParse(cmbDies.Text, out dia);
             if(cmbDies.Text!="" && !lstAfegeix.Items.Contains(cmbDies.Text))
                 lstAfegeix.Items.Add(cmbDies.Text);
         }
@@ -101,6 +103,9 @@ namespace classe15
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
             Title = ((Button)sender).Content.ToString();
+            Window1 f = new Window1();
+            f.ShowDialog();
+            Title = f.count.ToString();
         }
     }
 }
