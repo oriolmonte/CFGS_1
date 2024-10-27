@@ -20,5 +20,11 @@ namespace Puzzle
         {
             InitializeComponent();
         }
+
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            TaulerJoc t = new TaulerJoc((int)sldFiles.Value, (int)sldColumnes.Value);
+            t.Show();
+        }
     }
 }

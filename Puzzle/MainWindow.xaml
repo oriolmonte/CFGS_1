@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock Margin="30">Files</TextBlock>
+            <Slider x:Name="sldFiles" Margin="30" Minimum="2" Maximum="20" SmallChange="1" IsSnapToTickEnabled="True" TickFrequency="1"></Slider>
+            <TextBlock Margin="30">Columnes</TextBlock>
+            <Slider x:Name="sldColumnes" Margin="30" Minimum="2" Maximum="20" SmallChange="1" IsSnapToTickEnabled="True" TickFrequency="1"></Slider>
+            <TextBlock Margin="40,0">Files</TextBlock>
+            <TextBlock Text="{Binding ElementName=sldFiles, Path=Value}" Margin="40,5"></TextBlock>
+            <TextBlock Margin="40,0">Columnes</TextBlock>
+            <TextBlock Text="{Binding ElementName=sldColumnes, Path=Value}" Margin="40,5"></TextBlock>
+        </StackPanel>
+        <Button Grid.Column="1" Margin="30,100" Name="btnStart" Click="btnStart_Click">Comença</Button>
 
     </Grid>
+    
 </Window>
