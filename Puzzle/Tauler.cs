@@ -166,49 +166,42 @@ namespace Puzzle
             {
                 var buida = this.Children.Cast<Casella>()
                  .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1]);
-                if (!buida.Iguals(current))
+                
+                if (current.Columna == buida.Columna)
                 {
-                    if (current.Columna == buida.Columna)
+                    if (buida.Fila > current.Fila)
                     {
-                        if (buida.Fila > current.Fila)
-                        {
-                            var contigua = this.Children.Cast<Casella>()
-                                .First(e => Grid.GetRow(e) == casellaBuida[0] - 1 && Grid.GetColumn(e) == casellaBuida[1]);
-                            Swap(contigua, buida);
-                        }
-                        if (buida.Fila < current.Fila)
-                        {
-                            var contigua = this.Children.Cast<Casella>()
-                                    .First(e => Grid.GetRow(e) == casellaBuida[0] + 1 && Grid.GetColumn(e) == casellaBuida[1]);
-                            Swap(contigua, buida);
-                        }
+                        var contigua = this.Children.Cast<Casella>()
+                            .First(e => Grid.GetRow(e) == casellaBuida[0] - 1 && Grid.GetColumn(e) == casellaBuida[1]);
+                        Swap(contigua, buida);
                     }
-                    else if (current.Fila == buida.Fila)
+                    if (buida.Fila < current.Fila)
                     {
-                        if (buida.Columna > current.Columna)
-                        {
-                            var contigua = this.Children.Cast<Casella>()
-                            .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1] - 1);
-                            Swap(contigua, buida);
-                        }
-                        if (buida.Columna < current.Columna)
-                        {
-                            var contigua = this.Children.Cast<Casella>()
-                            .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1] + 1);
-                            Swap(contigua, buida);
-                        }
+                        var contigua = this.Children.Cast<Casella>()
+                                .First(e => Grid.GetRow(e) == casellaBuida[0] + 1 && Grid.GetColumn(e) == casellaBuida[1]);
+                        Swap(contigua, buida);
                     }
-                    else
+                }
+                else if (current.Fila == buida.Fila)
+                {
+                    if (buida.Columna > current.Columna)
                     {
-                        break;
+                        var contigua = this.Children.Cast<Casella>()
+                        .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1] - 1);
+                        Swap(contigua, buida);
+                    }
+                    if (buida.Columna < current.Columna)
+                    {
+                        var contigua = this.Children.Cast<Casella>()
+                        .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1] + 1);
+                        Swap(contigua, buida);
                     }
                 }
                 else
                 {
-                    //IMPORTANTE LIMPIAR ANTES DE REINICIAR
-                    this.Children.Clear();
-                    Inicialitza();
+                    break;
                 }
+                
             }
             if (!estaSolucionat) moves++;
             return Win();
