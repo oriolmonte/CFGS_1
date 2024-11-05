@@ -1,8 +1,8 @@
-﻿<Application x:Class="StarterTeclatMouseControlsDinàmics.App"
+﻿<Application x:Class="AccesDirecte.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:StarterTeclatMouseControlsDinàmics"
-             StartupUri="PropietatsDependencia.xaml">
+             xmlns:local="clr-namespace:AccesDirecte"
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
          
     </Application.Resources>

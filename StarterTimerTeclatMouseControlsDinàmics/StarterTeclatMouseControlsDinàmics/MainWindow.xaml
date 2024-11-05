@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StarterTeclatMouseControlsDinamics"
         mc:Ignorable="d"
-        Title="Controls Dinàmics" Height="450" Width="800">
+        Title="Controls Dinàmics" Height="450" Width="800" MouseDown="Window_MouseDown"
+        KeyDown="txtText_KeyDown" 
+        PreviewKeyDown="Window_PreviewKeyDown">
     <DockPanel LastChildFill="True">
         <StatusBar
             DockPanel.Dock="Bottom">
@@ -80,11 +82,11 @@
                     />
                 </Grid>
             </TabItem>
-            <TabItem Header="Teclat">
+            <TabItem Header="Teclat" MouseDown="TabItem_MouseDown">
                 <Grid 
                 x:Name="grdFinestra"
                 Margin="25"
-                Background="Aquamarine">
+                Background="Aquamarine" MouseDown="grdFinestra_MouseDown">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -105,14 +107,14 @@
                         DockPanel.Dock="Top"
                         x:Name="tbkGroc"
                         Background="Yellow"
-                        Text="Groc"
+                        Text="Groc" MouseDown="tbkGroc_MouseDown"
                         />
                         <TextBlock 
                         Margin="15"
                         DockPanel.Dock="Top"
                         x:Name="tbkVerd"
                         Background="Green"
-                        Text="Verd"
+                        Text="Verd" MouseDown="tbkVerd_MouseDown"
                         />
                         <Image x:Name="imgDaus" Source="Imatges/daus.png"/>
                         <Image x:Name="imgBolet" Source="Imatges/bolet.png"/>
@@ -126,7 +128,7 @@
                         Margin="15"
                         DockPanel.Dock="Top"
                         x:Name="btnFocus"
-                        Content="Posa el focus aquí"
+                        Content="Posa el focus aquí" MouseDown="btnFocus_MouseDown"
                         />
                         <TextBlock
                         Margin="5"
@@ -139,12 +141,12 @@
                         DockPanel.Dock="Bottom"
                         Text="Resultat 1:"/>
                         <TextBox 
-                        x:Name="txtText"
+                        x:Name="txtText" 
                         />
                     </DockPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Pissarra">
+            <TabItem Header="Pissarra" HorizontalAlignment="Right" Margin="0,-2,-2,0" Width="57">
                 <DockPanel>
                     <StackPanel
                     Orientation="Horizontal" DockPanel.Dock="Top">
@@ -153,8 +155,12 @@
                                Margin=" 20,0,0,0"/>
                     </StackPanel>
                     <Canvas
-                    Background="AliceBlue"
-                    x:Name="cnvPissarra"/>
+                        Background="AliceBlue"
+                        x:Name="cnvPissarra"
+                        MouseEnter="cnvPissarra_MouseEnter"
+                        MouseMove="cnvPissarra_MouseMove"
+                        MouseLeave="cnvPissarra_MouseLeave"
+                        />
                 </DockPanel>
             </TabItem>
         </TabControl>

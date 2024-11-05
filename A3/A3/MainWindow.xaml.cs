@@ -29,6 +29,7 @@ namespace A3
 
         }
 
+        //Set Seed
         private void btnSeed_Click(object sender, RoutedEventArgs e)
         {
             if(txtWriteSeed.Text.Trim().Length > 0 && txtWriteSeed.Text.Trim().Length<5)
@@ -52,6 +53,7 @@ namespace A3
 
         }
 
+        //Test
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
             if (dao != null)
@@ -73,7 +75,7 @@ namespace A3
                 
             
         }
-
+        //Write file
         private void btnWrite_Click(object sender, RoutedEventArgs e)
         {
             if (dao.IsFeasable(txtWriteNom.Text.Trim(), txtWriteNIF.Text.Trim()))
@@ -90,39 +92,44 @@ namespace A3
             }
         }
 
+        //Read file
         private void btnRead_Click(object sender, RoutedEventArgs e)
         {
-            string seed = lstBins.SelectedItem.ToString();
-            seed = seed.Substring(2, seed.Length - 6);
-            if (seed.Length == 4)
-            {
-                if (dao == null)
-                {
-                    dao = factory.CreateMSQA(seed);
-                }
-                else
-                {
-                    dao.Dispose();
-                    dao = null;
-                    dao = factory.CreateMSQA(seed);
-
-                }
-                if (dao.Empty)
-                {
-                    MessageBox.Show("Fitxer es buit");
-                    txtReadSeed.Text = "";
-                    txtReadNIF.Text = "";
-                    txtReadNom.Text = "";
-                }
-                else
-                {
-                    txtReadSeed.Text = seed;
-                    txtReadNIF.Text = dao.Nif;
-                    txtReadNom.Text = dao.Name;
-                }
-            }
+            if (lstBins.SelectedItem == null) MessageBox.Show("Sel·lecciona un element valid");
             else
-                MessageBox.Show("Sel·lecciona un element valid");
+            {
+                string seed = lstBins.SelectedItem.ToString();
+                seed = seed.Substring(2, seed.Length - 6);
+                if (seed.Length == 4)
+                {
+                    if (dao == null)
+                    {
+                        dao = factory.CreateMSQA(seed);
+                    }
+                    else
+                    {
+                        dao.Dispose();
+                        dao = null;
+                        dao = factory.CreateMSQA(seed);
+
+                    }
+                    if (dao.Empty)
+                    {
+                        MessageBox.Show("Fitxer es buit");
+                        txtReadSeed.Text = "";
+                        txtReadNIF.Text = "";
+                        txtReadNom.Text = "";
+                    }
+                    else
+                    {
+                        txtReadSeed.Text = seed;
+                        txtReadNIF.Text = dao.Nif;
+                        txtReadNom.Text = dao.Name;
+                    }
+                }
+                else
+                    MessageBox.Show("Sel·lecciona un element valid");
+            }
         }
     }
 }

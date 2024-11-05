@@ -36,9 +36,7 @@ namespace Puzzle
                 else
                 return $"{be}/{totes-1}";
             }
-        }
-        
-        
+        }        
         public string Time
         {
             get { return time; } set 
@@ -98,6 +96,7 @@ namespace Puzzle
                 {
                     if (aux <= NFiles * NColumnes - 2)
                     {
+                        //Caselles normals
                         Casella current = new Casella();
                         current.Fila = i;
                         current.Columna = j;
@@ -115,6 +114,7 @@ namespace Puzzle
                     }        
                     else
                     {
+                        //Casella buida
                         Casella current = new Casella();
                         current.Fila = i;
                         current.Columna = j;
@@ -139,10 +139,12 @@ namespace Puzzle
             }
         }
 
+        //Event al clicar una fitxa
         private void Current_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
 
             Casella current = (Casella)sender;
+            //si has guanyat
             if (MouFitxa(current))
             {
                 estaSolucionat = true;
@@ -160,28 +162,37 @@ namespace Puzzle
             }
         }
 
+        //Logica moviment
         private bool MouFitxa(Casella current)
         {
-            while (!estaSolucionat && current.EsVisible)
+            bool invalid = false;
+            bool valid = false;
+            //Mentre no sigui visible el que hem clicat
+            while (!estaSolucionat && current.EsVisible && !invalid)
             {
+                //trobem casella buida
                 var buida = this.Children.Cast<Casella>()
                  .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1]);
-                
+                //moviment vertical
                 if (current.Columna == buida.Columna)
                 {
                     if (buida.Fila > current.Fila)
                     {
+                        //trobem la contigua
                         var contigua = this.Children.Cast<Casella>()
                             .First(e => Grid.GetRow(e) == casellaBuida[0] - 1 && Grid.GetColumn(e) == casellaBuida[1]);
                         Swap(contigua, buida);
+                        valid = true;
                     }
                     if (buida.Fila < current.Fila)
                     {
                         var contigua = this.Children.Cast<Casella>()
                                 .First(e => Grid.GetRow(e) == casellaBuida[0] + 1 && Grid.GetColumn(e) == casellaBuida[1]);
                         Swap(contigua, buida);
+                        valid = true;
                     }
                 }
+                //moviment horitzontal
                 else if (current.Fila == buida.Fila)
                 {
                     if (buida.Columna > current.Columna)
@@ -189,21 +200,24 @@ namespace Puzzle
                         var contigua = this.Children.Cast<Casella>()
                         .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1] - 1);
                         Swap(contigua, buida);
+                        valid = true;
                     }
                     if (buida.Columna < current.Columna)
                     {
                         var contigua = this.Children.Cast<Casella>()
                         .First(e => Grid.GetRow(e) == casellaBuida[0] && Grid.GetColumn(e) == casellaBuida[1] + 1);
                         Swap(contigua, buida);
+                        valid = true;
                     }
                 }
                 else
                 {
-                    break;
+                    invalid = true;
                 }
+                //Sortim si la casella que ha clicat no té moviments legals
                 
             }
-            if (!estaSolucionat) moves++;
+            if (!estaSolucionat && valid) moves++;
             return Win();
         }
         private bool Win()
@@ -268,7 +282,6 @@ namespace Puzzle
             buida.Visibility = Visibility.Visible;
             buida.EsVisible = true;
             current.Visibility = Visibility.Hidden;
-            buida.EstaBenColocada = buida.ValorActual == buida.ValorDesitjat;
             this.casellaBuida = [current.Fila, current.Columna];
         }
 
@@ -279,8 +292,7 @@ namespace Puzzle
             {
                 for (int j = i + 1; j < numeros.Length; j++)
                 {
-                    if (numeros[j] != 0 && numeros[i] != 0
-                        && numeros[i] > numeros[j])
+                    if (numeros[i] > numeros[j])
                         desordres++;
                 }
             }

@@ -17,6 +17,7 @@ namespace A3.DAO
         string seed;
         List<int> posicionsValides = new List<int>();
 
+
         public string Nif
         {
             get
@@ -41,7 +42,14 @@ namespace A3.DAO
 
         public int MaxLengthOfName
         {
-            get => posicionsValides.Count-9;
+            get
+            {
+                if (posicionsValides.Count - 9 >= 0)
+                    return posicionsValides.Count - 9;
+                else
+                    return 0;
+                
+            }
         }
         public bool Empty
         {
@@ -83,7 +91,7 @@ namespace A3.DAO
             }
             return int.Parse(n2String);
         }
-
+        
         public int ReadLengthOfName()
         {
             int result;
