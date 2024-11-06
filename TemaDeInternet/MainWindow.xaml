@@ -1,0 +1,130 @@
+﻿<Window x:Class="TemaDeInternet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TemaDeInternet"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+        <Grid x:Name="LayoutRoot">
+            <StackPanel>
+                <GroupBox Header="GroupBox">
+                    Això és un GroupBox
+                </GroupBox>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Botons">
+                        <StackPanel>
+                            <Button Width="100" Content="Botó normal"/>
+                            <Button Width="100" Content="Botó amb focus"/>
+                            <Button Width="100" Content="Botoó desactivat" IsEnabled="false"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Caixes de text">
+                        <StackPanel>
+                            <TextBox Width="100" Text="TextBox normal"/>
+                            <TextBox Width="100" Text="TextBox amb focus"/>
+                            <TextBox Width="100" Text="Textbox desactivat" IsEnabled="false"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Column="2" Header="Caixes de mot de pas">
+                        <StackPanel>
+                            <PasswordBox Width="100" Password="Password normal"/>
+                            <PasswordBox Width="100" Password="Password amb focus"/>
+                            <PasswordBox Width="100" Password="Password desactivat" IsEnabled="false"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Column="3" Header="Etiqueta">
+                        <StackPanel>
+                            <Label Width="100" Content="Etiqueta normal"/>
+                            <Label Width="100" Content="Etiqueta desactivada" IsEnabled="false"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Grid.Column="0" Header="ComboBox">
+                        <StackPanel>
+                            <ComboBox>
+                                <ComboBoxItem IsSelected="true">Primer element</ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox IsEnabled="false" Margin="0,10,0,0">
+                                <ComboBoxItem IsSelected="true">Desactivat</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="1" Header="ComboBox desplegat">
+                        <ComboBox>
+                            <ComboBoxItem>Primer element</ComboBoxItem>
+                            <ComboBoxItem>Segon element</ComboBoxItem>
+                            <ComboBoxItem ToolTip="ToolTip">Tercer element</ComboBoxItem>
+                            <ComboBoxItem>Quart element</ComboBoxItem>
+                            <ComboBoxItem>Cinquè element</ComboBoxItem>
+                            <ComboBoxItem>Sisè element</ComboBoxItem>
+                        </ComboBox>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="2" Header="TreeView">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TreeView Grid.Column="0">
+                                <TreeViewItem Header="Arrel 1">
+                                    <TreeViewItem Header="Element 1 1"/>
+                                    <TreeViewItem Header="Element 1 2"/>
+                                    <TreeViewItem Header="Element 1 3"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Arrel 2">
+                                    <TreeViewItem Header="Element 2 1"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Arrel 3">
+                                    <TreeViewItem Header="Element 5"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Arrel 4"/>
+                                <TreeViewItem Header="Arrel 5"/>
+                            </TreeView>
+
+                            <TreeView Grid.Column="1" IsEnabled="false">
+                                <TreeViewItem Header="Arrel 1">
+                                    <TreeViewItem Header="Element 1 1"/>
+                                    <TreeViewItem Header="Element 1 2"/>
+                                    <TreeViewItem Header="Element 1 3"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Arrel 2">
+                                    <TreeViewItem Header="Element 2 1"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Arrel 3">
+                                    <TreeViewItem Header="Element 5"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Arrel 4"/>
+                                <TreeViewItem Header="Arrel 5"/>
+                            </TreeView>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+                <GroupBox Header="Barra de progrés">
+                    <StackPanel>
+                        <ProgressBar IsIndeterminate="true"/>
+                        <ProgressBar Value="45"/>
+                    </StackPanel>
+                </GroupBox>
+
+            </StackPanel>
+        </Grid>
+</Window>

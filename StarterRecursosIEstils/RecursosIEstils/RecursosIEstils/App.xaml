@@ -1,0 +1,17 @@
+﻿<Application x:Class="RecursosIEstils.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RecursosIEstils"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DiccionarisDeRecursos/Estils.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="DiccionarisDeRecursos/Mides.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="DiccionarisDeRecursos/PinzellsSolids.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="DiccionarisDeRecursos/PinzellsImatge.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>
