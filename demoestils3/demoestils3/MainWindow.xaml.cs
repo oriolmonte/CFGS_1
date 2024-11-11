@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using ModernWpf.Controls;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DemoEstils
+namespace demoestils3
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -45,11 +45,12 @@ namespace DemoEstils
             DataGridName.ItemsSource = items;
             ListViewName.ItemsSource = items;
             List<string> itemss = new List<string>();
-            foreach (Item item in items)
+            foreach(Item item in items) 
             {
                 itemss.Add(item.Description);
             }
             lst.ItemsSource = itemss;
         }
     }
+
 }
