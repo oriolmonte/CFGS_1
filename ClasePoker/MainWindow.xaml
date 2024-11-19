@@ -9,7 +9,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Left"
                     Orientation="Vertical">
-            <Button Name="btnReverteix" Click="btnReverteix_Click" Content="Reverteix"></Button>
+            <Button Name="btnNovama" Click="btnNovama_Click" Content="Reverteix"></Button>
             <Button Name="btnTria" Click="btnTria_Click" Content="Tria"></Button>
         </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
@@ -18,8 +18,7 @@
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
-
-            <StackPanel Name="stkBaralla" Orientation="Horizontal" DockPanel.Dock="Bottom" Height="200">
+            <StackPanel Name="stkHand" Orientation="Horizontal" DockPanel.Dock="Bottom" Height="200">
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

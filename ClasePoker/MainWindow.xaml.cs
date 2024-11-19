@@ -35,7 +35,7 @@ namespace ClasePoker
             InitializeComponent();
         }
 
-        private void btnReverteix_Click(object sender, RoutedEventArgs e)
+        private void btnNovama(object sender, RoutedEventArgs e)
         {
             
             
