@@ -50,7 +50,9 @@ namespace ClasePoker.Model
         public bool BocaAvall
         {
             get { return bocaAvall; }
-            set { bocaAvall = value; }
+            set { 
+                bocaAvall = value; 
+            }
         }
 
         public int CompareTo(Carta other)

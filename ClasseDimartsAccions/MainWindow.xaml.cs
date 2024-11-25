@@ -144,7 +144,6 @@ namespace ClasseDimartsAccions
         }
 
         private void CommandDesa_Executed(object sender, ExecutedRoutedEventArgs e)
-        private void CommandDesa_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             DesaFitxer(NomDocument);
             IsDesat = true;

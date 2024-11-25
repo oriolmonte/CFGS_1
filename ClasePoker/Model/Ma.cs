@@ -13,7 +13,41 @@ namespace ClasePoker.Model
 
         List<Carta> cartes;
         List<Carta> comodins;
-
+        int millorResultat = -1;
+        public int MillorResultat
+        {
+            
+            get
+            {
+                millorResultat = -1;
+                if(cartes.Count!=0) { 
+                    Dictionary<int,bool> resultats = new Dictionary<int,bool>();
+                    {
+                        resultats.Add(0, HiHaEscalaReialDeColor);
+                        resultats.Add(1, HiHaEscalaDeColor);
+                        resultats.Add(2, HiHaPoker);
+                        resultats.Add(3, HiHaFull);
+                        resultats.Add(4, HiHaColor);
+                        resultats.Add(5, HiHaEscala);
+                        resultats.Add(6, HiHaTrio);
+                        resultats.Add(7, HiHaDobleParella);                        
+                        resultats.Add(8, HiHaParellaMinima(Valor.Jota));                   
+                    }
+                
+                    foreach (var item in resultats)
+                    {
+                        if (item.Value) 
+                        {
+                            if (millorResultat == -1 || item.Key < millorResultat)
+                            {
+                                millorResultat = item.Key; 
+                            }
+                        }
+                    }
+                }
+                return millorResultat;
+            }
+        }
 
         public Ma()
         {

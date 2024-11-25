@@ -5,21 +5,170 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClasePoker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Left"
-                    Orientation="Vertical">
-            <Button Name="btnNovama" Click="btnNovama_Click" Content="Reverteix"></Button>
-            <Button Name="btnTria" Click="btnTria_Click" Content="Tria"></Button>
-        </StackPanel>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
-            <StackPanel Orientation="Horizontal" Name="stkMa" Height="200">
-                <Image Source="{StaticResource Dors07}"></Image>
+        Title="MainWindow" Height="900" Width="1600">
+    <DockPanel x:Name="dckPantalla">
+        <Menu x:Name="mnuMenu" DockPanel.Dock="Top">
+            <MenuItem Header="Aposta">
+                <MenuItem Header="1€" Command="local:Commands.ApostaMes" CommandParameter="1"></MenuItem>
+                <MenuItem Header="2€" Command="local:Commands.ApostaMes" CommandParameter="2"></MenuItem>
+                <MenuItem Header="3€" Command="local:Commands.ApostaMes" CommandParameter="3"></MenuItem>
+                <MenuItem Header="4€" Command="local:Commands.ApostaMes" CommandParameter="4"></MenuItem>
+                <MenuItem Header="5€" Command="local:Commands.ApostaMes" CommandParameter="5"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Doble" Command="local:Commands.Doble">
+            </MenuItem>
+            <MenuItem Header="Semidoble" Command="local:Commands.SemiDoble">
+            </MenuItem>
+            <MenuItem Header="Reparteix" Command="local:Commands.Reparteix">
+            </MenuItem>
+            <MenuItem Header="Swap" Command="local:Commands.Swap"></MenuItem>
+            <MenuItem Header="Deal" Command="local:Commands.Deal"></MenuItem>
+            
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                
+                <Button Command="local:Commands.ApostaMes" CommandParameter="1" Content="1€" />
+                <Button Command="local:Commands.ApostaMes" CommandParameter="2" Content="2€" />
+                <Button Command="local:Commands.ApostaMes" CommandParameter="3" Content="3€" />
+                <Button Command="local:Commands.ApostaMes" CommandParameter="4" Content="4€" />
+                <Button Command="local:Commands.ApostaMes" CommandParameter="5" Content="5€" />
+                <Button Command="local:Commands.Doble" Content="Doble" />
+                <Button Command="local:Commands.SemiDoble" Content="Semidoble" />
+                <Button Command="local:Commands.Reparteix" Content="Reparteix" />
+                <Button Command="local:Commands.Swap" Content="Swap" />
+                <Button Command="local:Commands.Deal" Content="Deal" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Background="Black"  Grid.Column="1">
+                <Grid Margin="10" x:Name="grdPayout">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Text="Mà" Grid.Row="0" Grid.Column="0" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="1 crèdit" Grid.Row="0" Grid.Column="1" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="2 crèdits" Grid.Row="0" Grid.Column="2" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="3 crèdits" Grid.Row="0" Grid.Column="3" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="4 crèdits" Grid.Row="0" Grid.Column="4" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="5 crèdits" Grid.Row="0" Grid.Column="5" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="Escala real de color" Grid.Row="1" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="250" Grid.Row="1" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="500" Grid.Row="1" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="750" Grid.Row="1" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="1000" Grid.Row="1" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="4000" Grid.Row="1" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+
+                    <TextBlock Text="Escala de color" Grid.Row="2" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="50" Grid.Row="2" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="100" Grid.Row="2" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="150" Grid.Row="2" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="200" Grid.Row="2" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="250" Grid.Row="2" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+
+                    <TextBlock Text="Pòquer" Grid.Row="3" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="25" Grid.Row="3" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="50" Grid.Row="3" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="75" Grid.Row="3" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="100" Grid.Row="3" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="125" Grid.Row="3" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+
+                    <TextBlock Text="Full" Grid.Row="4" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="9" Grid.Row="4" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="18" Grid.Row="4" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="27" Grid.Row="4" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="36" Grid.Row="4" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="45" Grid.Row="4" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+
+                    <TextBlock Text="Color" Grid.Row="5" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="6 " Grid.Row="5" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="12" Grid.Row="5" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="18" Grid.Row="5" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="24" Grid.Row="5" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="30" Grid.Row="5" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="Escala" Grid.Row="6" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="4 " Grid.Row="6" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="8 " Grid.Row="6" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="12" Grid.Row="6" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="16" Grid.Row="6" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="20" Grid.Row="6" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+
+
+                    <TextBlock Text="Trio" Grid.Row="7" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="3 " Grid.Row="7" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="6 " Grid.Row="7" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="9" Grid.Row="7" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="12" Grid.Row="7" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="15" Grid.Row="7" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+
+                    <TextBlock Text="Doble parella" Grid.Row="8" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="2 " Grid.Row="8" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="4 " Grid.Row="8" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="6" Grid.Row="8" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="8" Grid.Row="8" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="10" Grid.Row="8" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+
+                    <TextBlock Text="Jacks or més" Grid.Row="9" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="1 " Grid.Row="9" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="2 " Grid.Row="9" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="3" Grid.Row="9" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="4" Grid.Row="9" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
+                    <TextBlock Text="5" Grid.Row="9" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
+                </Grid>
+            </Grid>
+            <StackPanel Name="stkHand" Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
             </StackPanel>
-        </ScrollViewer>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Top">
-            <StackPanel Name="stkHand" Orientation="Horizontal" DockPanel.Dock="Bottom" Height="200">
-            </StackPanel>
-        </ScrollViewer>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnSwap" Content="Swap" Click="btnSwap_Click" Grid.Column="0" />
+                <Button x:Name="btnDeal" Content="Deal!" Click="btnDeal_Click" Grid.Column="1" />
+                <Button x:Name="btnPlusOne" Content="+1" Click="btnPlusOne_Click" Grid.Column="2" />
+                <Button x:Name="btnMaxBet" Content="Max Bet" Click="btnMaxBet_Click" Grid.Column="3" />
+                <Button x:Name="btnDoble" Content="Doble" IsEnabled="False" Click="btnDoble_Click" Grid.Column="4" />
+                <Button x:Name="btnSemiDoble" Content="Semidoble" IsEnabled="False" Click="btnSemiDoble_Click" Grid.Column="5" />
+            </Grid>
+            <Image Source="{StaticResource Dors01}" Grid.Row="2"></Image>
+            <Button Name="btnNovama" Click="btnNovama_Click" Content="Reparteix" Grid.Row="0"></Button>
+            <TextBlock Grid.Row="1" Name="txtCredit"></TextBlock>
+        </Grid>
     </DockPanel>
+    
+    
+
 </Window>
