@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClasePoker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1600">
+        Title="Poker" Height="900" Width="1600">
     <DockPanel x:Name="dckPantalla">
         <Menu x:Name="mnuMenu" DockPanel.Dock="Top">
             <MenuItem Header="Aposta">
@@ -51,6 +51,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
+            <!--Grid Payouts-->
             <Grid Background="Black"  Grid.Column="1">
                 <Grid Margin="10" x:Name="grdPayout">
                     <Grid.RowDefinitions>
@@ -80,7 +81,7 @@
                     <TextBlock Text="3 crèdits" Grid.Row="0" Grid.Column="3" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
                     <TextBlock Text="4 crèdits" Grid.Row="0" Grid.Column="4" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
                     <TextBlock Text="5 crèdits" Grid.Row="0" Grid.Column="5" Background="Yellow" Foreground="Black" FontWeight="Bold" Padding="5" TextAlignment="Center" />
-                    <TextBlock Text="Escala real de color" Grid.Row="1" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="Escala reial de color" Grid.Row="1" Grid.Column="0" Foreground="White" Padding="5" />
                     <TextBlock Text="250" Grid.Row="1" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
                     <TextBlock Text="500" Grid.Row="1" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
                     <TextBlock Text="750" Grid.Row="1" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />
@@ -136,7 +137,7 @@
                     <TextBlock Text="8" Grid.Row="8" Grid.Column="4" Foreground="White" Padding="5" TextAlignment="Center" />
                     <TextBlock Text="10" Grid.Row="8" Grid.Column="5" Foreground="White" Padding="5" TextAlignment="Center" />
 
-                    <TextBlock Text="Jacks or més" Grid.Row="9" Grid.Column="0" Foreground="White" Padding="5" />
+                    <TextBlock Text="Jota o més" Grid.Row="9" Grid.Column="0" Foreground="White" Padding="5" />
                     <TextBlock Text="1 " Grid.Row="9" Grid.Column="1" Foreground="White" Padding="5" TextAlignment="Center" />
                     <TextBlock Text="2 " Grid.Row="9" Grid.Column="2" Foreground="White" Padding="5" TextAlignment="Center" />
                     <TextBlock Text="3" Grid.Row="9" Grid.Column="3" Foreground="White" Padding="5" TextAlignment="Center" />

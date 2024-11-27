@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace ClasePoker
 {
     /// <summary>
@@ -19,6 +20,54 @@ namespace ClasePoker
 
     public partial class MainWindow : Window
     {
+        int bet = 1;
+        int credit = 0;
+        Baralla baralla = new Baralla();
+        Ma ma = new Ma();
+
+        public enum GameState
+        {
+            NoGame, FirstHand, SecondHand, Doble, Semidoble, WinPoker
+        }
+        public int Bet
+        {
+            get => bet;
+            set
+            {
+                bet = value;
+                txtCredit.Text = $"Credit:{credit}\nBet:{bet}";
+            }
+        }
+        public int Credit
+        {
+            get
+            {
+                return credit;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    credit = value;
+                    txtCredit.Text = $"Credit:{credit}\nBet:{bet}";
+                }
+                else
+                    txtCredit.Text = "BANCARROTA";
+
+
+
+
+            }
+        }
+        public MainWindow()
+        {
+            InitializeComponent();
+            CreaBindings();
+            Credit = 100;
+            State = GameState.NoGame;
+            OnGameStateChange();
+        }
+
         public int RondesExtra {  get; set; }
 
         public Dictionary<int,List<int>> premis = new Dictionary<int, List<int>>()
@@ -33,10 +82,13 @@ namespace ClasePoker
             { 7, new List<int> { 2, 4, 6, 8, 10 } },
             { 8, new List<int> { 1, 2, 3, 4, 5 } }
         };
+        /// <summary>
+        /// Funcio per cambiar estils entre ronda doble i normal
+        /// </summary>
         private void CambiarEstils()
         {
             this.Resources.MergedDictionaries.Clear();
-            if (State==GameState.WinPoker || State == GameState.Doble || State ==GameState.Semidoble)
+            if (State == GameState.WinPoker || State == GameState.Doble || State == GameState.Semidoble)
             {
                 var diccionari = new ResourceDictionary
                 {
@@ -54,6 +106,8 @@ namespace ClasePoker
             }
 
         }
+
+        #region Commands
         private void CreaBindings()
         {
             CommandBinding reparteix = new CommandBinding(Commands.Reparteix);
@@ -106,7 +160,7 @@ namespace ClasePoker
         {
             bool result = false;
             int increment = int.Parse(e.Parameter.ToString());
-            if (increment+Bet <= 5 && State==GameState.NoGame) 
+            if (increment+Bet <= 5 && State==GameState.NoGame && Credit >= Bet+increment) 
             {
                 result = true;
             }
@@ -141,61 +195,17 @@ namespace ClasePoker
 
         private void Reparteix_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = State == GameState.NoGame;
+            e.CanExecute = (State == GameState.NoGame && Credit-1>(Bet)) ;
         }
 
         private void Reparteix_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Reparteix();
         }
+        #endregion
 
-        public enum GameState
-        {
-            NoGame,FirstHand, SecondHand, Doble, Semidoble, WinPoker
-        }
-        int bet = 1;
-
-        int credit = 0;
-        public int Bet
-        {
-            get => bet; 
-            set
-            {
-                bet = value;
-                txtCredit.Text = $"Credit:{credit}\nBet:{bet}";
-            }
-        }
         GameState State {  get; set; }
-        public int Credit
-        {
-            get
-            {
-                return credit;
-            }
-            set
-            {
-                credit = value;
-                txtCredit.Text = $"Credit:{credit}\nBet:{bet}";
-                
-
-            }
-        }
-        Baralla baralla = new Baralla();
-        Ma ma = new Ma();
-        public MainWindow()
-        {
-            InitializeComponent();
-            CreaBindings();
-            Bet = 1;
-            Credit = 100;
-            State = GameState.NoGame;
-            OnGameStateChange();
-        }
-
-        private void btnNovama_Click(object sender, RoutedEventArgs e)
-        {
-            Reparteix();
-        }
+  
         private void Reparteix()
         {
             SetTable();
@@ -208,6 +218,10 @@ namespace ClasePoker
             }
             OnGameStateChange();
         }
+
+        /// <summary>
+        /// Preparem la taula per ronda doble
+        /// </summary>
         private void PokerWinSetup()
         {
             SetTable();
@@ -269,6 +283,12 @@ namespace ClasePoker
                 }
             }
         }
+        /// <summary>
+        /// Carta més alta
+        /// </summary>
+        /// <param name="clic"></param>
+        /// <param name="ma"></param>
+        /// <param name="state"></param>
         private void HighCard (Valor clic, Valor ma, GameState state)
         {
             bool result = false;
@@ -295,7 +315,7 @@ namespace ClasePoker
             else if (state == GameState.Semidoble)
             {
                 credit += Bet / 2;
-                State = GameState.NoGame;
+                State = GameState.NoGame;   
                 OnGameStateChange();
             }
             else
@@ -304,6 +324,9 @@ namespace ClasePoker
                 OnGameStateChange();
             }
         }
+        /// <summary>
+        /// Control d'estats del joc
+        /// </summary>
         private void OnGameStateChange()
         { 
             switch(State)
@@ -338,13 +361,14 @@ namespace ClasePoker
                     btnMaxBet.IsEnabled = false;
                     break;
                 case GameState.WinPoker:
+                    
+                    PokerWinSetup();
+                    State = GameState.WinPoker;
                     btnNovama.IsEnabled = false;
                     btnDoble.IsEnabled = true;
                     btnSemiDoble.IsEnabled = true;
                     btnPlusOne.IsEnabled = true;
                     btnMaxBet.IsEnabled = true;
-                    PokerWinSetup();
-                    State = GameState.WinPoker;
                     btnSwap.IsEnabled = false;
                     btnDeal.IsEnabled = false;
                     break;
@@ -367,15 +391,13 @@ namespace ClasePoker
                     btnMaxBet.IsEnabled = true;
                     break;
             }
+            
             CambiarEstils();
             SenyalaResult();
         }
-
-        private void btnSwap_Click(object sender, RoutedEventArgs e)
-        {
-            Swap();
-        }
-
+        /// <summary>
+        /// Canvia les cartes girades.
+        /// </summary>
         private void SwapFlip()
         {
             
@@ -392,7 +414,9 @@ namespace ClasePoker
             }
             Refresh();
         }
-
+        /// <summary>
+        /// Recarrega les cartes
+        /// </summary>
         private void Refresh()
         {
             stkHand.Children.Clear();
@@ -401,7 +425,9 @@ namespace ClasePoker
                 RenderitzaCarta(c);
             }
         }
-
+        /// <summary>
+        /// Actualitzacio del pagament
+        /// </summary>
         private void Payout()
         {
             int millorResultat = ma.MillorResultat;
@@ -425,11 +451,9 @@ namespace ClasePoker
             }
 
         }
-
-        private void btnDeal_Click(object sender, RoutedEventArgs e)
-        {
-            Deal();
-        }
+        /// <summary>
+        /// Prepara la taula
+        /// </summary>
         private void SetTable()
         {
             stkHand.Children.Clear();
@@ -438,6 +462,9 @@ namespace ClasePoker
             State = GameState.FirstHand;
             OnGameStateChange();
         }
+        /// <summary>
+        /// Senyala el resultat de la ma a la taula en vermell
+        /// </summary>
         private void SenyalaResult()
         {
             foreach (UIElement child in grdPayout.Children)
@@ -459,7 +486,53 @@ namespace ClasePoker
                 }
             }
         }
+        /// <summary>
+        /// Tanquem el joc si apostem més del que tenim
+        /// </summary>
+        private void Bancarrota()
+        {
+            btnPlusOne.IsEnabled = false;
+            btnMaxBet.IsEnabled = false;
+            btnNovama.IsEnabled = false;
+            txtCredit.Text = "BANCARROTA!";
 
+        }
+
+        #region events botons
+        private void btnSemiDoble_Click(object sender, RoutedEventArgs e)
+        {
+            SemiDoble();
+        }
+        private void btnDeal_Click(object sender, RoutedEventArgs e)
+        {
+            Deal();
+        }
+        private void btnSwap_Click(object sender, RoutedEventArgs e)
+        {
+            Swap();
+        }
+        private void btnNovama_Click(object sender, RoutedEventArgs e)
+        {
+            Reparteix();
+        }
+        private void btnMaxBet_Click(object sender, RoutedEventArgs e)
+        {
+            if (State == GameState.Doble || State == GameState.Semidoble || State == GameState.WinPoker)
+            {
+                Credit += Bet;
+                State = GameState.NoGame;
+                OnGameStateChange();
+            }
+            else if (Bet < 5 && State == GameState.NoGame)
+            {
+                if ((Credit - 5) >= 0)
+                    Bet = 5;
+                else
+                {
+                    Bancarrota();
+                }
+            }
+        }
         private void btnPlusOne_Click(object sender, RoutedEventArgs e)
         {
             if (State == GameState.Doble || State == GameState.Semidoble || State == GameState.WinPoker)
@@ -469,37 +542,26 @@ namespace ClasePoker
                 OnGameStateChange();
             }
 
-            else if (Bet<5 && State==GameState.NoGame)
+            else if (Bet < 5 && State == GameState.NoGame)
             {
-                Bet++;
+                if (Credit - (Bet + 1) >= 0)
+                    Bet++;
+                else
+                {
+                    Bancarrota();
+                }
             }
-            
-        }
 
-        private void btnMaxBet_Click(object sender, RoutedEventArgs e)
-        {
-            if (State == GameState.Doble || State==GameState.Semidoble || State==GameState.WinPoker)
-            {
-                Credit += Bet;
-                State = GameState.NoGame;
-                OnGameStateChange();
-            }
-            else if (Bet < 5 && State==GameState.NoGame)
-            {
-                Bet=5;
-            }
         }
-
         private void btnDoble_Click(object sender, RoutedEventArgs e)
         {
             Doble();
         }
 
-        private void btnSemiDoble_Click(object sender, RoutedEventArgs e)
-        {
-            SemiDoble();
-        }
-
+        #endregion
+        /// <summary>
+        /// Entrem en estat doble.
+        /// </summary>
         private void Doble()
         {
             RondesExtra++;
@@ -514,6 +576,9 @@ namespace ClasePoker
                 OnGameStateChange();
             }    
         }
+        /// <summary>
+        /// Entrem en estat semidoble
+        /// </summary>
         private void SemiDoble()
         {
             RondesExtra++;
@@ -528,6 +593,9 @@ namespace ClasePoker
                 OnGameStateChange();
             }
         }
+        /// <summary>
+        /// Canviem les cartes girades per unes altres
+        /// </summary>
         private void Swap()
         { 
             bool flipped = false;
@@ -543,7 +611,9 @@ namespace ClasePoker
                 OnGameStateChange();
             }
         }
-
+        /// <summary>
+        /// Juguem la ma
+        /// </summary>
         private void Deal()
         {
             Payout();

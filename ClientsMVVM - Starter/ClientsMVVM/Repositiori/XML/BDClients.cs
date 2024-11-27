@@ -14,7 +14,7 @@ namespace ClientsMVVM.Dades.Json
 {
     public class ClientsXML : IRepositoriDeClients
     {
-        const string NOM_FITXER_XML = @"BBDD\Clients.xml";
+        const string NOM_FITXER_XML = @"Clients.xml";
         string RUTA_FITXER_XML = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), NOM_FITXER_XML);
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace ClientsMVVM.Dades.Json
         /// <param name="clients">Dades dels clients que ha de desar</param>
         public void Desa(ObservableCollection<Client> clients)
         {
-            using (TextWriter fitxer = new StreamWriter(RUTA_FITXER_XML))
+            using (TextWriter fitxer = new StreamWriter(RUTA_FITXER_XML, new FileStreamOptions { Mode=FileMode.OpenOrCreate}))
             {
 
                 XmlSerializer serialitzador = new XmlSerializer(typeof(ObservableCollection<Client>));
@@ -69,7 +69,7 @@ namespace ClientsMVVM.Dades.Json
         {
             ObservableCollection<Client> clients;
 
-            using (TextReader fitxer = new StreamReader(RUTA_FITXER_XML))
+            using (TextReader fitxer = new StreamReader(RUTA_FITXER_XML)) //
             {
                 if (fitxer.Peek() != -1)
                 {

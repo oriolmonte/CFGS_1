@@ -10,7 +10,7 @@
         Title="VistaClients" Height="450" Width="800">
     <!--S'HA DE CREAR EL CONTEXT DE LES DADES -->
     <Window.DataContext>
-        <vm:ClientViewModelAMa></vm:ClientViewModelAMa> 
+        <vm:ClientViewModelCommunityToolkit></vm:ClientViewModelCommunityToolkit> 
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="EtiquetaStyle">
@@ -47,13 +47,13 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <Button Content="Crea clients" />
+            <Button Content="Crea clients" Command="{Binding CreaClientsCommand}" />
             <Separator/>
-            <Button Content="Afegeix" />
-            <Button Content="Edita" />
-            <Button Content="Confirma" />
-            <Button Content="Descarta" />
-            <Button Content="Elimina" />
+            <Button Content="Afegeix" Command="{Binding AfegeixClientCommand}"/>
+            <Button Content="Edita" Command="{Binding EditaClientCommand}" />
+            <Button Content="Confirma"  Command="{Binding ConfirmaClientCommand}"/>
+            <Button Content="Descarta"  Command="{Binding DescartaClientCommand}"/>
+            <Button Content="Elimina"  Command="{Binding EliminaClientCommand}"/>
         </ToolBar>
         <StackPanel Grid.Row="1" VerticalAlignment="Center">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="20">
@@ -68,7 +68,7 @@
                 </DockPanel>
                 <DockPanel >
                     <TextBlock DockPanel.Dock="Left" Text="Saldo:" Style="{StaticResource ResourceKey=EtiquetaStyle}"/>
-                    <TextBox DockPanel.Dock="Left" Text="" Style="{StaticResource ResourceKey=ValorStyle}"/>
+                    <TextBox DockPanel.Dock="Left" Text="{Binding Saldo}" Style="{StaticResource ResourceKey=ValorStyle}"/>
                 </DockPanel>
 
             </StackPanel>
