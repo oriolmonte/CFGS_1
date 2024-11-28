@@ -1,4 +1,5 @@
-﻿using RPS.Dades;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using RPS.Dades;
 using RPS.Model;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,15 @@ using System.Threading.Tasks;
 
 namespace RPS.ViewModel
 {
-    public class JugadorViewmodel
+    public partial class JugadorViewmodel : ObservableObject
     {
+        [ObservableProperty] 
         string id;
+        [ObservableProperty]
         string nom;
+        [ObservableProperty]
         int punts;
+        [ObservableProperty]
         string foto;
 
         ObservableCollection<Jugador> jugadors = new();

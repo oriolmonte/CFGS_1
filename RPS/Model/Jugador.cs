@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPS.Model
 {
-    public class Client
+    public class Jugador
     {
         string id;
         string nom;
