@@ -17,7 +17,12 @@
         <converters:MainWindowConverter x:Key="EstatToVisibilitatKey"/>
     </Window.Resources>
     <DockPanel>
-        
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Records" Command="{Binding VeureRecordsCommand}">                
+            </MenuItem>
+            <MenuItem Header="Abandona" Command="{Binding AbandonaCommand}">
+            </MenuItem>
+        </Menu>
         <!--Play Screen-->
         <Grid Visibility="{Binding State, Converter={StaticResource EstatToVisibilitatKey}, ConverterParameter={x:Static vm:Gamestate.GameScreen}}">
             <Grid.ColumnDefinitions>

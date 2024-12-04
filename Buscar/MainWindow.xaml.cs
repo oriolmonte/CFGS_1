@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -84,8 +85,59 @@ namespace Buscar
         /// </summary>
         private async void StartSearch_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funció: StartSearch_Click");
-            // TODO: Inicialitza el CancellationToken, neteja els resultats i llança els threads per a la cerca.
+            if (string.IsNullOrWhiteSpace(selectedFolder))
+            {
+                MessageBox.Show("Si us plau, selecciona una carpeta abans de començar la cerca.");
+                return;
+            }
+
+            string searchPattern = "*"+FileNameTextBox.Text; 
+            if (string.IsNullOrWhiteSpace(searchPattern))
+            {
+                MessageBox.Show("Si us plau, introdueix un patró de cerca.");
+                return;
+            }
+
+            _cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = _cancellationTokenSource.Token;
+
+            // Neteja els resultats anteriors
+            Results.Clear();
+            processedFiles.Clear();
+            fileCount = 0;
+            folderQueue = new ConcurrentQueue<string>();
+
+            // Afegim la carpeta seleccionada a la cua de treball
+            folderQueue.Enqueue(selectedFolder);
+
+            // Inicia el temporitzador per mesurar el temps de cerca
+            stopwatch.Restart();
+
+            try
+            {
+                // Llança la cerca de carpetes i fitxers utilitzant múltiples threads
+                var tasks = new List<Task>();
+
+                for (int i = 0; i < MaxThreads; i++)
+                {
+                    tasks.Add(Task.Run(() => ProcessFolders(searchPattern, token), token));
+                }
+
+                // Espera a que totes les tasques finalitzin
+                await Task.WhenAll(tasks);
+
+                stopwatch.Stop();
+                MessageBox.Show($"Cerca completada en {stopwatch.Elapsed.TotalSeconds:N2} segons. Fitxers trobats: {fileCount}");
+            }
+            catch (OperationCanceledException)
+            {
+                stopwatch.Stop();
+                MessageBox.Show("Cerca cancel·lada per l'usuari.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"S'ha produït un error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -93,20 +145,82 @@ namespace Buscar
         /// </summary>
         private void StopSearch_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funció: StopSearch_Click");
-            // TODO: Atura la cerca actual activant el CancellationToken.
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel();
+            }
         }
 
         /// <summary>
         /// Processa les carpetes de manera recursiva. Cerca fitxers que coincideixin amb el nom indicat
         /// i afegeix subcarpetes a la cua.
         /// </summary>
-        private void ProcessFolders(string fileName, CancellationToken token)
+        private async Task ProcessFolders(string fileName, CancellationToken token)
         {
-            MessageBox.Show("Funció: ProcessFolders");
-            // TODO: Treu carpetes de la cua i cerca fitxers que coincideixin amb `fileName`.
-            // Afegeix subcarpetes a la cua i assegura que els threads poden cancel·lar-se.
+            while (folderQueue.TryDequeue(out string currentFolder))
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+
+                    var files = Directory.GetFiles(currentFolder, fileName);
+                    foreach (var file in files)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        lock (lockObject)
+                        {
+                            if (processedFiles.Add(file))
+                            {
+                                fileCount++;
+
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    Results.Add(new FileResult
+                                    {
+                                        Name = Path.GetFileName(file),
+                                        Path = file
+                                    });
+                                });
+                            }
+                        }
+                    }
+
+                    var subfolderTasks = new List<Task>();
+                    var subfolders = Directory.GetDirectories(currentFolder);
+                    foreach (var subfolder in subfolders)
+                    {
+                        token.ThrowIfCancellationRequested(); 
+
+                        subfolderTasks.Add(Task.Run(() =>
+                        {
+                            folderQueue.Enqueue(subfolder);
+                        }));
+                    }
+
+                    await Task.WhenAll(subfolderTasks);
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
+                catch (Exception ex)
+                {
+                    // Log unexpected errors
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Results.Add(new FileResult
+                        {
+                            Name = "[Error]",
+                            Path = $"{currentFolder}: {ex.Message}"
+                        });
+                    });
+                }
+            }
         }
+
 
         /// <summary>
         /// Detecta el doble clic a un element del ListView i obre el fitxer o la carpeta corresponent.
@@ -137,8 +251,12 @@ namespace Buscar
         /// </summary>
         private void OpenFile_Click(FileResult file)
         {
-            MessageBox.Show("Funció: OpenFile_Click");
-            // TODO: Obre el fitxer indicat pel paràmetre `file` utilitzant l'aplicació predeterminada.
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = file.Path,
+                UseShellExecute = true 
+            });
+
         }
 
         /// <summary>
@@ -146,8 +264,12 @@ namespace Buscar
         /// </summary>
         private void OpenDirectory_Click(FileResult file)
         {
-            MessageBox.Show("Funció: OpenDirectory_Click");
-            // TODO: Obre la carpeta que conté el fitxer indicat pel paràmetre `file`.
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = Path.GetDirectoryName(file.Path),
+                UseShellExecute = true,
+                Verb = "open"
+            });
         }
 
         /// <summary>
@@ -155,8 +277,7 @@ namespace Buscar
         /// </summary>
         private void ClearResults_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funció: ClearResults_Click");
-            // TODO: Esborra els resultats actuals i reinicia `processedFiles`.
+            Results.Clear();
         }
     }
 
