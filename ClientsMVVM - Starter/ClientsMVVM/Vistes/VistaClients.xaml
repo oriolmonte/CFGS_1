@@ -26,8 +26,6 @@
         <!--PEEP THIS-->
         <!--PEEP THIS-->
         <!--PEEP THIS-->
-        <converter:ClientColorConverter x:Key="ClientColorConverter"></converter:ClientColorConverter>
-        <converter:ClientGruixConverter x:Key="ClientGruixConverter"></converter:ClientGruixConverter>
         <!--PEEP THIS-->
         <!--PEEP THIS-->
         <!--PEEP THIS-->
@@ -89,19 +87,7 @@
                     <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Nom}"></GridViewColumn>
                     <GridViewColumn Header="Cognom" DisplayMemberBinding="{Binding Cognom}"></GridViewColumn>
                     <GridViewColumn Header="Saldo" DisplayMemberBinding="{Binding Saldo}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border BorderBrush ="{Binding Saldo, Converter={StaticResource ClientColorConverter}}" BorderThickness="{Binding Saldo, Converter={StaticResource ClientGruixConverter}}" Padding="2">
-                                    <TextBlock Text="{Binding Saldo}" Foreground="{Binding Saldo, Converter={StaticResource ClientColorConverter}}"></TextBlock>
-                                    <!--PEEP THIS-->
-                                    <!--PEEP THIS-->
-                                    <!--PEEP THIS-->
-                                    <!--PEEP THIS-->
-                                    <!--PEEP THIS-->
-                                    <!--PEEP THIS-->
-                                </Border>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
+
                     </GridViewColumn>
                     
                     
@@ -117,7 +103,6 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black"
-                            BorderThickness="{Binding Saldo, Converter={StaticResource ClientGruixConverter}}"
                             CornerRadius="15">
                         <Grid HorizontalAlignment="Stretch"
                               Margin="20,0,20,0">
@@ -136,7 +121,7 @@
                             <!--PEEP THIS-->
                             <!--PEEP THIS-->
                             <!--PEEP THIS-->
-                            <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Saldo}" Margin="0,0,20,0" TextAlignment="Right" FontWeight="ExtraBold" Foreground="{Binding Saldo, Converter={StaticResource ClientColorConverter}}"></TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Saldo}" Margin="0,0,20,0" TextAlignment="Right" FontWeight="ExtraBold"></TextBlock>
                             <!--PEEP THIS-->
                             <!--PEEP THIS-->
                             <!--PEEP THIS-->

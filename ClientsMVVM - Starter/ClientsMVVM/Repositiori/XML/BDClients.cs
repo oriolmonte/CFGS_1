@@ -53,11 +53,13 @@ namespace ClientsMVVM.Dades.Json
         /// <param name="clients">Dades dels clients que ha de desar</param>
         public void Desa(ObservableCollection<Client> clients)
         {
-            using (TextWriter fitxer = new StreamWriter(RUTA_FITXER_XML, new FileStreamOptions { Mode=FileMode.OpenOrCreate}))
+            using (FileStream fileStream = new FileStream(RUTA_FITXER_XML, FileMode.OpenOrCreate, FileAccess.Write))
             {
-
-                XmlSerializer serialitzador = new XmlSerializer(typeof(ObservableCollection<Client>));
-                serialitzador.Serialize(fitxer, clients);
+                using (TextWriter fitxer = new StreamWriter(fileStream))
+                {
+                    XmlSerializer serialitzador = new XmlSerializer(typeof(ObservableCollection<Client>));
+                    serialitzador.Serialize(fitxer, clients);
+                }
             }
         }
 

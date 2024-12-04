@@ -3,33 +3,151 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:RPS.ViewModel"
         xmlns:local="clr-namespace:RPS"
+        xmlns:converters="clr-namespace:RPS.Converters"
         mc:Ignorable="d"
+        WindowState="Maximized"
+        SizeToContent="Manual"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:JugadorViewmodel></vm:JugadorViewmodel>
+    </Window.DataContext>
+    <Window.Resources>
+        <converters:MainWindowConverter x:Key="EstatToVisibilitatKey"/>
+    </Window.Resources>
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Play"></MenuItem>
-            <MenuItem Header="Register"></MenuItem>
-            <MenuItem Header="See Records"></MenuItem>
-        </Menu>
-        <Grid Name="grdMain">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>            
-        </Grid.RowDefinitions>
-        <TextBlock Text="Username" Grid.Column="0" Grid.Row="0"></TextBlock>
-        <TextBlock Text="Mode" Grid.Column="0" Grid.Row="1"></TextBlock>
-        <Button Content="Normal" Name="btnModeSelect" Grid.Row="1" Grid.Column="1"></Button>
-        <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" 
+        
+        <!--Play Screen-->
+        <Grid Visibility="{Binding State, Converter={StaticResource EstatToVisibilitatKey}, ConverterParameter={x:Static vm:Gamestate.GameScreen}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image x:Name="imgScissors" Source="Resources/Rock.png" Cursor="Hand" Grid.Column="0" >
+                <Image.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding ResultPickCommand}" CommandParameter="Rock" />
+                </Image.InputBindings>
+            </Image>
+            <Image Source="Resources/Paper.png" Cursor="Hand" Grid.Column="1" Tag="Paper">
+                <Image.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding ResultPickCommand}" CommandParameter="Paper" />
+                </Image.InputBindings>
+            </Image>
+            <Image Source="Resources/Scissors.png" Cursor="Hand" Grid.Column="2" Tag="Scissors">
+                <Image.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding ResultPickCommand}" CommandParameter="Scissors" />
+                </Image.InputBindings>
+            </Image>
+            <Image Source="Resources/Lizard.png" Cursor="Hand" Grid.Column="3" Tag="Lizard" Visibility ="{Binding Vismode}">
+                <Image.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding ResultPickCommand}" CommandParameter="Lizard"/>
+                </Image.InputBindings>
+            </Image>
+            <Image Source="Resources/Spock.png" Cursor="Hand" Grid.Column="4" Tag="Spock" Visibility ="{Binding Vismode}">
+                <Image.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding ResultPickCommand}" CommandParameter="Spock" />
+                </Image.InputBindings>
+            </Image>
+            <TextBlock Text="Current Score:" Grid.Column="0" Grid.Row="1"></TextBlock>
+            <TextBlock Text="{Binding CurrentScore}" Grid.Row="1" Grid.Column="1"></TextBlock>
+        </Grid>
+        <!--Result Screen-->
+        <Grid Visibility="{Binding State, Converter={StaticResource EstatToVisibilitatKey}, ConverterParameter={x:Static vm:Gamestate.ResultScreen}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Current Score"></TextBlock>
+            <TextBlock Text="{Binding CurrentScore}" Grid.Column="1"></TextBlock>
+            <Image Source="{Binding YourPickImg}" Cursor="Hand" Grid.Row="1" Grid.Column="0"/>
+            <Image Source="pack://application:,,,/Resources/vs.jpg" Grid.Column="1" Grid.Row="1"></Image>
+            <Image Source="{Binding ComputerPickImg}"  Grid.Row="1" Grid.Column="2"/>
+            <Button Grid.Column="1" Grid.Row="2" Content="{Binding Result}" Command="{Binding NextResultCommand}"></Button>
+        </Grid>
+        <!--Records-->
+        <Grid Visibility="{Binding State, Converter={StaticResource EstatToVisibilitatKey}, ConverterParameter={x:Static vm:Gamestate.Records}}" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListBox
+                 x:Name="lstClients" HorizontalContentAlignment="Stretch"
+                 ItemsSource="{Binding Jugadors}"
+                 SelectedIndex="{Binding Posicio}"
+                 Grid.ColumnSpan="2" Margin="5,0,0,0" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black"
+                            CornerRadius="15">
+                            <Grid HorizontalAlignment="Stretch"
+                              Margin="20,0,20,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Nom}"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Punts}" Margin="0,0,20,0" TextAlignment="Right" FontWeight="ExtraBold"></TextBlock>
+                                <Image Grid.RowSpan="2" Source="{Binding Foto}" Stretch="UniformToFill" Height="40" Margin="0,0,20,0"></Image>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Row="1" Content="Go back" Command="{Binding StartAgainCommand}">
+            </Button>
+
+        </Grid>
+        <!--Main Menu-->
+        <Grid Visibility="{Binding State, Converter={StaticResource EstatToVisibilitatKey}, ConverterParameter={x:Static vm:Gamestate.Entrada}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Username"></TextBlock>
+                <TextBox x:Name="txtbUsername" Text="{Binding Nom}"></TextBox>
+                <Image Source="{Binding Foto}" Stretch="None"></Image>
+            </StackPanel>
+            <TextBlock Text="Mode" Grid.Column="0" Grid.Row="1"></TextBlock>
+            <Button Content="Start" Name="btnStart" Grid.Row="0" Grid.Column="1" Command="{Binding StartGameCommand}"></Button>
+            <Button Content="{Binding Gamemode}" Name="btnModeSelect" Grid.Row="1" Grid.Column="1" Command="{Binding ChangeModeCommand}"></Button>
+            <ListView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" 
                  x:Name="lstJugadorsMainMenu" HorizontalContentAlignment="Stretch"
                  ItemsSource="{Binding Jugadors}"
                  Margin="5,0,0,0" >
-        </ListBox>
-    </Grid>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Nom}" Width="Auto"></GridViewColumn>
+                        <GridViewColumn Header="Punts" DisplayMemberBinding="{Binding Punts}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+
     </DockPanel>
 </Window>

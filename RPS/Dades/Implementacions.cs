@@ -13,9 +13,9 @@ namespace RPS.Dades
 {
     public class JugadorsXml : IRepositori
     {
-        const string NOM_FITXER_XML = @"BBDD/jugadors.xml";
+        const string NOM_FITXER_XML = @"jugadors.xml";
         string RUTA_FITXER_XML = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), NOM_FITXER_XML);
-        public void Crea(int quantitat = 10)
+        public void Crea(int quantitat = 8)
         {
             Random random = new Random();
             List<string> noms = new List<string> { "Joan", "Pere", "Maria", "Sílvia", "Ricard", "Lluís", "Roser", "Laura" };
@@ -29,7 +29,7 @@ namespace RPS.Dades
                 jugadorActual = new Jugador()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Nom = noms[random.Next(noms.Count)],
+                    Nom = noms[njugador],
                     Punts = random.Next(0, 5),
                     Foto = "https://loremflickr.com/320/240/"
                 };
@@ -44,14 +44,15 @@ namespace RPS.Dades
         /// <param name="jugadors">Dades dels jugadors que ha de desar</param>
         public void Desa(ObservableCollection<Jugador> jugadors)
         {
-            using (TextWriter fitxer = new StreamWriter(RUTA_FITXER_XML, new FileStreamOptions { Mode = FileMode.OpenOrCreate }))
+            using (FileStream fileStream = new FileStream(RUTA_FITXER_XML, FileMode.OpenOrCreate, FileAccess.Write))
             {
-
-                XmlSerializer serialitzador = new XmlSerializer(typeof(ObservableCollection<Jugador>));
-                serialitzador.Serialize(fitxer, jugadors);
+                using (TextWriter fitxer = new StreamWriter(fileStream))
+                {
+                    XmlSerializer serialitzador = new XmlSerializer(typeof(ObservableCollection<Jugador>));
+                    serialitzador.Serialize(fitxer, jugadors);
+                }
             }
         }
-
         /// <summary>
         /// Obté els jugadors desats en un fitxer XML
         /// </summary>

@@ -9,8 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Converters\" />
-    <Folder Include="BBDD\" />
+    <None Remove="Resources\Lizard.png" />
+    <None Remove="Resources\Paper.png" />
+    <None Remove="Resources\Rock.png" />
+    <None Remove="Resources\Scissors.png" />
+    <None Remove="Resources\Spock.png" />
+    <None Remove="Resources\vs.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Lizard.png" />
+    <Resource Include="Resources\Paper.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Rock.png" />
+    <Resource Include="Resources\Scissors.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Spock.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\vs.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
