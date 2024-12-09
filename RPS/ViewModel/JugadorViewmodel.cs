@@ -80,7 +80,7 @@ namespace RPS.ViewModel
                 {
                     Id = Guid.NewGuid().ToString(),
                     Nom = this.Nom,
-                    Foto = "https://loremflickr.com/320/240",
+                    Foto = $"https://loremflickr.com/320/240/?random={nom}",
                     Punts = this.Punts
                 };
                 repositori.Afegeix(nou);
@@ -164,11 +164,35 @@ namespace RPS.ViewModel
                 }
                 repositori.Modifica(JugadorActual);
                 Jugadors = repositori.Obten();
+
+                
                 State = Gamestate.Records;
             }            
         }
-        
-
+        [RelayCommand(CanExecute =nameof(RecordsCan))]
+        private void VeureRecords()
+        {
+             State = Gamestate.Records;
+        }
+        private bool RecordsCan()
+        {
+            return State == Gamestate.Entrada;
+        }
+        [RelayCommand(CanExecute =nameof(AbandonaCan))]
+        private void Abandona()
+        {
+            if(State!=Gamestate.Entrada) 
+            {
+                State = Gamestate.Entrada;
+                CurrentScore = 0;
+            }
+            else if(State==Gamestate.Entrada)
+                App.Current.Shutdown();
+        }
+        private bool AbandonaCan()
+        {
+            return State != Gamestate.Records;
+        }
         [RelayCommand]
         private void ChangeMode()
         {
