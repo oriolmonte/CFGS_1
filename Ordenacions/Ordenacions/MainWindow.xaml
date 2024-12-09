@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:vm="clr-namespace:Ordenacions.Viewmodel"
         xmlns:local="clr-namespace:Ordenacions"
         mc:Ignorable="d"
         Title="Ordenacions" Height="900" Width="1600">
+    <Window.DataContext>
+        <vm:PintaArrayViewModel></vm:PintaArrayViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -19,70 +23,131 @@
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="#0296f9" Name="dckTopMenu" LastChildFill="False">
             <TextBlock Text="Configuració" FontSize="40" FontWeight="Bold" Foreground="White" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0">
             </TextBlock>
-            <TextBlock Text="Genera" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0">
-            </TextBlock>
-            <TextBlock Text="Atura" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0">
+            <TextBlock Text="Genera" Name="btnGenera" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding CreaCommand}"/>
+                </TextBlock.InputBindings>
             </TextBlock>
             <TextBlock Text="Ordena" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0">
             </TextBlock>
         </DockPanel>
         <Viewbox Grid.Row="1" Grid.Column="2" x:Name="vwbGrafic">
-            <Canvas x:Name="cnvGrafic" Width="1000" Height="1000"></Canvas>
+            <Canvas x:Name="cnvGrafic" Width="1000" Height="1000">
+                <ItemsControl>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                            <Rectangle Fill="{Binding Fill}"
+                                   Stroke="{Binding Stroke}"
+                                   StrokeThickness="{Binding StrokeThickness}"
+                                   Width="{Binding Width}"
+                                   Height="{Binding Height}"
+                                   RadiusX="{Binding RadiusX}"
+                                   RadiusY="{Binding RadiusY}">
+                            </Rectangle>
+                        </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Canvas>
         </Viewbox>
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <TextBlock Background="#0296f9" Text="General" FontSize="20" Foreground="White" Padding="10" Margin="0,10"></TextBlock>
-            <Grid Margin="0,5">
+                <TextBlock Background="#0296f9" Text="General" FontSize="20" Foreground="White" Padding="10" Margin="0,10"></TextBlock>
+            <Grid Margin="5,5" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Numero d'elements" FontSize="15" Foreground="#0296f9"></TextBlock>
-                <xctk:IntegerUpDown Grid.Column="1" x:Name="numNumElements"></xctk:IntegerUpDown>
+                <xctk:IntegerUpDown Grid.Column="1" x:Name="numNumElements" Value="{Binding Length}"></xctk:IntegerUpDown>
             </Grid>
-            <Grid Margin="0,5">
+            <Grid Margin="5,5" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Gruix del Marc" FontSize="15" Foreground="#0296f9"></TextBlock>
-                <xctk:IntegerUpDown Grid.Column="1" x:Name="numGruixMarc"></xctk:IntegerUpDown>
+                <xctk:IntegerUpDown Grid.Column="1" x:Name="numGruixMarc" Value="{Binding Gruix}"></xctk:IntegerUpDown>
             </Grid>
-            <Grid Margin="0,5">
+            <Grid Margin="5,5" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Radi de les Columnes" FontSize="15" Foreground="#0296f9"></TextBlock>
-                <xctk:IntegerUpDown Grid.Column="1" x:Name="numRadiColumnes"></xctk:IntegerUpDown>
+                <xctk:IntegerUpDown Grid.Column="1" x:Name="numRadiColumnes" Value="{Binding CornerRadius}"></xctk:IntegerUpDown>
             </Grid>
-            <Grid Margin="0,5">
+            <Grid Margin="5,5" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Temps d'espera" FontSize="15" Foreground="#0296f9"></TextBlock>
-                <xctk:IntegerUpDown Grid.Column="1" x:Name="numTempsEspera"></xctk:IntegerUpDown>
+                <xctk:IntegerUpDown Grid.Column="1" x:Name="numTempsEspera" Increment="10" Value="{Binding TempsEspera}"></xctk:IntegerUpDown>
             </Grid>
-            <Grid Margin="0,5">
+            <Grid Margin="5,5" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Marca Intercanvis" FontSize="15" Foreground="#0296f9"></TextBlock>
-                <CheckBox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"></CheckBox>
+                <CheckBox x:Name="chkMarcaIntercanvis" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"></CheckBox>
             </Grid>
             <TextBlock Text="Figures" FontSize="20" Foreground="#0296f9"></TextBlock>
-            <ComboBox Name="cmbFigures">
-                <ComboBoxItem Content="Barres"></ComboBoxItem>
-                <ComboBoxItem Content="Punts"></ComboBoxItem>
+            <ComboBox Name="cmbFigures" ItemsSource="{Binding OpcionsFigures}" SelectedItem="{Binding SelectedFigura}"
+             >
             </ComboBox>
             <TextBlock Text="Tipus d'ordenació" FontSize="20" Foreground="#0296f9"></TextBlock>
-            <ComboBox Name="cmbOrdenacio">
-                <ComboBoxItem Content="Bubble Sort"></ComboBoxItem>
-                <ComboBoxItem Content="Merge Sort"></ComboBoxItem>
-                <ComboBoxItem Content="Cocktail Sort"></ComboBoxItem>
+            <ComboBox Name="cmbOrdenacio" ItemsSource="{Binding OpcionsOrdenacions}" SelectedItem="{Binding SelectedOrdenacions}">
             </ComboBox>
-
+            <TextBlock Background="#0296f9" Text="Operacio Inicial" FontSize="20" Foreground="White" Padding="10" Margin="0,10"></TextBlock>
+            <Grid Margin="5,5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Invertit" FontSize="15" Foreground="#0296f9"></TextBlock>
+                    <CheckBox x:Name="chkInvertit" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="{Binding Invertit}"></CheckBox>
+            </Grid>
+            <Grid Margin="5,5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Aleatori" FontSize="15" Foreground="#0296f9"></TextBlock>
+                  <CheckBox x:Name="chkAleatori" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="{Binding Aleatori}"></CheckBox>
+            </Grid>
+            <TextBlock Background="#0296f9" Text="Colors" FontSize="20" Foreground="White" Padding="10" Margin="0,10"></TextBlock>
+            <Grid Margin="5,5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Correcte" FontSize="15" Foreground="#0296f9"></TextBlock>
+                <xctk:ColorPicker x:Name="clrCorrecte" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" SelectedColor="{Binding ColorCorrecte}" Width="100"></xctk:ColorPicker>
+            </Grid>
+            <Grid Margin="5,5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Incorrecte" FontSize="15" Foreground="#0296f9"></TextBlock>
+                <xctk:ColorPicker x:Name="clrIncorrecte" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" SelectedColor="{Binding ColorIncorrecte}" Width="100"></xctk:ColorPicker>
+            </Grid>
+            <Grid Margin="5,5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Intercanvi" FontSize="15" Foreground="#0296f9"></TextBlock>
+                <xctk:ColorPicker x:Name="clrSwap" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" SelectedColor="{Binding ColorIntercanvi}" Width="100"></xctk:ColorPicker>
+            </Grid>
+            <Grid Margin="5,5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Fons" FontSize="15" Foreground="#0296f9"></TextBlock>
+                <xctk:ColorPicker x:Name="clrFons" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" SelectedColor="{Binding ColorFons}" Width="100"></xctk:ColorPicker>
+            </Grid>
         </StackPanel>
         
     </Grid>

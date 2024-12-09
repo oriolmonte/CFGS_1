@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Ordenacions.Viewmodel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,18 @@ namespace Ordenacions
         public MainWindow()
         {
             InitializeComponent();
+            
+
+        }
+
+        private void btnGenera_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var viewModel = (PintaArrayViewModel)DataContext;
+
+            foreach (var rect in viewModel.Rectangles)
+            {
+                cnvGrafic.Children.Add(rect); // Add rectangle to Canvas
+            }
         }
     }
 }

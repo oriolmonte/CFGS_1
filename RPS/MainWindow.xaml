@@ -10,7 +10,7 @@
         WindowState="Maximized"
         SizeToContent="Manual"
         Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
+    <Window.DataContext>    
         <vm:JugadorViewmodel></vm:JugadorViewmodel>
     </Window.DataContext>
     <Window.Resources>
