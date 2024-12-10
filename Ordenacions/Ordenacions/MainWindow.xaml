@@ -23,33 +23,16 @@
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="#0296f9" Name="dckTopMenu" LastChildFill="False">
             <TextBlock Text="Configuració" FontSize="40" FontWeight="Bold" Foreground="White" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0" MouseDown="btnGenera_MouseDown">
             </TextBlock>
-            <TextBlock Text="Genera" Name="btnGenera" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0" >
-                <TextBlock.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding CreaCommand}"/>
-                </TextBlock.InputBindings>
+            <TextBlock Text="Genera" Name="btnGenera" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0" MouseDown="btnGenera_MouseDown" >
             </TextBlock>
             <TextBlock Text="Ordena" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0">
                 <TextBlock.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding AlteraCommand}"/>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding OrdenaCommand}"/>
                 </TextBlock.InputBindings>
             </TextBlock>
         </DockPanel>
         <Viewbox Grid.Row="1" Grid.Column="2" x:Name="vwbGrafic">
             <Canvas x:Name="cnvGrafic" Width="1000" Height="1000">
-                <ItemsControl>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                            <Rectangle Fill="{Binding Fill}"
-                                   Stroke="{Binding Stroke}"
-                                   StrokeThickness="{Binding StrokeThickness}"
-                                   Width="{Binding Width}"
-                                   Height="{Binding Height}"
-                                   RadiusX="{Binding RadiusX}"
-                                   RadiusY="{Binding RadiusY}">
-                            </Rectangle>
-                        </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                </ItemsControl>
             </Canvas>
         </Viewbox>
         <StackPanel Grid.Column="0" Grid.Row="1">
@@ -92,7 +75,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Marca Intercanvis" FontSize="15" Foreground="#0296f9"></TextBlock>
-                <CheckBox x:Name="chkMarcaIntercanvis" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"></CheckBox>
+                <CheckBox x:Name="chkMarcaIntercanvis" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="{Binding MarcaIntercanvis}"></CheckBox>
             </Grid>
             <TextBlock Text="Figures" FontSize="20" Foreground="#0296f9"></TextBlock>
             <ComboBox Name="cmbFigures" ItemsSource="{Binding OpcionsFigures}" SelectedItem="{Binding SelectedFigura}"

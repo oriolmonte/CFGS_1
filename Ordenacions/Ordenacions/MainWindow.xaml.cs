@@ -27,11 +27,24 @@ namespace Ordenacions
         private void btnGenera_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var viewModel = (PintaArrayViewModel)DataContext;
-
-            foreach (var rect in viewModel.Rectangles)
+            cnvGrafic.Background = viewModel.Fons;
+            cnvGrafic.Children.Clear();
+            if(cmbFigures.SelectedIndex == 0) 
             {
-                cnvGrafic.Children.Add(rect); 
+                foreach (var rect in viewModel.Rectangles)
+                {
+                    cnvGrafic.Children.Add(rect);
+                }
+            
             }
+            else
+            {
+                foreach(var circ in viewModel.Circles)
+                {
+                    cnvGrafic.Children.Add(circ);
+                }
+            }
+            
 
         }
     }
