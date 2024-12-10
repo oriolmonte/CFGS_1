@@ -21,14 +21,17 @@
             <ColumnDefinition Width="4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Background="#0296f9" Name="dckTopMenu" LastChildFill="False">
-            <TextBlock Text="Configuració" FontSize="40" FontWeight="Bold" Foreground="White" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0">
+            <TextBlock Text="Configuració" FontSize="40" FontWeight="Bold" Foreground="White" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0" MouseDown="btnGenera_MouseDown">
             </TextBlock>
-            <TextBlock Text="Genera" Name="btnGenera" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0">
+            <TextBlock Text="Genera" Name="btnGenera" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0" >
                 <TextBlock.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding CreaCommand}"/>
                 </TextBlock.InputBindings>
             </TextBlock>
             <TextBlock Text="Ordena" FontSize="30" Foreground="White" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="30,0">
+                <TextBlock.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding AlteraCommand}"/>
+                </TextBlock.InputBindings>
             </TextBlock>
         </DockPanel>
         <Viewbox Grid.Row="1" Grid.Column="2" x:Name="vwbGrafic">

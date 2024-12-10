@@ -30,8 +30,9 @@ namespace Ordenacions
 
             foreach (var rect in viewModel.Rectangles)
             {
-                cnvGrafic.Children.Add(rect); // Add rectangle to Canvas
+                cnvGrafic.Children.Add(rect); 
             }
+
         }
     }
 }
