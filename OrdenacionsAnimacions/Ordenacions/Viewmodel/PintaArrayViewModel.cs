@@ -137,8 +137,7 @@ namespace Ordenacions.Viewmodel
                 isUpdating = false;
             }
         }
-        [ObservableProperty]
-        bool activaSo = false;
+        
         [ObservableProperty]
         bool marcaIntercanvis;
         [ObservableProperty]
@@ -295,27 +294,21 @@ namespace Ordenacions.Viewmodel
             }
         }
 
-        private void PlaySound(List<int> list, int index1)
-        {
-            int maxFrequency = 800;
-            int minFrequency = 150;
-
-            double scaledValue = (500.0 * list[index1]) / Length;
-            int frequency = (int)Math.Round(scaledValue);
-
-            frequency = Math.Clamp(frequency, minFrequency, maxFrequency);
-
-            int duration = TempsEspera * 10;
-            Console.Beep(frequency, duration);
-
-        }
         async Task Swap(List<int> list, int index1, int index2)
         {
             //BARRES
             if (SelectedFigura == figures[0])
             {
-                if(ActivaSo)
-                    PlaySound(list, index1);
+                int maxFrequency = 800;
+                int minFrequency = 150;
+
+                double scaledValue = (500.0 * list[index1]) / Length; 
+                int frequency = (int)Math.Round(scaledValue);
+
+                frequency = Math.Clamp(frequency, minFrequency, maxFrequency);
+
+                int duration = TempsEspera * 10; 
+                Console.Beep(frequency, duration);
                 if (MarcaIntercanvis)
                 {
                     Rectangles[index1].Fill = Intercanvi;
@@ -340,8 +333,6 @@ namespace Ordenacions.Viewmodel
             //CERCLES
             else
             {
-                if (ActivaSo)
-                    PlaySound(list, index1);
                 if (MarcaIntercanvis)
                 {
                     Circles[index1].Fill = Intercanvi;
@@ -454,16 +445,21 @@ namespace Ordenacions.Viewmodel
         }
         private async Task Final()
         {
-            int i = 0;
             if (SelectedFigura == figures[0])
             {
+                int i = 1;
                 foreach (Rectangle r in Rectangles)
                 {
                     r.Fill = Intercanvi;
-                    if (ActivaSo)
-                    {
-                        PlaySound(Numeros, i);
-                    }
+                    int maxFrequency = 800;
+                    int minFrequency = 150;
+                    double scaledValue = (500.0 * i) / Length; 
+                    int frequency = (int)Math.Round(scaledValue);
+
+                    frequency = Math.Clamp(frequency, minFrequency, maxFrequency);
+
+                    int duration = TempsEspera * 5; 
+                    Console.Beep(frequency, duration);
                     if (Length < 20)
                         await Task.Delay(75);
                     else if (Length < 50)
@@ -483,17 +479,12 @@ namespace Ordenacions.Viewmodel
                 foreach (Ellipse r in Circles)
                 {
                     r.Fill = Intercanvi;
-                    if (ActivaSo)
-                    {
-                        PlaySound(Numeros, i);
-                    }
                     if (Length < 20)
                         await Task.Delay(75);
                     else if (Length < 50)
                         await Task.Delay(20);
                     else
                         await Task.Delay(5);
-                    i++;
                 }
                 foreach (Ellipse r in Circles)
                 {
