@@ -67,7 +67,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Temps d'espera" FontSize="15" Foreground="#0296f9"></TextBlock>
-                <xctk:IntegerUpDown Grid.Column="1" x:Name="numTempsEspera" Increment="10" Value="{Binding TempsEspera}" IsEnabled="{Binding IsNotSorting}"></xctk:IntegerUpDown>
+                <xctk:IntegerUpDown Grid.Column="1" x:Name="numTempsEspera" Increment="10" Value="{Binding TempsEspera}" Minimum="0"></xctk:IntegerUpDown>
             </Grid>
             <Grid Margin="5,5" >
                 <Grid.ColumnDefinitions>

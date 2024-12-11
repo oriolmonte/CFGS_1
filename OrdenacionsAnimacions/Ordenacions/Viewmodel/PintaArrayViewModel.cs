@@ -12,7 +12,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Ordenacions.Viewmodel
 {   
@@ -20,10 +22,39 @@ namespace Ordenacions.Viewmodel
 
     public partial class PintaArrayViewModel : ObservableObject
     {
+        public enum EasingType
+        {
+            Quadratic,
+            Cubic,
+            Sine,
+            Bounce,
+            Elastic
+        }
+
+        [ObservableProperty]
+        EasingType easingTypeProp;
+
+       
+
+        private IEasingFunction GetEasingFunction(EasingType easingType)
+        {
+            return easingType switch
+            {
+                EasingType.Cubic => new CubicEase { EasingMode = EasingMode.EaseInOut },
+                EasingType.Sine => new SineEase { EasingMode = EasingMode.EaseInOut },
+                EasingType.Bounce => new BounceEase { Bounces = 3, Bounciness = 2 },
+                EasingType.Elastic => new ElasticEase { Oscillations = 2, Springiness = 3 },
+                _ => new QuadraticEase { EasingMode = EasingMode.EaseInOut }
+            };
+        }
+
+
         static ObservableCollection<string> figures = ["Barres", "Punts"];
         static ObservableCollection<string> ordenacions = ["Bubble Sort", "Cocktail Sort", "Quick Sort"];
         [ObservableProperty]
         ObservableCollection<string> opcionsFigures = figures;
+        [ObservableProperty]
+        bool vertical = false;
         [ObservableProperty]
         ObservableCollection<string> opcionsOrdenacions = ordenacions;
         [ObservableProperty]
@@ -79,7 +110,7 @@ namespace Ordenacions.Viewmodel
         int cornerRadius;
         partial void OnCornerRadiusChanged(int value)
         {
-            Crea();
+            Crea(); 
         }
         [ObservableProperty]
         int tempsEspera;
@@ -269,14 +300,13 @@ namespace Ordenacions.Viewmodel
         {
             IsNotSorting = false;
             if (SelectedOrdenacions == ordenacions[0])
-                await BubbleSort(Numeros);
+                BubbleSort(Numeros);
             else if(SelectedOrdenacions == ordenacions[1])
                 {
-                await CocktailSort(Numeros);
+                CocktailSort(Numeros);
             }
             else
-                await QuickSort(Numeros,0,Numeros.Count-1);
-            await Final();
+                QuickSort(Numeros,0,Numeros.Count-1);
             IsNotSorting=true;
         }
         private async Task BubbleSort(List<int> list)
@@ -288,43 +318,51 @@ namespace Ordenacions.Viewmodel
                 {
                     if (list[j] > list[j + 1])
                     {
-                        await Swap(list, j, j + 1);
+                        Swap(list, j, j + 1);
                     }
                 }
             }
         }
 
-        async Task Swap(List<int> list, int index1, int index2)
+        private void Swap(List<int> list, int index1, int index2)
         {
             //BARRES
             if (SelectedFigura == figures[0])
             {
-                int maxFrequency = 800;
-                int minFrequency = 150;
-
-                double scaledValue = (500.0 * list[index1]) / Length; 
-                int frequency = (int)Math.Round(scaledValue);
-
-                frequency = Math.Clamp(frequency, minFrequency, maxFrequency);
-
-                int duration = TempsEspera * 10; 
-                Console.Beep(frequency, duration);
+                
                 if (MarcaIntercanvis)
                 {
                     Rectangles[index1].Fill = Intercanvi;
                     Rectangles[index2].Fill = Intercanvi;
                 }
-                double tempHeight = Rectangles[index1].Height;
-                Rectangles[index1].Height = Rectangles[index2].Height;
-                Rectangles[index2].Height = tempHeight;
+                AnimateRectangleSwap(index1, index2, list);
+                Espera(TempsEspera);
+                if (Vertical)
+                {
+                    Rectangles[index1].BeginAnimation(Rectangle.HeightProperty, null);
+                    Rectangles[index2].BeginAnimation(Rectangle.HeightProperty, null);
+                    double tempHeight = Rectangles[index1].Height;
+                    Rectangles[index1].Height = Rectangles[index2].Height;
+                    Rectangles[index2].Height = tempHeight;
+                }
+                else
+                {
+                    DoEvents();
+                    Rectangle tempPos = Rectangles[index1];
+                    Rectangles[index1] = Rectangles[index2];
+                    Rectangles[index2] = tempPos;
+                }
+                // Swap list values
                 int temp = list[index1];
                 list[index1] = list[index2];
                 list[index2] = temp;
-                await Task.Delay(TempsEspera);
+
+                // Update colors based on positioning
                 if (BenColocat(Numeros, index1))
                     Rectangles[index1].Fill = Correcte;
                 else
                     Rectangles[index1].Fill = Incorrecte;
+
                 if (BenColocat(Numeros, index2))
                     Rectangles[index2].Fill = Correcte;
                 else
@@ -339,13 +377,26 @@ namespace Ordenacions.Viewmodel
                     Circles[index2].Fill = Intercanvi;
 
                 }
-                double tempHeight = (double)Canvas.GetTop(Circles[index1]);
-                Circles[index1].SetValue(Canvas.TopProperty,Canvas.GetTop(Circles[index2]));
-                Circles[index2].SetValue(Canvas.TopProperty, tempHeight);
+                AnimateCircleSwap(index1, index2, list);
+                Espera(TempsEspera);
+                Circles[index1].BeginAnimation(Canvas.TopProperty, null);
+                Circles[index2].BeginAnimation(Canvas.TopProperty, null);
+                if (Vertical)
+                {
+                    double tempHeight = (double)Canvas.GetTop(Circles[index1]);
+                    Circles[index1].SetValue(Canvas.TopProperty, Canvas.GetTop(Circles[index2]));
+                    Circles[index2].SetValue(Canvas.TopProperty, tempHeight);
+                }
+                else
+                {
+                    DoEvents();
+                    Ellipse tempPos = Circles[index1];
+                    Circles[index1] = Circles[index2];
+                    Circles[index2] = tempPos;
+                }
                 int temp = list[index1];
                 list[index1] = list[index2];
                 list[index2] = temp;
-                await Task.Delay(TempsEspera);
                 if (BenColocat(Numeros, index1))
                     Circles[index1].Fill = Correcte;
                 else
@@ -357,6 +408,181 @@ namespace Ordenacions.Viewmodel
             }
 
         }
+
+        private void AnimateRectangleSwap(int index1, int index2, List<int> list)
+        {
+            if (Vertical)
+            {
+                // Create the animations for height change
+                DoubleAnimation anim1 = new DoubleAnimation
+                {
+                    From = Rectangles[index1].Height,
+                    To = Rectangles[index2].Height,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+                DoubleAnimation anim2 = new DoubleAnimation
+                {
+                    From = Rectangles[index2].Height,
+                    To = Rectangles[index1].Height,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+
+                // Create a Storyboard and add the animations to it
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(anim1);
+                storyboard.Children.Add(anim2);
+
+                // Set the targets for the animations
+                Storyboard.SetTarget(anim1, Rectangles[index1]);
+                Storyboard.SetTarget(anim2, Rectangles[index2]);
+                Storyboard.SetTargetProperty(anim1, new PropertyPath(Rectangle.HeightProperty));
+                Storyboard.SetTargetProperty(anim2, new PropertyPath(Rectangle.HeightProperty));
+
+                // Start the animation
+                storyboard.Begin();
+            }
+            else
+            {
+                double pos1 = Canvas.GetLeft(Rectangles[index1]);
+                double pos2 = Canvas.GetLeft(Rectangles[index2]);
+                // Create the animations for height change
+                DoubleAnimation anim1 = new DoubleAnimation
+                {
+                    From = pos1,
+                    To = pos2,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+
+                DoubleAnimation anim2 = new DoubleAnimation
+                {
+                    From = pos2,
+                    To = pos1,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+
+                // Create a Storyboard and add the animations to it
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(anim1);
+                storyboard.Children.Add(anim2);
+
+                // Set the targets for the animations
+                Storyboard.SetTarget(anim1, Rectangles[index1]);
+                Storyboard.SetTarget(anim2, Rectangles[index2]);
+                Storyboard.SetTargetProperty(anim1, new PropertyPath("(Canvas.Left)"));
+                Storyboard.SetTargetProperty(anim2, new PropertyPath("(Canvas.Left)"));
+
+                // Start the animation
+                storyboard.Begin();
+
+            }
+
+        }
+
+        private void AnimateCircleSwap(int index1, int index2, List<int> list)
+        {
+            if (Vertical)
+            {
+                double pos1 = Canvas.GetTop(Circles[index1]);
+                double pos2 = Canvas.GetTop(Circles[index2]);
+                // Create the animations for height change
+                DoubleAnimation anim1 = new DoubleAnimation
+                {
+                    From = pos1,
+                    To = pos2,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+
+                DoubleAnimation anim2 = new DoubleAnimation
+                {
+                    From = pos2,
+                    To = pos1,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+
+                // Create a Storyboard and add the animations to it
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(anim1);
+                storyboard.Children.Add(anim2);
+
+                // Set the targets for the animations
+                Storyboard.SetTarget(anim1, Circles[index1]);
+                Storyboard.SetTarget(anim2, Circles[index2]);
+                Storyboard.SetTargetProperty(anim1, new PropertyPath("(Canvas.Top)"));
+                Storyboard.SetTargetProperty(anim2, new PropertyPath("(Canvas.Top)"));
+
+                // Start the animation
+                storyboard.Begin();
+            }
+            else
+            {
+                double pos1 = Canvas.GetLeft(Circles[index1]);
+                double pos2 = Canvas.GetLeft(Circles[index2]);
+                // Create the animations for height change
+                DoubleAnimation anim1 = new DoubleAnimation
+                {
+                    From = pos1,
+                    To = pos2,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+
+                DoubleAnimation anim2 = new DoubleAnimation
+                {
+                    From = pos2,
+                    To = pos1,
+                    Duration = TimeSpan.FromMilliseconds(TempsEspera),
+                    EasingFunction = new QuadraticEase
+                    {
+                        EasingMode = EasingMode.EaseInOut
+                    }
+                };
+
+                // Create a Storyboard and add the animations to it
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(anim1);
+                storyboard.Children.Add(anim2);
+
+                // Set the targets for the animations
+                Storyboard.SetTarget(anim1, Circles[index1]);
+                Storyboard.SetTarget(anim2, Circles[index2]);
+                Storyboard.SetTargetProperty(anim1, new PropertyPath("(Canvas.Left)"));
+                Storyboard.SetTargetProperty(anim2, new PropertyPath("(Canvas.Left)"));
+
+                // Start the animation
+                storyboard.Begin();
+
+            }
+        }
+
+
+
         private async Task CocktailSort(List<int> list)
         {
             bool swapped = true;
@@ -372,7 +598,7 @@ namespace Ordenacions.Viewmodel
                 {
                     if (list[i] > list[i + 1])
                     {
-                        await Swap(list, i, i + 1);
+                        Swap(list, i, i + 1);
                         swapped = true;
 
                     }
@@ -389,7 +615,7 @@ namespace Ordenacions.Viewmodel
                 {
                     if (list[i] > list[i + 1])
                     {
-                        await Swap(list, i, i + 1);
+                        Swap(list, i, i + 1);
                         swapped = true;
 
                     }
@@ -399,17 +625,17 @@ namespace Ordenacions.Viewmodel
             }
         }
 
-        private async Task QuickSort(List<int> list, int low, int high)
+        private void QuickSort(List<int> list, int low, int high)
         {
             if (low < high)
             {
-                int pivotIndex = await Partition(list, low, high);
-                await QuickSort(list, low, pivotIndex - 1);  // Sort left of pivot
-                await QuickSort(list, pivotIndex + 1, high); // Sort right of pivot
+                int pivotIndex = Partition(list, low, high);
+                QuickSort(list, low, pivotIndex - 1);  // Sort left of pivot
+                QuickSort(list, pivotIndex + 1, high); // Sort right of pivot
             }
         }
 
-        private async Task<int> Partition(List<int> list, int low, int high)
+        private int Partition(List<int> list, int low, int high)
         {
             int pivot = list[high];
             int i = low - 1;
@@ -419,12 +645,12 @@ namespace Ordenacions.Viewmodel
                 if (list[j] < pivot)
                 {
                     i++;
-                    await Swap(list, i, j);
+                    Swap(list, i, j);
 
 
                 }
             }
-            await Swap(list, i + 1, high);
+            Swap(list, i + 1, high);
             return i + 1;
         }
 
@@ -443,56 +669,28 @@ namespace Ordenacions.Viewmodel
 
             return true;
         }
-        private async Task Final()
+        #region Threads
+        Thread thread;
+        private void Espera(double milliseconds)
         {
-            if (SelectedFigura == figures[0])
+            var frame = new DispatcherFrame();
+            thread = new Thread((ThreadStart)(() =>
             {
-                int i = 1;
-                foreach (Rectangle r in Rectangles)
-                {
-                    r.Fill = Intercanvi;
-                    int maxFrequency = 800;
-                    int minFrequency = 150;
-                    double scaledValue = (500.0 * i) / Length; 
-                    int frequency = (int)Math.Round(scaledValue);
-
-                    frequency = Math.Clamp(frequency, minFrequency, maxFrequency);
-
-                    int duration = TempsEspera * 5; 
-                    Console.Beep(frequency, duration);
-                    if (Length < 20)
-                        await Task.Delay(75);
-                    else if (Length < 50)
-                        await Task.Delay(20);
-                    else
-                        await Task.Delay(5);
-                    i++;
-                }
-                foreach (Rectangle r in Rectangles)
-                {
-                    r.Fill = Correcte;
-                }
-                
-            }
-            else
-            {
-                foreach (Ellipse r in Circles)
-                {
-                    r.Fill = Intercanvi;
-                    if (Length < 20)
-                        await Task.Delay(75);
-                    else if (Length < 50)
-                        await Task.Delay(20);
-                    else
-                        await Task.Delay(5);
-                }
-                foreach (Ellipse r in Circles)
-                {
-                    r.Fill = Correcte;
-                }
-                
-
-            }
+                Thread.Sleep(TimeSpan.FromMilliseconds(milliseconds));
+                frame.Continue = false;
+            }));
+            thread.Start();
+            Dispatcher.PushFrame(frame);
         }
+        static Action action;
+        public static void DoEvents()
+        {
+            action = new Action(delegate { });
+            Application.Current?.Dispatcher?.Invoke(
+               System.Windows.Threading.DispatcherPriority.Background,
+               action);
+        }
+        #endregion
     }
+
 }

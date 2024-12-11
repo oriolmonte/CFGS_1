@@ -1,16 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Ink;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -83,6 +74,11 @@ namespace Ordenacions.Viewmodel
         }
         [ObservableProperty]
         int tempsEspera;
+        partial void OnTempsEsperaChanged(int value)
+        {
+            if(value<0)
+                value = 0;
+        }
         [ObservableProperty]
         bool aleatori = true;
         partial void OnAleatoriChanged(bool value)
@@ -145,19 +141,19 @@ namespace Ordenacions.Viewmodel
         SolidColorBrush fons = new SolidColorBrush(Colors.White);
         partial void OnFonsChanged(SolidColorBrush value)
         {
-            Crea();
+           // Crea();
         }
         [ObservableProperty]
         SolidColorBrush correcte = new SolidColorBrush(Colors.Green);
         partial void OnCorrecteChanged(SolidColorBrush? oldValue, SolidColorBrush newValue)
         {
-            Crea();
+           // Crea();
         }
         [ObservableProperty]
         SolidColorBrush incorrecte = new SolidColorBrush(Colors.Red);
         partial void OnIncorrecteChanged(SolidColorBrush? oldValue, SolidColorBrush newValue)
         {
-            Crea();
+           // Crea();
         }
         [ObservableProperty]
         SolidColorBrush intercanvi = new SolidColorBrush(Colors.Yellow);
@@ -165,7 +161,7 @@ namespace Ordenacions.Viewmodel
         private string selectedFigura;
         partial void OnSelectedFiguraChanged(string? oldValue, string newValue)
         {
-            Crea();
+           // Crea();
         }
         [ObservableProperty]
         private string selectedOrdenacions;
@@ -297,15 +293,15 @@ namespace Ordenacions.Viewmodel
 
         private void PlaySound(List<int> list, int index1)
         {
-            int maxFrequency = 800;
-            int minFrequency = 150;
+            int maxFrequency = 2000;
+            int minFrequency = 400;
 
             double scaledValue = (500.0 * list[index1]) / Length;
             int frequency = (int)Math.Round(scaledValue);
 
             frequency = Math.Clamp(frequency, minFrequency, maxFrequency);
 
-            int duration = TempsEspera * 10;
+            int duration = TempsEspera;
             Console.Beep(frequency, duration);
 
         }
@@ -321,13 +317,15 @@ namespace Ordenacions.Viewmodel
                     Rectangles[index1].Fill = Intercanvi;
                     Rectangles[index2].Fill = Intercanvi;
                 }
+
+                await Task.Delay(TempsEspera);
                 double tempHeight = Rectangles[index1].Height;
                 Rectangles[index1].Height = Rectangles[index2].Height;
                 Rectangles[index2].Height = tempHeight;
                 int temp = list[index1];
                 list[index1] = list[index2];
                 list[index2] = temp;
-                await Task.Delay(TempsEspera);
+                
                 if (BenColocat(Numeros, index1))
                     Rectangles[index1].Fill = Correcte;
                 else
@@ -499,7 +497,6 @@ namespace Ordenacions.Viewmodel
                 {
                     r.Fill = Correcte;
                 }
-                
 
             }
         }
