@@ -337,6 +337,11 @@ namespace Ordenacions.Viewmodel
                 }
                 AnimateRectangleSwap(index1, index2, list);
                 Espera(TempsEspera);
+                Rectangles[index1].BeginAnimation(Rectangle.HeightProperty, null);
+                Rectangles[index2].BeginAnimation(Rectangle.HeightProperty, null);
+                Rectangles[index1].BeginAnimation(Canvas.LeftProperty, null);
+                Rectangles[index2].BeginAnimation(Canvas.LeftProperty, null);
+
                 if (Vertical)
                 {
                     Rectangles[index1].BeginAnimation(Rectangle.HeightProperty, null);
@@ -348,9 +353,14 @@ namespace Ordenacions.Viewmodel
                 else
                 {
                     DoEvents();
+                    double tempHeight = (double)Canvas.GetLeft(Rectangles[index1]);
+                    Rectangles[index1].SetValue(Canvas.LeftProperty, Canvas.GetLeft(Rectangles[index2]));
+                    Rectangles[index2].SetValue(Canvas.LeftProperty, tempHeight);
+
                     Rectangle tempPos = Rectangles[index1];
                     Rectangles[index1] = Rectangles[index2];
                     Rectangles[index2] = tempPos;
+
                 }
                 // Swap list values
                 int temp = list[index1];
@@ -381,15 +391,24 @@ namespace Ordenacions.Viewmodel
                 Espera(TempsEspera);
                 Circles[index1].BeginAnimation(Canvas.TopProperty, null);
                 Circles[index2].BeginAnimation(Canvas.TopProperty, null);
+                Circles[index1].BeginAnimation(Canvas.LeftProperty, null);
+                Circles[index2].BeginAnimation(Canvas.LeftProperty, null);
+
+
                 if (Vertical)
                 {
                     double tempHeight = (double)Canvas.GetTop(Circles[index1]);
                     Circles[index1].SetValue(Canvas.TopProperty, Canvas.GetTop(Circles[index2]));
                     Circles[index2].SetValue(Canvas.TopProperty, tempHeight);
+
                 }
                 else
                 {
                     DoEvents();
+                    double tempHeight = (double)Canvas.GetLeft(Circles[index1]);
+                    Circles[index1].SetValue(Canvas.LeftProperty, Canvas.GetLeft(Circles[index2]));
+                    Circles[index2].SetValue(Canvas.LeftProperty, tempHeight);
+
                     Ellipse tempPos = Circles[index1];
                     Circles[index1] = Circles[index2];
                     Circles[index2] = tempPos;

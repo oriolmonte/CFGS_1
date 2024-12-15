@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Ordenacions.Viewmodel"
         xmlns:local="clr-namespace:Ordenacions"
         mc:Ignorable="d"
-        Title="Ordenacions" Height="900" Width="1600">
+        Title="Ordenacions" Height="1000" Width="1600">
     <Window.DataContext>
         <vm:PintaArrayViewModel></vm:PintaArrayViewModel>
     </Window.DataContext>
