@@ -22,32 +22,45 @@ namespace Ordenacions.Viewmodel
 
     public partial class PintaArrayViewModel : ObservableObject
     {
-        public enum EasingType
-        {
-            Quadratic,
-            Cubic,
-            Sine,
-            Bounce,
-            Elastic
-        }
-
         [ObservableProperty]
-        EasingType easingTypeProp;
-
-       
-
-        private IEasingFunction GetEasingFunction(EasingType easingType)
+        public static List<String> easing =
+        new List<string>{
+            "QuadraticEase",
+            "CubicEase",
+            "ElasticEase",
+            "ExponentialEase",
+            "BounceEase",
+            "CircleEase",
+            "BackEase",
+            "SineEase",
+            "PowerEase",
+        };
+        [ObservableProperty]
+        string selectedEasing = easing[0];
+        [ObservableProperty]
+        static List<string> modes = new List<string> { "EaseIn", "EaseOut", "EaseInOut" };
+        [ObservableProperty]
+        string selectedMode = modes[0];
+        public static Dictionary<string, EasingMode> DiccionariModes = new Dictionary<string, EasingMode>
         {
-            return easingType switch
-            {
-                EasingType.Cubic => new CubicEase { EasingMode = EasingMode.EaseInOut },
-                EasingType.Sine => new SineEase { EasingMode = EasingMode.EaseInOut },
-                EasingType.Bounce => new BounceEase { Bounces = 3, Bounciness = 2 },
-                EasingType.Elastic => new ElasticEase { Oscillations = 2, Springiness = 3 },
-                _ => new QuadraticEase { EasingMode = EasingMode.EaseInOut }
-            };
-        }
+            { modes[0], EasingMode.EaseIn },
+            { modes[1], EasingMode.EaseOut },
+            { modes[2], EasingMode.EaseInOut },
+        };
 
+        //Chat gpt m'ha ajudat, ni de conya hi arribo. Guardem una lambda amb la funció que necessitem per cada cas. 
+        public Dictionary<string, Func<EasingMode, IEasingFunction>> DiccionariEasings = new Dictionary<string, Func<EasingMode, IEasingFunction>>
+        {
+            { "QuadraticEase", mode => new QuadraticEase() { EasingMode = mode } },
+            { "CubicEase", mode => new CubicEase() { EasingMode = mode } },
+            { "ElasticEase", mode => new ElasticEase() { EasingMode = mode } },
+            { "ExponentialEase", mode => new ExponentialEase() { EasingMode = mode } },
+            { "BounceEase", mode => new BounceEase() { EasingMode = mode } },
+            { "CircleEase", mode => new CircleEase() { EasingMode = mode } },
+            { "BackEase", mode => new BackEase() { EasingMode = mode } },
+            { "SineEase", mode => new SineEase() { EasingMode = mode } },
+            { "PowerEase", mode => new PowerEase() { EasingMode = mode } }
+        };
 
         static ObservableCollection<string> figures = ["Barres", "Punts"];
         static ObservableCollection<string> ordenacions = ["Bubble Sort", "Cocktail Sort", "Quick Sort"];
@@ -438,24 +451,18 @@ namespace Ordenacions.Viewmodel
                     From = Rectangles[index1].Height,
                     To = Rectangles[index2].Height,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
                 };
                 DoubleAnimation anim2 = new DoubleAnimation
                 {
                     From = Rectangles[index2].Height,
                     To = Rectangles[index1].Height,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
                 };
 
                 // Create a Storyboard and add the animations to it
-                Storyboard storyboard = new Storyboard();
+                Storyboard storyboard = new Storyboard(); 
                 storyboard.Children.Add(anim1);
                 storyboard.Children.Add(anim2);
 
@@ -478,10 +485,8 @@ namespace Ordenacions.Viewmodel
                     From = pos1,
                     To = pos2,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
+
                 };
 
                 DoubleAnimation anim2 = new DoubleAnimation
@@ -489,10 +494,8 @@ namespace Ordenacions.Viewmodel
                     From = pos2,
                     To = pos1,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
+
                 };
 
                 // Create a Storyboard and add the animations to it
@@ -525,10 +528,7 @@ namespace Ordenacions.Viewmodel
                     From = pos1,
                     To = pos2,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
                 };
 
                 DoubleAnimation anim2 = new DoubleAnimation
@@ -536,10 +536,7 @@ namespace Ordenacions.Viewmodel
                     From = pos2,
                     To = pos1,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
                 };
 
                 // Create a Storyboard and add the animations to it
@@ -566,10 +563,7 @@ namespace Ordenacions.Viewmodel
                     From = pos1,
                     To = pos2,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
                 };
 
                 DoubleAnimation anim2 = new DoubleAnimation
@@ -577,10 +571,8 @@ namespace Ordenacions.Viewmodel
                     From = pos2,
                     To = pos1,
                     Duration = TimeSpan.FromMilliseconds(TempsEspera),
-                    EasingFunction = new QuadraticEase
-                    {
-                        EasingMode = EasingMode.EaseInOut
-                    }
+                    EasingFunction = DiccionariEasings[SelectedEasing](DiccionariModes[SelectedMode])
+
                 };
 
                 // Create a Storyboard and add the animations to it
@@ -710,6 +702,7 @@ namespace Ordenacions.Viewmodel
                action);
         }
         #endregion
-    }
 
-}
+
+        }
+    }
